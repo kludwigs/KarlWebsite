@@ -1,0 +1,248 @@
+<html ng-app="karlApp">
+<meta charset="utf-8">
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel='stylesheet' type='text/css' href='bootstrap-3.3.6-dist/css/bootstrap.min.css' /></link>	
+<link rel='stylesheet' type='text/css' href='mystyles.css'></link>
+<link rel="shortcut icon" href='images/profile.jpg'>
+<script src='bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
+<script>
+// Activate Carousel
+$("#mediagallery").carousel();
+
+// Enable Carousel Indicators
+$(".item").click(function(){
+    $("#mediagallery").carousel(1);
+});
+
+// Enable Carousel Controls
+$(".left").click(function(){
+    $("#mediagallery").carousel("prev");
+});
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+<script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-animate.min.js"></script>
+
+<!--
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+-->
+
+<script>
+var karlApp = angular.module('karlApp', ['ngRoute', 'ngAnimate']);
+
+      karlApp.config(function($routeProvider) {
+        $routeProvider.
+          when('/', 
+		  {
+            templateUrl: 'aboutme.html',
+            controller: 'webpageCtrl'
+          }).
+          when('/aboutme', 
+		  {
+            templateUrl: 'aboutme.html',
+            controller: 'webpageCtrl'
+
+          }).	
+          when('/resume', 
+		  {
+            templateUrl: 'resume.html',
+            controller: 'webpageCtrl'
+          }).		  
+          when('/mediagallery', 
+		  {
+            templateUrl: 'mediagallery.html',
+            controller: 'webpageCtrl'
+          }).	
+		   when('/contactme', 
+		  {
+            templateUrl: 'contactme.html',
+            controller: 'webpageCtrl',
+          }).
+          otherwise({
+            redirectTo: '/'
+          });
+      });
+	  
+	  
+karlApp.factory('alertsManager', function() {
+    return {
+        alerts: {},
+        addAlert: function(message, type) {
+		
+			console.log("add-alert :message", message);
+			console.log("add-alert :type", type);
+            this.alerts[type] = this.alerts[type] || [];
+            this.alerts[type].push(message);
+        },
+        clearAlerts: function() 
+		{
+            for(var x in this.alerts) 
+			{
+			delete this.alerts[x];
+			}
+        }
+    };
+});	
+	  
+karlApp.controller('webpageCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout)
+{			
+		$scope.formData = {};				
+		$scope.alerts = alertsManager.alerts;
+						
+		$scope.AlertMessage = {active: false};
+						
+		
+		$scope.toggle = function(delay)
+		{		
+			console.log("toggling...");
+			
+			console.log($scope.AlertMessage);
+			
+			if(!delay)
+			{
+				$scope.AlertMessage.active = !$scope.AlertMessage.active;
+			}
+			else
+			{
+				$timeout(function()
+				{
+					$scope.AlertMessage.active = !$scope.AlertMessage.active;
+				}, 3000);				
+			}
+			
+			console.log($scope.AlertMessage);
+		}
+		
+		$scope.doGood = function(msg) 
+		{
+			console.log(msg);
+			alertsManager.addAlert(msg, 'alert-success');
+		};
+		$scope.doEvil = function(msg) 
+		{
+			console.log(msg);
+			alertsManager.addAlert(msg, 'alert-danger');
+		};
+		$scope.doInfo = function(msg)
+		{
+			alertsManager.addAlert(msg, 'alert-info');
+		};
+		
+		$scope.reset = function() 
+		{
+			alertsManager.clearAlerts();
+		};
+								
+        $scope.processForm = function () 
+		{		
+			$scope.reset();
+			
+			console.log($scope.formData.emailname);
+			console.log($scope.formData.emailaddress);
+			console.log($scope.formData.emailmessage);			
+			console.log($.param($scope.formData));
+										
+			$scope.toggle();
+			$scope.doInfo("Sending Email...");						
+			
+            $http
+			({
+                method: 'POST',
+                url: 'mymailer2.php',
+                data: $.param($scope.formData),  // pass in data as strings
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+            })
+												
+			.success(function (data) {
+										
+				$scope.reset();
+				
+				console.log("data", data);				
+				console.log("data.success", data.success);
+				console.log("data.errors", data.errors);					
+
+				if (!data.success) {
+					// if not successful, bind errors to error variables
+					console.log("you had a bad time!");	
+					console.log(data.message);
+					$scope.message = data.message;
+					$scope.doEvil(data.message);
+				   // $scope.errorName = data.errors.emailname;
+				   // $scope.errorEmailAddress = data.errors.emailaddress;
+					
+				} 
+				else 
+				{
+					// if successful, bind success message to message
+					console.log("you win!");
+					
+					$scope.message = data.message;
+					$scope.doGood(data.message);
+				}
+				
+				$scope.toggle(true);
+				
+			});
+        };	  
+});
+</script>
+
+
+</head>
+
+<body>
+
+
+<div class="container">
+<!--
+	<div class="banner jumbotron" role="banner">
+	-->
+	<div class="col-md-12 col-xs-12 well well-lg" id="myheader">
+			<h2>Karl Ludwigsen </h2><h3> software developer, keyboardist <img src="images/profile.jpg" width="133" height="90" ></h3>
+	</div>	
+				
+	<div class="row-fluid">
+		<div class="col-md-3 col-xs-12 pull-left" >	
+			<div class="row">				
+				<div class="pagination">
+					<ul id="pagelist">
+						<!--<li><a href="#">Prev</a></li>-->
+						<li><a href="#/aboutme">About Me</a></li>
+						<li><a href="#/resume">Resume</a></li>
+						<li><a href="#/contactme">Contact Me</a></li>				
+						<li><a href="#/mediagallery">Media Gallery</a></li>
+						<!--<li><a href="#">Next</a></li>-->
+					</ul>		
+						<a href="http://github.com/kludwigs">
+							<img src="images/github.png" alt="Git Hub Logo" style="width:50px;height:50px;">
+						</a>
+						<a href="https://www.linkedin.com/in/karl-ludwigsen-8035a727">
+							<img src="images/linkedin.png" alt="Linkedin Logo" style="width:50px;height:50px">
+						</a>
+						<a href="https://soundcloud.com/knote3">
+							<img src="images/soundcloud.jpg" alt="Soundcloud Logo" style="width:50px;height:50px">
+						</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9 col-xs-12">
+			<div class="row">
+				<div class="content">							
+				<div ng-view></div>
+				</div>			
+				<div class="footer"> 
+					© 2015 by Karl Ludwigsen / info@karlludwigsen.com
+				</div>			
+			</div>
+		</div>
+	</div>	
+	<!--
+	</div>
+	-->
+</div> 
+</body>
+
+</html>
