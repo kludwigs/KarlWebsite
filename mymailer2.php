@@ -28,6 +28,7 @@ $data = array(); 		// array to pass back data
 	} 
 	else 
 	{
+		$config = parse_ini_file("../settings/commandandconquer.txt");
 		$emailaddress = $_POST['emailaddress'];
 		$message = $_POST['emailmessage'];
 		$sender = $_POST['emailname'];
@@ -39,8 +40,9 @@ $data = array(); 		// array to pass back data
 		//$mail->SMTPDebug = 2;
 		//$mail->Host = gethostbyname('smtp.gmail.com');
 		//$mail->SMTPAuth = true;                               // Enable SMTP authentication
-		$mail->Username = 'info@karlludwigsen.com';                 // SMTP username
-		$mail->Password = '@Ov3rn1ght!';                           // SMTP password
+		
+		$mail->Username = $config['user'];
+		$mail->Password = $config['pass'];
 		$mail->SMTPSecure = 'ssl';
 		$mail->Port = 465;                                    // TCP port to connect to
 		
