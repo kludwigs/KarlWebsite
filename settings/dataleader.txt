@@ -1,0 +1,5 @@
+[commands]
+server = 'localhost'
+database = 'karlludw_site_info'
+user = 'karlludw_myadmin'
+pass = 'EwzCgXx=uiZ5'

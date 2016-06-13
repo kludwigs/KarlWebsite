@@ -28,7 +28,7 @@ $data = array(); 		// array to pass back data
 	} 
 	else 
 	{
-		$config = parse_ini_file("../settings/commandandconquer.txt");
+		$config = parse_ini_file("settings/commandandconquer.txt");
 		$emailaddress = $_POST['emailaddress'];
 		$message = $_POST['emailmessage'];
 		$sender = $_POST['emailname'];
