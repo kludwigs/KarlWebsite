@@ -1,0 +1,31 @@
+
+<h1> File Editor </h1>
+<!--
+<input type="text" id="filename" ng-options="x for x in names" ng-model="adminFilename"><br>
+-->
+
+
+ <div class="container-fluid">
+    <div class="row">
+	        <div class="col-md-9 col-xs-9">
+			<select ng-model="adminFilename" ng-options="x for x in filenames"></select><br>
+			<textarea class="form-control" id="html_content" style="height:400" width="100%" ng-model="fileContents"></textarea><br>
+			<button id="save" ng-click="adminSave()">save</button>
+			<!--
+			<button id="load" ng-click="adminLoad()">load</button>
+			-->
+			</div>
+	</div>
+	    <div ng-repeat="(key,val) in alerts" class="alert {{key}}">
+        <div ng-repeat="msg in val track by $index">
+				
+		{{msg}}		
+		
+		</div>
+    </div>
+</div>
+
+<!--
+style="width:900;height:400;
+-->
+

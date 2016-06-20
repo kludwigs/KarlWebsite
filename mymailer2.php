@@ -13,11 +13,11 @@ $data = array(); 		// array to pass back data
 
 // validate the variables ======================================================
 	if (empty($_POST['emailname']))
-		$errors['emailname'] = 'Name is required.';
+		$errors['message'] = 'Name is required.';
 	if (empty($_POST['emailaddress']))
-		$errors['emailaddress'] = 'E-mail is required.';
+		$errors['message'] = 'E-mail is required.';
 	if (empty($_POST['emailmessage']))
-		$errors['emailmessage'] = 'Message is required.';
+		$errors['message'] = 'Message is required.';
 
 	if ( ! empty($errors)) 
 	{
@@ -28,7 +28,7 @@ $data = array(); 		// array to pass back data
 	} 
 	else 
 	{
-		$config = parse_ini_file("../settings/commandandconquer.txt");
+		$config = parse_ini_file("settings/commandandconquer.txt");
 		$emailaddress = $_POST['emailaddress'];
 		$message = $_POST['emailmessage'];
 		$sender = $_POST['emailname'];
