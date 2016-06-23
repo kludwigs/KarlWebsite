@@ -1,12 +1,16 @@
 <html ng-app="karlApp">
 <meta charset="utf-8">
 <head>
-
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel='stylesheet' type='text/css' href='bootstrap-3.3.6-dist/css/bootstrap.min.css' /></link>	
 <link rel='stylesheet' type='text/css' href='mystyles.css'></link>
 <link rel="shortcut icon" href='images/profile.jpg'>
 <script src='bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
+<script src='stats.js'></script>
+<script src="fileutility.js"></script>
 <script>
 // Activate Carousel
 $("#mediagallery").carousel();
@@ -29,172 +33,10 @@ $(".left").click(function(){
 <!--
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
 -->
-
-<script>
-var karlApp = angular.module('karlApp', ['ngRoute', 'ngAnimate']);
-
-      karlApp.config(function($routeProvider) {
-        $routeProvider.
-          when('/', 
-		  {
-            templateUrl: 'aboutme.html',
-            controller: 'webpageCtrl'
-          }).
-          when('/aboutme', 
-		  {
-            templateUrl: 'aboutme.html',
-            controller: 'webpageCtrl'
-
-          }).	
-          when('/resume', 
-		  {
-            templateUrl: 'resume.html',
-            controller: 'webpageCtrl'
-          }).		  
-          when('/mediagallery', 
-		  {
-            templateUrl: 'mediagallery.html',
-            controller: 'webpageCtrl'
-          }).	
-		   when('/contactme', 
-		  {
-            templateUrl: 'contactme.html',
-            controller: 'webpageCtrl',
-          }).
-          otherwise({
-            redirectTo: '/'
-          });
-      });
-	  
-	  
-karlApp.factory('alertsManager', function() {
-    return {
-        alerts: {},
-        addAlert: function(message, type) {
-		
-			console.log("add-alert :message", message);
-			console.log("add-alert :type", type);
-            this.alerts[type] = this.alerts[type] || [];
-            this.alerts[type].push(message);
-        },
-        clearAlerts: function() 
-		{
-            for(var x in this.alerts) 
-			{
-			delete this.alerts[x];
-			}
-        }
-    };
-});	
-	  
-karlApp.controller('webpageCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout)
-{			
-		$scope.formData = {};				
-		$scope.alerts = alertsManager.alerts;
-						
-		$scope.AlertMessage = {active: false};
-						
-		
-		$scope.toggle = function(delay)
-		{		
-			console.log("toggling...");
-			
-			console.log($scope.AlertMessage);
-			
-			if(!delay)
-			{
-				$scope.AlertMessage.active = !$scope.AlertMessage.active;
-			}
-			else
-			{
-				$timeout(function()
-				{
-					$scope.AlertMessage.active = !$scope.AlertMessage.active;
-				}, 3000);				
-			}
-			
-			console.log($scope.AlertMessage);
-		}
-		
-		$scope.doGood = function(msg) 
-		{
-			console.log(msg);
-			alertsManager.addAlert(msg, 'alert-success');
-		};
-		$scope.doEvil = function(msg) 
-		{
-			console.log(msg);
-			alertsManager.addAlert(msg, 'alert-danger');
-		};
-		$scope.doInfo = function(msg)
-		{
-			alertsManager.addAlert(msg, 'alert-info');
-		};
-		
-		$scope.reset = function() 
-		{
-			alertsManager.clearAlerts();
-		};
-								
-        $scope.processForm = function () 
-		{		
-			$scope.reset();
-			
-			console.log($scope.formData.emailname);
-			console.log($scope.formData.emailaddress);
-			console.log($scope.formData.emailmessage);			
-			console.log($.param($scope.formData));
-										
-			$scope.toggle();
-			$scope.doInfo("Sending Email...");						
-			
-            $http
-			({
-                method: 'POST',
-                url: 'mymailer2.php',
-                data: $.param($scope.formData),  // pass in data as strings
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-            })
-												
-			.success(function (data) {
-										
-				$scope.reset();
-				
-				console.log("data", data);				
-				console.log("data.success", data.success);
-				console.log("data.errors", data.errors);					
-
-				if (!data.success) {
-					// if not successful, bind errors to error variables
-					console.log("you had a bad time!");	
-					console.log(data.message);
-					$scope.message = data.message;
-					$scope.doEvil(data.message);
-				   // $scope.errorName = data.errors.emailname;
-				   // $scope.errorEmailAddress = data.errors.emailaddress;
-					
-				} 
-				else 
-				{
-					// if successful, bind success message to message
-					console.log("you win!");
-					
-					$scope.message = data.message;
-					$scope.doGood(data.message);
-				}
-				
-				$scope.toggle(true);
-				
-			});
-        };	  
-});
-</script>
-
-
+<script type='text/javascript' src='siteangularcode.js'></script>
 </head>
 
 <body>
-
 
 <div class="container">
 <!--
@@ -202,8 +44,9 @@ karlApp.controller('webpageCtrl', function ($scope, $routeParams, $http, alertsM
 	-->
 	<div class="col-md-12 col-xs-12 well well-lg" id="myheader">
 			<h2>Karl Ludwigsen </h2><h3> software developer, keyboardist <img src="images/profile.jpg" width="133" height="90" ></h3>
-	</div>	
+			<button type="button" class="btn btn-info btn-sm pull-right" onclick="location.href='#/adminlogin'">Admin Page</button>
 				
+	</div>	
 	<div class="row-fluid">
 		<div class="col-md-3 col-xs-12 pull-left" >	
 			<div class="row">				
@@ -228,7 +71,7 @@ karlApp.controller('webpageCtrl', function ($scope, $routeParams, $http, alertsM
 				<div ng-view></div>
 				</div>			
 				<div class="footer"> 
-					© 2015 by Karl Ludwigsen / info@karlludwigsen.com
+					© 2016 by Karl Ludwigsen / info@karlludwigsen.com
 				</div>			
 			</div>
 		</div>

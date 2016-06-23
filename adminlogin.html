@@ -1,0 +1,16 @@
+
+<h2>Admin Login</h2>
+<form ng-submit="processLogin()">
+	<fieldset class="form-group">
+		<label for="Textarea">Enter Username</label>
+		<input type="username" class="form-control" id="Username1" rows="1" placeholder="enter username" ng-model="loginForm.username"></textarea>
+	</fieldset>
+	<fieldset class="form-group">
+		<label for="InputPassword">Your Password</label>
+		<input type="password" class="form-control" id="Password1" placeholder="enter password" ng-model="loginForm.password">
+	</fieldset>
+
+	<div class="span6" style="padding-top:4px;">	
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</div>	
+</form>
