@@ -9,13 +9,9 @@ class File {
 	//private $dir ='/files';
 	public $urladdress;
     public function __construct() {
-		//print("File Constructor");
-		//$this->urladdress = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+
 		$this->urladdress = dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-		
-		//print("this url address = " + $this->urladdress);
-		//die("this->urladdress" + $this->urladdress);
-		
+
         $action = isset($_POST['action']) ? $_POST['action'] : false;
         $this->filename = isset($_POST['filename']) ? $_POST['filename'] : false;
         if ((!$action) || (!$this->filename)) return;
@@ -31,15 +27,15 @@ class File {
                 break;
         }
     }
-    private function old_save() {
-        $content = isset($_POST['content']) ? $_POST['content'] : '';
-        file_put_contents($this->dir.$this->filename, urldecode($content));
-    }
 	private function save()
 	{
 		$content = isset($_POST['content']) ? $_POST['content'] : '';
 		file_put_contents($this->dir.$this->filename . '.txt', urldecode($content));
 	}
+    private function save() {
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        file_put_contents($this->dir.$this->filename, urldecode($content));
+    }
     private function load() {
 		//print($_SERVER['SERVER_NAME']);
 		//print('http://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . '/');
@@ -49,9 +45,11 @@ class File {
 		//print($url);
        //$content = @file_get_contents($url);
 	   $content = $this->get_url_contents($url);
+
 		//$content =  $this->get_html($url);
 		//echo $url;
 		echo $content;
+
     }
     private function delete() {
         unlink($this->dir.$this->filename);
@@ -64,7 +62,6 @@ class File {
 		$crl = curl_init($url);
         $timeout = 10;
         curl_setopt ($crl, CURLOPT_URL, 'http://'. $url);
-		//curl_setopt($curl, CURLOPT_REFERER, dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']));
 		curl_setopt($crl, CURLOPT_FAILONERROR, true);
 		curl_setopt($crl, CURLOPT_FOLLOWLOCATION, false);
         curl_setopt ($crl, CURLOPT_RETURNTRANSFER, true);
@@ -122,3 +119,4 @@ class File {
 }
 
 ?>
+
