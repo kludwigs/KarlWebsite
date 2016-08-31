@@ -1,11 +1,10 @@
 <div class="aboutme">
 <h2>About Me</h2>
-
 <div class="aboutme_content">
 <p>
-I am a native of Oregon. I grew up in NE Portland and went to Grant High School. I completed my B.A. in Mathematics from the University of Oregon and a Masters in Engineering from Portland State University. I have an affinity for music as well as software.<p>
+I am a native of Oregon. I grew up in NE Portland and went to Grant High School. I completed my B.A. in Mathematics from the University of Oregon and a Masters in Engineering from Portland State University. I have an affinity for music as well as software. I've been developing software since 2010 and playing music professionally since 2001.<p>
 <p>
-Please contact me for help in web and music services. 
+Please contact me for help in software development, web and music services. 
 </p>
 </div>
 </div>

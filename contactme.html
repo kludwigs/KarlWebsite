@@ -1,34 +1,58 @@
-<h2>
-Contact Me
-</h2>
-<br>
-<form ng-submit="processForm()">
-	
-	<fieldset class="form-group">
-		<label for="Textarea">Your Name</label>
-		<textarea class="form-control" id="Textarea1" rows="1" placeholder="enter name" ng-model="formData.emailname"></textarea>
-	</fieldset>
-
-	<fieldset class="form-group">
-		<label for="InputEmail1">Your Email Address</label>
-		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="enter email address" ng-model="formData.emailaddress">
-		<small class="text-muted"></small>
-	</fieldset>
-
-	<fieldset class="form-group">
-		<label for="exampleTextarea">Your Message</label>
-		<textarea class="form-control" id="Textarea2" rows="3" placeholder="enter message" ng-model="formData.emailmessage"></textarea>
-	</fieldset>
-<div class="span6" style="padding-top:4px;">	
-	<button type="submit" class="btn btn-primary">Submit</button>
-</div>	
-
-</form>
-
-<div ng-show="AlertMessage.active" class="fadein fadeout">
-    <div ng-repeat="(key,val) in alerts" class="alert {{key}}">
-        <div ng-repeat="msg in val track by $index">				
-			{{msg}}			
-		</div>   
-	</div>
-</div>
+<h2>
+Contact Me
+</h2>
+<br>
+<form ng-submit="processForm()">
+	
+	<fieldset class="form-group">
+		<label for="Textarea">Your Name</label>
+		<textarea class="form-control" id="Textarea1" rows="1" placeholder="enter name" ng-model="formData.emailname"></textarea>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<label for="InputEmail1">Your Email Address</label>
+		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="enter email address" ng-model="formData.emailaddress">
+		<small class="text-muted"></small>
+	</fieldset>
+
+	<fieldset class="form-group">
+		<label for="exampleTextarea">Your Message</label>
+		<textarea class="form-control" id="Textarea2" rows="3" placeholder="enter message" ng-model="formData.emailmessage"></textarea>
+	</fieldset>
+<div class="span6" style="padding-top:4px;">	
+	<button type="submit" class="btn btn-primary">Submit</button>
+</div>	
+
+</form>
+
+<div ng-show="AlertMessage.active" class="fadein fadeout">
+    <div ng-repeat="(key,val) in alerts" class="alert {{key}}">
+        <div ng-repeat="msg in val track by $index">				
+			{{msg}}			
+		</div>   
+	</div>
+</div>
+
+<!--
+
+<div ng-hide="AlertMessage" ng-class="{fade: StartFade}">
+    <div ng-repeat="(key,val) in alerts" class="alert {{key}}">
+        <div ng-repeat="msg in val track by $index">
+				
+		{{msg}}		
+		
+		</div>
+    </div>
+</div>
+
+
+<div ng-show="showMsg" class="msg fadein fadeout">
+    <div ng-repeat="(key,val) in alerts" class="alert {{key}}">
+        <div ng-repeat="msg in val track by $index">
+				
+		{{msg}}		
+		
+		</div>
+    </div>
+</div>
+-->

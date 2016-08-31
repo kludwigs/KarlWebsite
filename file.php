@@ -9,9 +9,17 @@ class File {
 	//private $dir ='/files';
 	public $urladdress;
     public function __construct() {
-
-		$this->urladdress = dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-
+		//print("File Constructor");
+		//$this->urladdress = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+		$config = parse_ini_file("settings/dataleader.txt");
+		
+		if($config['islocal'] == 1)
+			$this->urladdress = dirname($_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']. $_SERVER['REQUEST_URI']);		
+		else			
+			$this->urladdress = dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+		//print("this url address = " + $this->urladdress);
+		//die("this->urladdress" + $this->urladdress);
+		
         $action = isset($_POST['action']) ? $_POST['action'] : false;
         $this->filename = isset($_POST['filename']) ? $_POST['filename'] : false;
         if ((!$action) || (!$this->filename)) return;
@@ -27,15 +35,16 @@ class File {
                 break;
         }
     }
-	private function save()
-	{
-		$content = isset($_POST['content']) ? $_POST['content'] : '';
-		file_put_contents($this->dir.$this->filename . '.txt', urldecode($content));
-	}
-    private function save() {
+    private function old_save() {
         $content = isset($_POST['content']) ? $_POST['content'] : '';
         file_put_contents($this->dir.$this->filename, urldecode($content));
     }
+	private function save()
+	{
+		$content = isset($_POST['content']) ? $_POST['content'] : '';
+		//echo file_put_contents($this->dir.$this->filename . '.html', urldecode($content));
+		file_put_contents($this->filename, urldecode($content));
+	}
     private function load() {
 		//print($_SERVER['SERVER_NAME']);
 		//print('http://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . '/');
@@ -45,11 +54,9 @@ class File {
 		//print($url);
        //$content = @file_get_contents($url);
 	   $content = $this->get_url_contents($url);
-
 		//$content =  $this->get_html($url);
 		//echo $url;
 		echo $content;
-
     }
     private function delete() {
         unlink($this->dir.$this->filename);
@@ -62,13 +69,14 @@ class File {
 		$crl = curl_init($url);
         $timeout = 10;
         curl_setopt ($crl, CURLOPT_URL, 'http://'. $url);
+		//curl_setopt($curl, CURLOPT_REFERER, dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']));
 		curl_setopt($crl, CURLOPT_FAILONERROR, true);
 		curl_setopt($crl, CURLOPT_FOLLOWLOCATION, false);
         curl_setopt ($crl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/plain'));
+		curl_setopt($crl, CURLOPT_HTTPHEADER, array('Content-type: text/plain'));
 		curl_setopt($crl, CURLOPT_BINARYTRANSFER, 1);
 		curl_setopt($crl, CURLOPT_FRESH_CONNECT, true);
-		curl_setopt($crl, CURLOPT_USERAGENT, $User_Agent);
+		//curl_setopt($crl, CURLOPT_USERAGENT, $User_Agent);
 		curl_setopt($crl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt ($crl, CURLOPT_CONNECTTIMEOUT, $timeout);
 		curl_setopt($crl,CURLOPT_ENCODING , "gzip");
@@ -102,8 +110,8 @@ class File {
 	"local_ip"
 	"local_port"
 	"redirect_url"
-	*/
-
+	*/	
+	
 		if(curl_errno($crl)) 
 		{
 				// We have an error. Show the error message.
@@ -111,12 +119,11 @@ class File {
 			curl_close($crl);
 			return $error_message;
 		}
-		
+	$information = $info['content_type'] . ' ' . $info['url'] . ' ' . $info['http_code'] . ' ' . $info['ssl_verify_result'] . ' ' . $info['redirect_time'];	
 		curl_close($crl);
-		//$information = $info['content_type'] . ' ' . $info['url'] . ' ' . $info['http_code'] . ' ' . $info['ssl_verify_result'] . ' ' . $info['redirect_time'];
+	
         return $content;
 	}
 }
 
 ?>
-

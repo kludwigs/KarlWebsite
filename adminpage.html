@@ -2,6 +2,7 @@
 <h1> File Editor </h1>
 <!--
 <input type="text" id="filename" ng-options="x for x in names" ng-model="adminFilename"><br>
+ <div class="container-fluid" ng-controller="adminCtrl">
 -->
 
 
@@ -9,24 +10,95 @@
     <div class="row">
 	        <div class="col-md-9 col-xs-9">
 			<select ng-model="adminFilename" ng-options="x for x in filenames"></select><br>
-			<textarea class="form-control" id="html_content" style="height:400" width="100%"></textarea><br>
+			<textarea class="form-control" id="html_content" style="height:400" width="100%"></textarea>
 			<button id="save" ng-click="adminSave(adminFilename)">save</button>
 			<!--
 			<button id="load" ng-click="adminLoad()">load</button>
 			ng-model="fileContents">
-			<textarea class="form-control" id="html_content" style="height:400" width="100%" ng-model="fileContents"></textarea><br>
-			<button id="save" ng-click="adminSave()">save</button>
-			<!--
-			<button id="load" ng-click="adminLoad()">load</button>
 			-->
 			</div>
 	</div>
-	    <div ng-repeat="(key,val) in alerts" class="alert {{key}}">
+	<div ng-repeat="(key,val) in alerts" class="alert {{key}}">
         <div ng-repeat="msg in val track by $index">
 				
 		{{msg}}		
 		
 		</div>
     </div>
+	<br>
+	
+    <button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
+	
+	<h2>Entries</h2>
+	
+	<table class="table table-bordered" ng-show="entries.length">	
+		<tr>
+			<th>Price</th>
+			<th>Comments</th>
+			<th>Category</th>
+			<th>User</th>
+			<th>DateTime</th>	
+		</tr>	
+		<tr ng-repeat="x in entries">
+			<td>${{x.price}}</td>
+			<td>{{x.comments }}</td>
+			<td>{{x.category_name }}</td>
+			<td>{{x.username}}</td>
+			<td>{{x.date_time | date:'medium'}}</td>	
+		</tr>
+	</table>
+	<br>
+	
+<form ng-submit="insertNewEntry()">	
+	<div class="span6" style="padding-bottom:4px";>	
+		<button type="submit">Insert New Entry</button>
+	</div>		
+	<table class="table table-bordered">	
+		<tr>
+			<th>Price</th>
+			<th>Comments</th>
+			<th>Category</th>
+			<th>User</th>
+			<th>DateTime</th>	
+		</tr>	
+		<tr>	
+			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"></td>
+			<td><input type="text" name="comments" ng-model="entry.comments"></td>
+			<td>   
+			 <select ng-model="entry.category" ng-options="i.id as i.category_name for i in categories" ></select>
+			</td>
+			<td>{{ returnUser() }}</td>
+			<td>
+				<select name="singleSelect" ng-model="entry.date">
+				<option value="now">NOW</option>
+				<!--
+				<option value="custom">Custom</option>
+				-->
+				</select>
+				<input ng-show="entry.date=='custom'"type="datetime-local" name="input" placeholder "ddTHH-MM-yyyy:mm:s" min="08-01T00-2016-:00:00" ng-model="sampleDate.value">
+			</td>	
+		</tr>
+	</table>
+</form>	
 </div>
+
+<!--
+				<select ng-model="selected" ng-options="o.category_name for o in categories">
+        <option value="">-------</option></select>
+
+
+<select ng-model="newcategories" ng-options="i.value as (i.category_name + ' - ' + i.id) for i in newcategories">
+        <option>Select</option></select>
+<select name="mySelect" "ng-show="categories.length"">
+				<option ng-repeat="category in categories">{{category.category_name}}</option></select>	
+
+
+<select ng-model="selectedDevice" ng-options="i.value as (i.label + ' - ' + i.value) for i in inputDevice">
+        <option>Select</option>
+
+
+			<select name="mySelect" id="mySelect"
+				<option ng-repeat="category in categories">{{category.category_name}}</option></select>
+style="width:900;height:400;
+-->
 
