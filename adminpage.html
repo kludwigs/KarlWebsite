@@ -40,7 +40,7 @@
 			<th>DateTime</th>	
 		</tr>	
 		<tr ng-repeat="x in entries">
-			<td>${{x.price | number:2}}</td>
+			<td style="text-align:right;padding-right:25px">${{x.price | number:2}}</td>
 			<td>{{x.comments }}</td>
 			<td>{{x.category_name }}</td>
 			<td>{{x.username}}</td>
