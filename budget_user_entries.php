@@ -76,7 +76,7 @@ if($authentication_required == true)
 		switch ($method) 
 		{
 			case 'GET':			
-				$sql_select = "SELECT entries.*, users.username, categories.category_name FROM entries, users, categories WHERE entries.user_id = $user_id AND users.id = entries.user_id AND categories.id = entries.category_id";
+				$sql_select = "SELECT entries.*, users.username, categories.category_name FROM entries, users, categories WHERE entries.user_id = $user_id AND users.id = entries.user_id AND categories.id = entries.category_id ORDER BY entries.date_time";
 			
 				$entries = get_entries_from_user_id($user_id, $sql_select);
 			
@@ -182,6 +182,7 @@ function get_entries_from_user_id($user_id, $sql_select)
 	{
 		//print("$dbPass, $dbUser, $dbDatabase, $dbServer, --- parm is $user_id\n");		
 		//die('Could not retrieve data from entries with '.$user_id.'!\n');
+		die(mysqli_error($connect));
 		return false;
 	}
 	

@@ -1,5 +1,5 @@
 .aboutme_content{
-font-size: 18px;
+font-size: 16px;
 }
 .container
 {
@@ -12,6 +12,22 @@ font-size: 18px;
 	font-size: 110%;	
 	
 }
+
+html{
+	overflow-y:hidden;
+}
+
+body
+{
+background-image:url("images/coffee_house.jpg");
+background-attachment: fixed;
+height: 100%;
+width:100%;
+overflow-x:hidden;
+background-repeat:no-repeat;
+background-size:100% 100%;
+}
+
 .content
 {
 	margin-left: auto;
@@ -75,14 +91,17 @@ font-size: 18px;
 
 #myheader{
 
-	background-color:#666666;
-	// .border-radius( 5px );
+	background-color:#666666;	
 	width: 100%;
 	color: white;
 	background-size: cover;
 	font-size:18px;
 	
 }
+#myfooter
+{
+}
+
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img 
 {

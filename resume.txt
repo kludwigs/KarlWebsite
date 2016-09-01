@@ -36,7 +36,7 @@ WORK EXPERIENCE:
 </b>
 <br>
 <b>
-Software Engineer ● Baldpeak Software ● 921 SW Washington St ● Portland, OR ● 2016 
+Software Engineer ● Baldpeak Software ● Portland, OR ● 2016 
 </b>
 <br>
 <ul>
@@ -46,7 +46,7 @@ Software Engineer ● Baldpeak Software ● 921 SW Washington St ● Portland, O
 </ul>
 <br>
 <b>
-Software Developer II ● NW Natural Gas ● 220 NW 2nd Ave, Drive ● Portland, OR ● 2014 – 2016
+Software Developer II ● NW Natural Gas ● Portland, OR ● 2014 – 2016
 </b>
 <br>
 <ul>
@@ -57,7 +57,7 @@ Software Developer II ● NW Natural Gas ● 220 NW 2nd Ave, Drive ● Portland,
 </ul>
 <br>
 <b>
-Software Engineer II ● Lam Research ● 11155 SW Leveton Drive ● Tualatin, Oregon ● 2012 – 2014
+Software Engineer II ● Lam Research ● Tualatin, Oregon ● 2012 – 2014
 </b>
 <br>
 <ul>
@@ -66,7 +66,7 @@ Software Engineer II ● Lam Research ● 11155 SW Leveton Drive ● Tualatin, O
 </ul>
 <br>
 <b>
-Graduate Technical Intern ● Intel Corporation ● Ronler Acres ● Hillsboro, Oregon ● 2010 – 2011
+Graduate Technical Intern ● Intel Corporation ● Hillsboro, Oregon ● 2010 – 2011
 </b>
 <br>
 <ul>

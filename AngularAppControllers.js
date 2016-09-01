@@ -143,6 +143,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.entries ={};
 		$scope.categories = [{category_name: "none", id:"0"}];
 		$scope.sampleDate = {value: new Date(2016, 11,8, 01, 30)};
+		$scope.hideme = false;
 		
         $scope.processLogin = function () 
 		{
@@ -353,7 +354,10 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				console.log("we're on the adminpage get those categories!");
 				$scope.getCategoriesFromService();
 				$scope.getBudgetEntries();
+				$scope.hideme = true;
 			}
+			else
+				$scope.hideme = false;
 		};
 		// and fire it after definition
 		init();		

@@ -30,6 +30,16 @@ karlApp.config(function($routeProvider)
 		templateUrl: 'contactme.html',
 		controller: 'webpageCtrl',
 	  }).
+	   when('/projects', 
+	  {
+		templateUrl: 'projects.html',
+		controller: 'webpageCtrl',
+	  }).	
+	   when('/testimonials', 
+	  {
+		templateUrl: 'testimonials.html',
+		controller: 'webpageCtrl',
+	  }).	  
 	   when('/adminlogin', 
 	  {
 		templateUrl: 'adminlogin.html',
