@@ -125,7 +125,10 @@ myheader old background-color:#666666;
      max-width: 100%;
      height: 500px !important;
 }
-
+.projects_content
+{
+	font-size: 18px;
+}
 /*---------------------- Animations ------------------*/
 
 .ng-hide-add, .ng-hide-remove {
