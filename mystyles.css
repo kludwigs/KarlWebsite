@@ -88,16 +88,32 @@ background-size:100% 100%;
 	font-color:green;
 	font-weight:bold;
 }
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+/*
+myheader old background-color:#666666;	
+*/
 
 #myheader{
 
-	background-color:#666666;	
+	
+	//background-image:url("images/plain-grey.jpg");
+	background-color:#666666;
 	width: 100%;
 	color: white;
+	opacity:0.95;
 	background-size: cover;
 	font-size:18px;
 	
 }
+#mymaincontainer
+{
+	background-image:url("images/plain-grey.jpg");
+	background-size:cover;
+	opacity:0.95;
+}
+
 #myfooter
 {
 }
