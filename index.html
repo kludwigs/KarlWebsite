@@ -80,71 +80,68 @@ padding-top:2.5px;padding-bottom:2.5px
 
 container inline style (background-color:#e6e6e6;)
 -->
-<div class="container" id="mymaincontainer">
-
-	<div class="col-md-12 col-xs-12 well well-lg" id="myheader">
-			<div = style="background-color:#666666;width:%40" >
-			<div style="width:40%;border-radius: 3px;" ><h2>Karl Ludwigsen</h2></div >
-			<div style="width:50%;border-radius: 3px;"><h3> software developer, keyboardist</h3></div><img src="images/profile.jpg" width="133" height="90" > 
-			</div>
-			
-			
-	<div class="navbar navbar-inverse" style="background-color:#666666; width:70%; font-color:white;border-color:#666666">
-		<div class="collapse navbar-collapse">
-		<div class="pagination" style="width:100000px;">
-		  <ul id="pagelist" class="nav navbar-nav" >
-			<li><a href="#/aboutme"><span >About Me</span></a></li>
-			<li><a href="#/resume">Resume</a></li>
-			<li><a href="#/contactme">Contact Me</a></li>		
-			<li><a href="#/projects">Projects</a></li>	
-			<li><button type="button" class="btn btn-info btn-sm pull-right margin-left:30px" onclick="location.href='#/adminlogin'"style="margin-top:10px">Admin Page</button></li>
-			<!--
-			<li><a href="#/testimonials">Testimonials</a></li>	
-			-->
-		  </ul>
-		  </div>
-		</div>		
-	</div>	
-
-	</div>	
-	<div class="row-fluid" ng-hide="hideme">
-		<div class="col-md-3 col-xs-12 pull-left" >	
-			<div class="row" style="margin-top:20px;margin-left:10px">	
-		<div class="mylinks" style="overflow:hidden;">						
-		<div class="myicons" style="float:left;">
-		<a href="https://www.linkedin.com/in/karl-ludwigsen-8035a727"><img src="images/linkedin_color.png" alt="Linkedin Logo" style="width:45px;height:45px:padding-left:5px;"></a>
-		
-		</div>
-		<div class="myicons" style="float:left;">
-		<a href="http://github.com/kludwigs"><img src="images/github.png" alt="Git Hub Logo" style="width:50px;height:50px;"></a>
-		</div>
-		<div class="myicons" style="float:left;">
-		<a href="https://soundcloud.com/knote3"><img src="images/soundcloud_icon_color2.png" alt="Soundcloud Logo" style="width:50px;height:50px;"></a>	
-		</div>
-		
-	</div>	
-<br>
-<p style="margin-left:-10px">
-Thanks for visiting my site! Check out my additional profiles on linkedin.com, github.com, and soundcloud.com	
-</p>
-			</div>
-		</div>
-		<div class="col-md-9 col-xs-12">
-			<div class="row">
-				<div class="content">							
-				<div ng-view></div>
-				</div>	
-		
-				<div class="footer" id="myfooter"> 
-				© 2016 by Karl Ludwigsen / info@karlludwigsen.com
-				</div>	
-			
-			</div>
+		<div class="navbar navbar-inverse navbar-fixed-top" style="width:100%; font-color:white;border-color:#666666 padding:0px;margin:0px">
+			<div class="collapse navbar-collapse">
+			<div class="pagination" style="width:1000px;">
+			  <ul id="pagelist" class="nav navbar-nav" >
+				<li><a href="#/aboutme"><span >About Me</span></a></li>
+				<li><a href="#/resume">Resume</a></li>
+				<li><a href="#/contactme">Contact Me</a></li>		
+				<li><a href="#/projects">Projects</a></li>	
+				<li><button type="button" class="btn btn-info btn-sm pull-right margin-left:30px" onclick="location.href='#/adminlogin'"style="margin-top:10px">Admin Page</button></li>
+				
+			  </ul>
+			  </div>
+			</div>		
 		</div>	
-	</div>	
-	<!--
+		
+
+<div class="container well well-lg" id="mymaincontainer">
+		<div class="col-md-12 col-xs-12" id="myheader" style="" >
+				<div>
+				<div style="width:40%;border-radius: 3px;" ><h2>Karl Ludwigsen</h2></div >
+				<div style="width:100%;border-radius: 3px;"><h3> software developer, keyboardist</h3></div><img src="images/profile.jpg" width="133" height="90" > 
+				</div>					
+		</div>	
+	<div class="row-fluid">
+
+
+		<div style="background-image:url('images/plain-grey.jpg')">
+			<div class="col-md-3 col-xs-12 pull-left" >	
+				<div class="row" style="margin-top:20px;margin-left:10px">	
+				<div class="mylinks" style="overflow:hidden;">						
+					<div class="myicons" style="float:left;">
+					<a href="https://www.linkedin.com/in/karl-ludwigsen-8035a727"><img src="images/linkedin_color.png" alt="Linkedin Logo" style="width:45px;height:45px:padding-left:5px;"></a>
+					
+					</div>
+					<div class="myicons" style="float:left;">
+					<a href="http://github.com/kludwigs"><img src="images/github.png" alt="Git Hub Logo" style="width:50px;height:50px;"></a>
+					</div>
+					<div class="myicons" style="float:left;">
+					<a href="https://soundcloud.com/knote3"><img src="images/soundcloud_icon_color2.png" alt="Soundcloud Logo" style="width:50px;height:50px;"></a>	
+					</div>
+				</div>
+					<br>
+					<p style="margin-left:-10px">
+					Thanks for visiting my site! Check out my additional profiles on linkedin.com, github.com, and soundcloud.com	
+					</p>
+				</div>
+			</div>
+			<div class="col-md-9 col-xs-12">
+				<div class="row">
+					<div class="content">
+					
+					<div ng-view></div>
+					</div>	
+			<div class="footer" id="myfooter" class="navbar navbar-inverse"> 
+	© 2016 by Karl Ludwigsen / info@karlludwigsen.com
+	</div>		
+
+					</div>		
+				
+				</div>
+			</div>	
 	</div>
-	-->
 </div> 
 </body>
 
