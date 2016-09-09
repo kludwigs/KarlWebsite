@@ -18,7 +18,7 @@ border-color:light-grey
 
 #resume_html_content
 {
-	font-size:16px;
+	font-size:90%;
 }
 
 #mymaincontainer
@@ -28,7 +28,7 @@ border-color:light-grey
 	opacity:.95;
 	font-family: Cabin;
 	src: url("cabin/Cabin.otf") format("opentype");
-	font-size:18px;
+	font-size:120%;
 }
 body { 
     padding-top: 65px; 
@@ -44,17 +44,13 @@ body {
 	*/
 	height:100%;	
 }
-#greeting
-{
-	font-size:16px;
-}
 .container
 {
 
 }
 #pagelist
 {
-font-size:15px
+font-size:95%;
 }
 
 
@@ -122,7 +118,7 @@ myheader old background-color:#666666;
 
 #myfooter
 {
-	font-size:16px;
+	font-size:125%;
 	font-family: Cabin;
 	src: url("cabin/Cabin.otf") format("opentype");
 	text-align:center;
@@ -131,7 +127,7 @@ myheader old background-color:#666666;
 }
 #greeting
 {
-	font-size:16px;
+	font-size:95%;
 }
 
 .carousel-inner > .item > img,
