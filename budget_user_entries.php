@@ -122,8 +122,7 @@ $response['code'] = 1;
 $response['status'] = $api_response_code[$response['code']]['HTTP Response'];
 $response['message'] = $api_response_code[$response['code']]['Message'];		
 $response['success'] = true;
-if($entries)
-	$response['data'] = $entries;
+
 
 sendresponse($response);
 

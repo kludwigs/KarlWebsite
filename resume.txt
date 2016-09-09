@@ -94,6 +94,5 @@ University of Oregon ● Eugene, Oregon ● 2007
 <br>
 Bachelor of Arts — Major: Mathematics 
 <br>
-<hr>
 <!-- – GPA 3.0 -->
 </div>

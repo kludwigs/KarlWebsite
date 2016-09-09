@@ -18,14 +18,6 @@
 			-->
 			</div>
 	</div>
-	<div ng-repeat="(key,val) in alerts" class="alert {{key}}">
-        <div ng-repeat="msg in val track by $index">
-				
-		{{msg}}		
-		
-		</div>
-    </div>
-	<br>
 	
     <button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
 	
@@ -70,6 +62,18 @@
 		</tr>
 	</table>
 </form>	
+<div ng-show="AlertMessage.active" class="fadein fadeout">
+
+    <div ng-repeat="(key,val) in alerts" class="alert {{key}}">
+
+        <div ng-repeat="msg in val track by $index">				
+
+			{{msg}}			
+
+		</div>   
+
+	</div>
+</div>
 </div>
 
 <!--

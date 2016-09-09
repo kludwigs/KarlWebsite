@@ -1,5 +1,5 @@
+
 .aboutme_content{
-font-size: 16px;
 }
 #myheader{	
 width:100%;
@@ -15,16 +15,25 @@ border-style:solid;
 border-width: 3px;
 border-color:light-grey
 }
+
+#resume_html_content
+{
+	font-size:16px;
+}
+
 #mymaincontainer
 {
 	background-image:url('images/plain-grey.jpg');
-	min-height:100%;
+	min-height:95%;
 	opacity:.95;
-
+	font-family: Cabin;
+	src: url("cabin/Cabin.otf") format("opentype");
+	font-size:18px;
 }
 body { 
-    padding-top: 62px; 
+    padding-top: 65px; 
 	background-color:#666666;
+
 	/*
 	
 	background-image:url('images/Sky-Blue.jpg');
@@ -35,7 +44,10 @@ body {
 	*/
 	height:100%;	
 }
-
+#greeting
+{
+	font-size:16px;
+}
 .container
 {
 
@@ -108,9 +120,18 @@ myheader old background-color:#666666;
 */
 
 
-
 #myfooter
 {
+	font-size:16px;
+	font-family: Cabin;
+	src: url("cabin/Cabin.otf") format("opentype");
+	text-align:center;
+	color:#d9d9d9
+
+}
+#greeting
+{
+	font-size:16px;
 }
 
 .carousel-inner > .item > img,

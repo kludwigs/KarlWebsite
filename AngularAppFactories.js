@@ -1,4 +1,4 @@
-karlApp.factory('alertsManager', function() {
+karlApp.factory('alertsManager', function($timeout) {
     return {
         alerts: {},
         addAlert: function(message, type) {
@@ -14,7 +14,39 @@ karlApp.factory('alertsManager', function() {
 			{
 			delete this.alerts[x];
 			}
-        }
+        },
+		doGood: function(message)
+		{
+			this.clearAlerts();
+			console.log(message);
+			this.addAlert(message, "alert-success");
+		},
+		doEvil: function(message)
+		{
+			this.clearAlerts();
+			console.log(message);
+			this.addAlert(message, "alert-danger");
+		},
+		doInfo: function(message)
+		{
+			this.clearAlerts();
+			console.log(message);
+			this.addAlert(message, "alert-info");
+		},
+		reset: function(delay) 
+		{
+			if(!delay)
+			{
+				this.clearAlerts();
+			}
+			else
+			{
+				$timeout(function()
+				{
+					this.clearAlerts();
+				}, 3000);				
+			}
+		}		
     };
 });	
 
@@ -92,5 +124,20 @@ karlApp.factory('currentUserFac', function () {
     };
 });
 
+karlApp.factory('facResumeContent', function () {
 
+    var data = {
+        fac_resume_content: null,
+    };
+
+    return {
+        getSavedResumeContent: function () {
+            return data.fac_resume_content;
+        },		
+		setSavedResumeContent: function (html)
+		{
+			data.fac_resume_content = html;
+		}
+    };
+});
  
