@@ -125,7 +125,7 @@
 
 karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, accessFac, currentUserFac, categoriesService, userEntriesService)
 {	
-		$scope.filenames = ["resume.txt", "aboutme.html"];
+		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
 		$scope.entries ={};
 		$scope.categories = [{category_name: "none", id:"0"}];
 		$scope.sampleDate = {value: new Date(2016, 11,8, 01, 30)};
