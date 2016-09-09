@@ -18,7 +18,7 @@ border-color:light-grey
 
 #resume_html_content
 {
-	font-size:90%;
+	font-size:96%;
 }
 
 #mymaincontainer
@@ -118,7 +118,7 @@ myheader old background-color:#666666;
 
 #myfooter
 {
-	font-size:125%;
+	font-size:130%;
 	font-family: Cabin;
 	src: url("cabin/Cabin.otf") format("opentype");
 	text-align:center;
@@ -138,7 +138,7 @@ myheader old background-color:#666666;
 }
 .projects_content
 {
-	font-size: 18px;
+	font-size: 120%;
 }
 /*---------------------- Animations ------------------*/
 
