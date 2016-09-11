@@ -19,7 +19,7 @@
 			</div>
 	</div>
 	
-    <button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
+    
 	
 	<h2>Entries</h2>
 	
@@ -39,13 +39,31 @@
 			<td>{{x.date_time | date:'medium'}}</td>	
 		</tr>
 	</table>
+	<button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
 	<br>
+	<h3>Insert New Entry</h3>
 	
-<form ng-submit="insertNewEntry()">	
-	<div class="span6" style="padding-bottom:4px";>	
-		<button type="submit">Insert New Entry</button>
-	</div>		
-	<table class="table table-bordered">	
+	<!-- *******************************************************************-->
+	<form ng-submit="insertNewEntry()">	
+	
+	<table class="table table-bordered hidden-md hidden-lg" style="table-layout:fixed;width:100%;">	
+		<col width="20%"/>
+		<col width="50%"/>
+		<col width="30%"/>		
+		<tr>
+			<th>Price</th>
+			<th>Comments</th>
+			<th>Category</th>
+		</tr>	
+		<tr>	
+			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
+			<td><input type="text" name="comments" ng-model="entry.comments"></td>
+			<td>   
+			 <select ng-model="entry.category" ng-options="i.id as i.category_name for i in categories" ></select>
+			</td>
+		</tr>
+	</table>
+	<table class="table table-bordered table-responsive hidden-sm hidden-xs" id="mobile_insert_entry_table">	
 		<tr>
 			<th>Price</th>
 			<th>Comments</th>
@@ -60,8 +78,14 @@
 			</td>
 			<td>{{ returnUser() }}</td>
 		</tr>
-	</table>
-</form>	
+	</table>	
+		<div class="span6" style="padding-bottom:4px";>	
+		<button type="submit">Insert New Entry</button>
+	</div>	
+	</form>	
+
+	<!-- *******************************************************************-->
+	
 <div ng-show="AlertMessage.active" class="fadein fadeout">
 
     <div ng-repeat="(key,val) in alerts" class="alert {{key}}">

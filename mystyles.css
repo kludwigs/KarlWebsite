@@ -1,38 +1,73 @@
-
-.aboutme_content{
+@media (max-width: @screen-xs) {
+    body{font-size: 18px;}
 }
+
 #myheader{	
 width:100%;
-background-color:#666666;
+//background-color:#666666;
+background-image:url('images/Portland_skyline_resize.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 color:white;
 z-index:1000;
 margin-top:0px;
+margin-left:0px;
+margin-right:0px;
 padding-top:0px;
-padding-bottom:20px; 
+padding-left:0px;
+padding-right:0px;
+padding-bottom:60px; 
 border-color:grey;
-border-radius:5px;
+//border-radius:5px;
 border-style:solid;
-border-width: 3px;
+//border-width: 3px;
 border-color:light-grey
 }
-
 #resume_html_content
 {
 	font-size:96%;
 }
-
+.container-fluid
+{
+	padding:0px;
+}
+#mobile_insert_entry_table td th
+{
+padding:0;
+margin:0;	
+}
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 0px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
 #mymaincontainer
 {
-	background-image:url('images/plain-grey.jpg');
+	//background-image:url('images/plain-grey.jpg');
+	background-color:white;
 	min-height:95%;
 	opacity:.95;
 	font-family: Cabin;
 	src: url("cabin/Cabin.otf") format("opentype");
 	font-size:120%;
 }
+#adminselect
+{
+color:#33b5e5;	
+}
+#adminselect:hover
+{
+color:white;	
+}
+
+
 body { 
-    padding-top: 65px; 
-	background-color:#666666;
+    padding-top: 50px; 
+	//background-color:#666666;
+	width:100%;
 
 	/*
 	
@@ -43,6 +78,16 @@ body {
 	background-size:100% 100%;
 	*/
 	height:100%;	
+}
+#myfooter
+{
+	padding:0px;
+	margin-top:10px;
+	font-size:120%;
+	font-family: Cabin;
+	src: url("cabin/Cabin.otf") format("opentype");
+	text-align:center;
+	//color:#d9d9d9	
 }
 .container
 {
@@ -93,7 +138,8 @@ font-size:95%;
 }
 .myicons
 {
-	margin-right:12px
+	margin-right:12px;
+	float:left;
 }
 
 
@@ -115,19 +161,11 @@ font-size:95%;
 myheader old background-color:#666666;	
 */
 
-
-#myfooter
-{
-	font-size:130%;
-	font-family: Cabin;
-	src: url("cabin/Cabin.otf") format("opentype");
-	text-align:center;
-	color:#d9d9d9
-
-}
 #greeting
 {
 	font-size:95%;
+	margin-left:-10px;
+	margin-right:-10px;
 }
 
 .carousel-inner > .item > img,

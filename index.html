@@ -1,48 +1,21 @@
-
-
-
 <html ng-app="karlApp">
 <meta charset="utf-8">
 <head>
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<meta name="viewport" content="initial-scale=.65, maximum-scale=1.0, width=device-width, user-scalable=1.0" />
+
 <link rel='stylesheet' type='text/css' href='bootstrap-3.3.6-dist/css/bootstrap.min.css' /></link>	
 <link rel='stylesheet' type='text/css' href='bootstrap-3.3.6-dist/css/bootstrap.min.css' /></link>	
-<script src='bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
-<link rel="shortcut icon" href='images/profile.jpg'>
 <link rel='stylesheet' type='text/css' href='mystyles.css?id=123'></link>
 
+<link rel="shortcut icon" href='images/profile.jpg'>
 <script src='stats.js'></script>
 <script src="fileutility.js"></script>
-<script>
-// Activate Carousel
-$("#mediagallery").carousel();
 
-// Enable Carousel Indicators
-$(".item").click(function(){
-    $("#mediagallery").carousel(1);
-});
 
-// Enable Carousel Controls
-$(".left").click(function(){
-    $("#mediagallery").carousel("prev");
-});
-</script>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
-<script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-animate.min.js"></script>
-
-<!--
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
-<script type='text/javascript' src='siteangularcode.js'></script>
--->
-<script type='text/javascript' src='AngularAppConfig.js'></script>
-<script type='text/javascript' src='AngularAppFactories.js'></script>
-<script type='text/javascript' src='AngularAppServices.js'></script>
-<script type='text/javascript' src='AngularAppControllers.js'></script>
 
 
 <meta property="og:url"           	 content="http://www.karlludwigsen.com" />
@@ -98,7 +71,7 @@ container inline style (background-color:#e6e6e6;)
 <nav class="navbar navbar-inverse navbar-fixed-top" style="font-color:white;border-color:#666666;margin:0px;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
@@ -107,47 +80,50 @@ container inline style (background-color:#e6e6e6;)
       <!--<a class="navbar-brand" href="#">Karl Ludwigsen</a>
 	  -->
     </div>
-    <div id="navbar" class="collapse navbar-collapse" style="font-size:110%;font-weight: bold;">
+    <div id="mynavbar" class="collapse navbar-collapse" style="font-size:110%;font-weight:bold;color-grey;">
       <ul class="nav navbar-nav" style="padding-top:15px;padding-bottom:15px">
 				<li><a href="#/aboutme"><span >About Me</span></a></li>
 				<li><a href="#/resume">Resume</a></li>
 				<li><a href="#/contactme">Contact Me</a></li>		
 				<li><a href="#/projects">Projects</a></li>	
-				<li>
-					<button type="button" class="btn btn-info btn-sm" onclick="location.href='#/adminlogin'"style="margin-left:5px;margin-top:10px">Admin Page
-					</button>
-				</li>
+				<li><a href ="#/adminlogin"><div id ="adminselect">Admin Page</div></a></li>
 
       </ul>
     </div>
   </div>
 </nav>		
-
-<div class="container well well-lg" id="mymaincontainer">
-		<div class="col-md-12 col-xs-12" id="myheader" style="" >
-				<div>
-				<div style="width:40%;border-radius: 3px;" ><h2>Karl Ludwigsen</h2></div >
-				<div style="width:100%;border-radius: 3px;"><h3> software developer, keyboardist</h3></div><img src="images/profile.jpg" width="133" height="90" > 
-				</div>					
+<div class="container-fluid" style="padding-left:0px;padding-right:0px">
+		<div class="col-md-12 col-xs-12" id="myheader">
+				<div style="margin-left:20px">
+				<h2>Karl Ludwigsen</h2>
+				<h3> software developer, keyboardist</h3>
+				
+			
+				
+				<div class="pull-left" style="width:85%"><img src="images/profile.jpg" width="133" height="90" ></div>
+				</div>
 		</div>	
+<div>
+
+<div class="container " id="mymaincontainer">
+
 	<div class="row-fluid">
-		<div style="background-image:url('images/plain-grey.jpg')">
-			<div class="col-md-3 col-xs-12 pull-left" >	
+		<div>
+			<div class="col-md-3 col-xs-12 pull-left well-lg">	
 				<div class="row" style="margin-top:20px;margin-left:10px">	
 				<div class="mylinks" style="overflow:hidden;">						
-					<div class="myicons" style="float:left;">
-					<a href="https://www.linkedin.com/in/karl-ludwigsen-8035a727"><img src="images/linkedin_color.png" alt="Linkedin Logo" style="width:45px;height:45px:padding-left:5px;"></a>
-					
+					<div class="myicons">
+					<a href="https://www.linkedin.com/in/karl-ludwigsen-8035a727"><img src="images/linkedin_color.png" alt="Linkedin Logo" style="width:45px;height:45px:padding-left:5px;"></a>					
 					</div>
-					<div class="myicons" style="float:left;">
+					<div class="myicons">
 					<a href="http://github.com/kludwigs"><img src="images/github.png" alt="Git Hub Logo" style="width:50px;height:50px;"></a>
 					</div>
-					<div class="myicons" style="float:left;">
+					<div class="myicons">
 					<a href="https://soundcloud.com/knote3"><img src="images/soundcloud_icon_color2.png" alt="Soundcloud Logo" style="width:50px;height:50px;"></a>	
 					</div>
 				</div>
 					<br>
-					<div id="greeting" style="margin-left:-10px:margin-right:-10px">
+					<div id="greeting">
 					Thanks for visiting my site! Check out my additional profiles on linkedin.com, github.com, and soundcloud.com	
 					</div>
 				</div>
@@ -166,9 +142,54 @@ container inline style (background-color:#e6e6e6;)
 			</div>	
 	</div>
 </div> 
-			<div class="footer" id="myfooter"> 
+
+			<div id="myfooter"> 
 	© 2016 by Karl Ludwigsen / info@karlludwigsen.com
 	</div>	
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src='bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
+
+<script>
+// Activate Carousel
+$("#mediagallery").carousel();
+
+// Enable Carousel Indicators
+$(".item").click(function(){
+    $("#mediagallery").carousel(1);
+});
+
+// Enable Carousel Controls
+$(".left").click(function(){
+    $("#mediagallery").carousel("prev");
+});
+
+    $(document).on('click', function(event){
+      var $clickedOn = $(event.target),
+          $collapsableItems = $('.collapse'),
+          isToggleButton = ($clickedOn.closest('.navbar-toggle').length == 1),
+          isLink = ($clickedOn.closest('a').length == 1),
+          isOutsideNavbar = ($clickedOn.parents('.navbar').length == 0);
+
+      if( (!isToggleButton && isLink) || isOutsideNavbar ) {
+        $collapsableItems.each(function(){
+          $(this).collapse('hide');
+        });
+      }
+    });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+<script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-animate.min.js"></script>
+
+<!--
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+<script type='text/javascript' src='siteangularcode.js'></script>
+-->
+<script type='text/javascript' src='AngularAppConfig.js'></script>
+<script type='text/javascript' src='AngularAppFactories.js'></script>
+<script type='text/javascript' src='AngularAppServices.js'></script>
+<script type='text/javascript' src='AngularAppControllers.js'></script>
 </body>
 
 </html>

@@ -317,7 +317,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		{
 			$scope.toggle();
 			console.log("you called insertNewEntry function - ");	
-			alertsManager.doInfo("Sending Record to database...");
+			alertsManager.doInfo("Sending entry to database...");
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
 			console.log("entry.category -", $scope.entry.category.id);
@@ -352,7 +352,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 					console.log("data", mydata);				
 					console.log("data.success", mydata.success);
 					console.log("data.errors", mydata.errors);
-					alertsManager.doGood("Failed to insert record!");
+					alertsManager.doEvil("Failed to insert record!");
 					$scope.toggle(true);
 				}			
 			});				
