@@ -20,9 +20,6 @@ Desktop: Windows Console, Winforms, VBA (Visual Basic 6), Microsoft Virtual Mach
 Version Control: ClearCase, TFS, & GIT. 
 </li>
 <li>
-Networking: TCP/IP, HTTP
-</li>
-<li>
 Operating Systems: Windows XP/7/10, Linux Red Hat, QNX4 UNIX. 
 </li>
 <li>
@@ -62,7 +59,10 @@ Software Engineer II ● Lam Research ● Tualatin, Oregon ● 2012 – 2014
 <br>
 <ul>
 <li>Developed application software for semiconductor device fabrication products. Tasks range in controls and automation, graphical user interfaces, robotics and simulation. </li> 
-<li>Worked with people involved in a wide variety of job roles and disciplines: including mechanical, electrical and process engineers.</li> <li>Utilized MPI (Message Passing Interface) for development on the multi-node system: involving synchronous and asynchronous communications. Attentive to race conditions and method re-entry. Made some use of the C# .Net Framework for front end GUI interaction. Back-end work in C/C++. Primarily worked in C. XML data binding for Schema to C mappings. Product developed across the Windows and UNIX platforms.</li>
+<li>Worked with people involved in a wide variety of job roles and disciplines: including mechanical, electrical and process engineers.</li> 
+<li>Made some use of the C# .Net Framework for front end GUI interaction. Back-end work in C/C++. </li>
+<li>XML data binding for Schema to C mappings. </li>
+<li>Product developed across the Windows and UNIX platforms.</li>
 </ul>
 <br>
 <b>
