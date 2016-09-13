@@ -6,8 +6,8 @@
 width:100%;
 //background-color:#666666;
 background-image:url('images/Portland_skyline_resize.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+background-repeat: no-repeat;
+background-size: 100% 100%;
 color:white;
 z-index:1000;
 margin-top:0px;
@@ -21,7 +21,7 @@ border-color:grey;
 //border-radius:5px;
 border-style:solid;
 //border-width: 3px;
-border-color:light-grey
+border-color:light-grey;
 }
 #resume_html_content
 {
@@ -50,8 +50,6 @@ input {
 	background-color:white;
 	min-height:95%;
 	opacity:.95;
-	font-family: Cabin;
-	src: url("cabin/Cabin.otf") format("opentype");
 	font-size:120%;
 }
 #adminselect
@@ -68,9 +66,10 @@ body {
     padding-top: 50px; 
 	//background-color:#666666;
 	width:100%;
-
+	font-family:Cabin;
+    src: url("cabin/Cabin.otf") format("opentype");
 	/*
-	
+		
 	background-image:url('images/Sky-Blue.jpg');
 	background-attachment: fixed;
 	background-repeat:no-repeat;
@@ -84,8 +83,7 @@ body {
 	padding:0px;
 	margin-top:10px;
 	font-size:120%;
-	font-family: Cabin;
-	src: url("cabin/Cabin.otf") format("opentype");
+
 	text-align:center;
 	//color:#d9d9d9	
 }
