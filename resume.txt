@@ -62,7 +62,8 @@ Software Engineer II ● Lam Research ● Tualatin, Oregon ● 2012 – 2014
 <li>Worked with people involved in a wide variety of job roles and disciplines: including mechanical, electrical and process engineers.</li> 
 <li>Made some use of the C# .Net Framework for front end GUI interaction. Back-end work in C/C++. </li>
 <li>XML data binding for Schema to C mappings. </li>
-<li>Product developed across the Windows and UNIX platforms.</li>
+<li>
+Product developed across the Windows and UNIX platforms.</li>
 </ul>
 <br>
 <b>
