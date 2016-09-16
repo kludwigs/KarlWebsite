@@ -24,7 +24,6 @@ if($authentication_required == true)
 {
 	// $_POST
 	// $_GET
-	
 	if (empty($_POST['username']) || empty($_POST['password']))
 	{
 		sendresponse($response, 3, false, $api_response_code);
@@ -37,27 +36,9 @@ if($authentication_required == true)
 	{
 		sendresponse($response, 4, false, $api_response_code);
 	}
-
-function sendresponse($response, $code, $success, $api_response_code)
-{
-	$response['code'] = $code;
-	$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-	$response['message'] = $api_response_code[$response['code']]['Message'];		
-	$response['success'] = $success;	
-	
-	header('HTTP/1.1 '.$response['status']. ' '.$response['message']);
-	header('Content-Type: application/json; charset=utf-8');
-	
-	echo json_encode($response);	
-	exit;
+	/* we passed - go back! */
+	sendresponse($response, 1, true, $api_response_code);			
 }
-		
-		sendresponse($response);			
-	}
-}
-/* we passed - send the data back */
-sendresponse($response, 1, true, $api_response_code);
-
 function sendresponse($response, $code, $success, $api_response_code)
 {
 	$response['code'] = $code;
@@ -74,8 +55,6 @@ function sendresponse($response, $code, $success, $api_response_code)
 
 function validatecredentials($username, $password)
 {
-	//return false;
-	
 	$passhash = hash("sha256", "$password");
 	$config = parse_ini_file("settings/dataleader.txt");
 	$dbUser = $config['user'];
