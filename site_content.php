@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 
 $HTTPS_required = false;
 $authentication_required = false;
+$response = null;
 
 $api_response_code = array(
 	0 => array('HTTP Response' => 400, 'Message' => 'Unknown Error'),
@@ -44,19 +45,23 @@ if($authentication_required == false)
 			break;
 			
 		case 'PUT':
+			parse_str(file_get_contents('php://input'), $_PUT);
 			$key = $_PUT['key'];
-			$newvalue = $_PUT['new_value'];	
-			if (empty($key) || empty($newvalue))
+			$new_value = $_PUT['new_value'];
+			$new_value = addslashes($new_value);
+			if (empty($key) || empty($new_value))
 			{
 				sendresponse($response, 6, false, $api_response_code);	
 			}
 			
-			$sql_select = "UPDATE site_content SET '$key'='$new_value' WHERE 1";	
+			$sql_select = "UPDATE site_content SET $key = '$new_value'";	
 			$success = update_site_content($sql_select);
-			if($site_content == false)
+			if($success == false)
 			{		
 				sendresponse($response, 0, false, $api_response_code);					
-			}	
+			}
+			$response['data'] = $success;
+			
 				break;				
 		case 'POST':
 				die("insert into table"); break;
@@ -113,18 +118,19 @@ function get_site_data($sql_select)
 	}	
 }
 function update_site_content($sql_select) 
-{
+{	
 	global $connect;
+	//$sql_select = mysqli_real_escape_string($connect,$sql_select);
 	mysql_query("set character_set_server='utf8'");
 	$results = mysqli_query($connect, $sql_select);
 	
-	if(mysql_affected_rows($connect) >= 0)
+	if(mysqli_affected_rows($connect) >= 0)
 	{
-		die(mysqli_error($connect));
-		return true;
+		return (mysqli_error($connect)+mysqli_affected_rows($connect));		
 	}
 	else
 	{
+		die(mysqli_error($connect));
 		return false;
 	}
 }

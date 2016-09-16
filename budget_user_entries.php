@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 
 $HTTPS_required = false;
 $authentication_required = true;
+$response = null;
 
 $api_response_code = array(
 	0 => array('HTTP Response' => 400, 'Message' => 'Unknown Error'),

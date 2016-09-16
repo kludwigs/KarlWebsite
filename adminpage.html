@@ -28,8 +28,8 @@
       <select ng-model="site_content_select" 
         ng-options="content.key for content in site_content">
       </select>
-	  <textarea class="form-control" id="site_content_editor" style="height:200" width="100%"></textarea>
-	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_select.value)">Save</button>
+	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:200" width="100%"></textarea>
+	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button>
 	<h2>Entries</h2>
 	
 	<table class="table table-bordered" ng-show="entries.length">	

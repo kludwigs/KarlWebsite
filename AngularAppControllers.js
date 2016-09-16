@@ -273,7 +273,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 						{
 							console.log("value.key == ", value.key);
 							console.log("got the match!");
-							$("#site_content_editor").html(value.value);
+							$scope.site_content_edit_text_field = value.value;
 						}
 						
 					});			
@@ -297,6 +297,15 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				success : function(msg) 
 				{
 					console.log(msg);
+					angular.forEach($scope.site_content, function(value, key) 
+					{						
+						if (value.key == objectkey) 
+						{
+							$scope.site_content[key]["value"] = objectvalue;						
+						}
+						
+					});	
+					
 				},
 				error : function(msg) 
 				{

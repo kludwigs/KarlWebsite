@@ -114,7 +114,6 @@ function validatecredentials($username, $password)
 	} 
 	else
 	{
-		//echo "we have results let's get shit";
 		$passhash = hash("sha256", "$password");
 		$row = mysqli_fetch_assoc($results);
 		$r_pass = $row['password']; 
