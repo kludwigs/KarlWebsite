@@ -141,3 +141,19 @@ karlApp.factory('facResumeContent', function () {
     };
 });
  
+karlApp.factory('facAboutMeContent', function () {
+
+    var data = {
+        fac_AboutMeContent: null,
+    };
+
+    return {
+        getSavedAboutMeContent: function () {
+            return data.fac_AboutMeContent;
+        },		
+		setSavedAboutMeContent: function (html)
+		{
+			data.fac_AboutMeContent = html;
+		},
+    };
+}); 

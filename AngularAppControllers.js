@@ -1,6 +1,6 @@
  /******************** WEBPAGE CTRL ******************/
  
- karlApp.controller('webpageCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, facResumeContent)
+ karlApp.controller('webpageCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, facResumeContent,facAboutMeContent)
 {			
 		$scope.formData = {};				
 		$scope.alerts = alertsManager.alerts;
@@ -98,7 +98,30 @@
 					facResumeContent.setSavedResumeContent(html);
 				}
 			});			
-		};		
+		}
+		$scope.LoadAboutMe = function(elementref)
+		{
+			console.log("we are going in!");
+			$.ajax({
+            	type: 'GET',
+				url: 'site_content.php',
+				dataType: 'json',
+				success : function(data) 
+				{
+					console.log("Loaded about me intro");
+					console.log(data.data);
+					if(elementref)		
+					{
+						elementref.html(data.data[0].aboutme_intro);
+					}						
+					facAboutMeContent.setSavedAboutMeContent(data.data[0].aboutme_intro);
+				},
+				error : function(data)
+				{
+					console.log("something went wrong!", data.data)
+				}
+			});				
+		}		
 		if($location.path() == '/resume')
 		{
 			if(facResumeContent.getSavedResumeContent() == null)
@@ -117,16 +140,29 @@
 			console.log("location path == ", $location.path())
 			$scope.Load(false, 'resume');	
 		}
+		if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
+		{
+			if(facAboutMeContent.getSavedAboutMeContent() == null)
+			{
+				console.log("loading content #aboutme_intro");
+				$scope.LoadAboutMe($("#aboutme_intro"));
+			}
+			else
+			{
+				$("#aboutme_intro").html(facAboutMeContent.getSavedAboutMeContent());
+			}			
+		}
 		
 });
 
 
 /******************** ADMIN CTRL ******************/
 
-karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, accessFac, currentUserFac, categoriesService, userEntriesService)
+karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, accessFac, currentUserFac, categoriesService, userEntriesService, siteContentService)
 {	
 		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
 		$scope.entries ={};
+		$scope.site_content=[{}];
 		$scope.categories = [{category_name: "none", id:"0"}];
 		$scope.sampleDate = {value: new Date(2016, 11,8, 01, 30)};
 		$scope.hideme = false;
@@ -178,6 +214,31 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		   
 			});			
 		}
+		$scope.getSiteContentFromService = function() 
+		{			
+		   siteContentService.getSiteContent() 
+		   .then(function(site_content_data) 
+		   {	   			  			   				  
+				   $scope.safeApply(function()
+					{			
+						console.log("safe apply! in getSiteContent")
+						console.log(site_content_data.site_content);
+							
+							var count = 1;		
+						angular.forEach(site_content_data.site_content[0], function(value, key) 
+						{
+							// do something for all key: value pairs 
+//							console.log("value =", value);
+							console.log("key =", key);
+							$scope.site_content.push({key:key, "value":value});
+						});		
+						
+						//$site_content = site_content_data.site_content[0];
+						console.log("for Each done site_content json object is populated", $scope.site_content);
+					}); 										
+		   
+			});			
+		}		
 
 		var mywatch =$scope.$watch('adminFilename', function() 
 		{
@@ -193,7 +254,36 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 			{
 				console.log("admin watch no load");
 			}
-		});		
+		});	
+		var site_content_watch =$scope.$watch('site_content_select', function() 
+		{
+			console.log("watch from adminCtrl");
+			
+			console.log("watch for site_content_select");
+			if($scope.site_content_select)
+			{
+				console.log("loading content site_content_watch");
+				if($scope.site_content)
+				{
+					console.log("site_content_select ==", $scope.site_content_select.key);
+					
+					angular.forEach($scope.site_content, function(value, key) 
+					{						
+						if (value.key == $scope.site_content_select.key) 
+						{
+							console.log("value.key == ", value.key);
+							console.log("got the match!");
+							$("#site_content_editor").html(value.value);
+						}
+						
+					});			
+				}
+			}
+		});	
+		$scope.saveContentChanges = function(objectkey, objectvalue)
+		{
+			console.log("object to change", objectkey, ",", objectvalue);
+		};
 		$scope.adminSave = function(file)
 		{
 			console.log("save event");	
@@ -368,6 +458,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				console.log("we're on the adminpage get those categories!");
 				$scope.getCategoriesFromService();
 				$scope.getBudgetEntries();
+				$scope.getSiteContentFromService();
 				$scope.hideme = true;
 			}
 			else

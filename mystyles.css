@@ -2,6 +2,8 @@
 width:100%;
 //background-color:#666666;
 background-image:url('images/Portland_skyline_resize.jpg');
+//background-image:url('images/plain-grey.jpg');
+//background-image:url('images/grey-banner.jpg');
 position: relative;
 background-repeat: no-repeat;
 background-size: 100% 100%;
@@ -15,11 +17,25 @@ padding-left:0px;
 padding-right:0px;
 padding-bottom:60px; 
 }
+.carousel img {
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+  max-width: none;
+}
+
 .caption{
     position: absolute;
     bottom:0;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;	
 }
-
+.sizer
+{
+	width: 350px;
+	text-align:center;
+}
 #resume_html_content
 {
 	font-size:96%;
@@ -58,10 +74,26 @@ color:#33b5e5;
 color:white;	
 }
 
+down vote
+This code finally worked for me:
+
+.carousel .item {
+    overflow:hidden;
+}
+.carousel-inner > .item > img {
+    height: none;
+    width:  100%;
+}
+
+.carousel-inner > .item > img:hover {
+
+}
 
 body { 
     padding-top: 50px; 
 	//background-color:#666666;
+	background-image:url('images/grey-banner.jpg');
+	background-repeat: no-repeat;
 	width:100%;
 	font-family:Cabin;
     src: url("cabin/Cabin.otf") format("opentype");
@@ -114,7 +146,6 @@ font-size:95%;
   margin-left:15px;
   margin-right:15px;
 }
-
 
 .myicons
 {

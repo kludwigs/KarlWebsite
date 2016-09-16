@@ -17,12 +17,8 @@ $api_response_code = array(
 );
 
 if($HTTPS_required && $_SERVER['HTTPS'] != 'on')
-{
-	$response['code'] = 2;
-	$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-	$response['message'] = $api_response_code[$response['code']]['Message'];
-	$response['success'] = false;
-	sendresponse($response);
+{	
+	sendresponse($response, 2, false, $api_response_code);	
 }
 
 if($authentication_required == true)
@@ -54,22 +50,13 @@ if($authentication_required == true)
 	
 	if (empty($username) || empty($password))
 	{
-		$response['code'] = 3;
-		$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-		$response['message'] = $api_response_code[$response['code']]['Message'];
-		$response['success'] = false;		
-		sendresponse($response);	
+		sendresponse($response, 3, false, $api_response_code);		
 	}			
 		
 	$user_id = validatecredentials($username, $password);
 	if($user_id == false)
 	{
-		$response['code'] = 4;
-		$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-		$response['message'] = $api_response_code[$response['code']]['Message'];	
-		$response['success'] = false;
-		
-		sendresponse($response);			
+		sendresponse($response, 4, false, $api_response_code);		
 	}
 	else
 	{			
@@ -82,34 +69,21 @@ if($authentication_required == true)
 			
 				if($entries == false)
 				{		
-					$response['code'] = 5;
-					$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-					$response['message'] = $api_response_code[$response['code']]['Message'];	
-					$response['success'] = false;	
-					sendresponse($response);					
+					sendresponse($response, 5, false, $api_response_code);					
 				}
 				else
-					$response['data'] = $entries;
-			
+					$response['data'] = $entries;			
 			
 				break;
 			case 'PUT':				
 					die("update table"); break;
 			case 'POST':				
-				 //die($price . "-" . $comments . "-". $category_id);
-				//$die("price - " . $price);
-				//$die("comments - " .$comments);
-				//$die("category_id - " .$category_id);
-				//$die("user_id - " . $user_id );
+
 				$sql_command = "INSERT INTO entries (user_id, price, date_time, comments, category_id, entry_id) values ('$user_id', '$price',now(), '$comments','$category_id', NULL)";
 				$result = insert_new_entry_for_user($sql_command);
 				if($result == false)
 				{
-					$response['code'] = 5;
-					$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-					$response['message'] = $api_response_code[$response['code']]['Message'];	
-					$response['success'] = false;	
-					sendresponse($response);	
+					sendresponse($response, 5, false, $api_response_code);
 				}
 				break;
 			case 'DELETE':
@@ -118,16 +92,15 @@ if($authentication_required == true)
 	}
 }
 /* we passed - send the data back */
-$response['code'] = 1;
-$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-$response['message'] = $api_response_code[$response['code']]['Message'];		
-$response['success'] = true;
+sendresponse($response, 1, true, $api_response_code);
 
-
-sendresponse($response);
-
-function sendresponse($response)
+function sendresponse($response, $code, $success, $api_response_code)
 {
+	$response['code'] = $code;
+	$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
+	$response['message'] = $api_response_code[$response['code']]['Message'];		
+	$response['success'] = $success;	
+	
 	header('HTTP/1.1 '.$response['status']. ' '.$response['message']);
 	header('Content-Type: application/json; charset=utf-8');
 	
@@ -156,8 +129,7 @@ function validatecredentials($username, $password)
 		return false;
 	} 
 	else
-	{
-		//echo "we have results let's get shit";
+	{	
 		$passhash = hash("sha256", "$password");
 		$row = mysqli_fetch_assoc($results);
 		$r_pass = $row['password']; 
@@ -193,7 +165,6 @@ function get_entries_from_user_id($user_id, $sql_select)
 	} 
 	else
 	{
-		//echo "we have results let's get shit";
 		//die('user_id is $user_id !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		$data = array();
 		while($row = $results->fetch_assoc())
@@ -206,7 +177,6 @@ function get_entries_from_user_id($user_id, $sql_select)
 function insert_new_entry_for_user($sql_command)
 {
 	global $connect;
-	//die("sql command - " . $sql_command);
 	$results = mysqli_query($connect, $sql_command);	
 	if(!$results)
 	{

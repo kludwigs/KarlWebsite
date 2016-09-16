@@ -18,11 +18,7 @@ $api_response_code = array(
 
 if($HTTPS_required && $_SERVER['HTTPS'] != 'on')
 {
-	$response['code'] = 2;
-	$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-	$response['message'] = $api_response_code[$response['code']]['Message'];
-	$response['success'] = false;
-	sendresponse($response);
+	sendresponse($response, 2, false, $api_response_code);	
 }
 
 if($authentication_required == true)
@@ -48,23 +44,12 @@ if($authentication_required == true)
 	}		
 	if (empty($username) || empty($password))
 	{
-		$response['code'] = 3;
-		$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-		$response['message'] = $api_response_code[$response['code']]['Message'];
-		$response['success'] = false;		
-		sendresponse($response);	
-	}	
-		
-		
+		sendresponse($response, 3, false, $api_response_code);		
+	}				
 	$user_id = validatecredentials($username, $password);
 	if($user_id == false)
 	{
-		$response['code'] = 4;
-		$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-		$response['message'] = $api_response_code[$response['code']]['Message'];	
-		$response['success'] = false;
-		
-		sendresponse($response);			
+		sendresponse($response, 4, false, $api_response_code);				
 	}
 	else
 	{
@@ -77,11 +62,7 @@ if($authentication_required == true)
 				
 				if($entries == false)
 				{		
-					$response['code'] = 5;
-					$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-					$response['message'] = $api_response_code[$response['code']]['Message'];	
-					$response['success'] = false;	
-					sendresponse($response);					
+					sendresponse($response, 5, false, $api_response_code);				
 				}
 				else
 					$response['data'] = $entries;
@@ -98,23 +79,21 @@ if($authentication_required == true)
 	}
 }
 /* we passed - send the data back */
-$response['code'] = 1;
-$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
-$response['message'] = $api_response_code[$response['code']]['Message'];		
-$response['success'] = true;
-$response['data'] = $entries;
+sendresponse($response, 1, true, $api_response_code);
 
-sendresponse($response);
-
-function sendresponse($response)
+function sendresponse($response, $code, $success, $api_response_code)
 {
+	$response['code'] = $code;
+	$response['status'] = $api_response_code[$response['code']]['HTTP Response'];
+	$response['message'] = $api_response_code[$response['code']]['Message'];		
+	$response['success'] = $success;	
+	
 	header('HTTP/1.1 '.$response['status']. ' '.$response['message']);
 	header('Content-Type: application/json; charset=utf-8');
 	
 	echo json_encode($response);	
 	exit;
 }
-
 function validatecredentials($username, $password)
 {
 	global $connect;	
@@ -170,7 +149,6 @@ function get_categories($sql_select)
 	} 
 	else
 	{
-		//echo "we have results let's get shit";
 		//die('user_id is $user_id !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		$data = array();
 		while($row = $results->fetch_assoc())
