@@ -283,6 +283,26 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.saveContentChanges = function(objectkey, objectvalue)
 		{
 			console.log("object to change", objectkey, ",", objectvalue);
+
+			alert("Saving " + objectkey + "!");
+			$.ajax(
+			{
+				url : 'site_content.php',
+				type: 'PUT',
+				data:
+				{
+					'key' : objectkey,
+					'new_value' : objectvalue,	
+				},
+				success : function(msg) 
+				{
+					console.log(msg);
+				},
+				error : function(msg) 
+				{
+					console.log(msg);
+				}					
+			});
 		};
 		$scope.adminSave = function(file)
 		{

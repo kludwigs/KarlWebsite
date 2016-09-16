@@ -46,7 +46,12 @@ if($authentication_required == false)
 		case 'PUT':
 			$key = $_PUT['key'];
 			$newvalue = $_PUT['new_value'];	
-			$sql_select = "UPDATE site_content SET '$key'='$new_value'";	
+			if (empty($key) || empty($newvalue))
+			{
+				sendresponse($response, 6, false, $api_response_code);	
+			}
+			
+			$sql_select = "UPDATE site_content SET '$key'='$new_value' WHERE 1";	
 			$success = update_site_content($sql_select);
 			if($site_content == false)
 			{		
@@ -115,6 +120,7 @@ function update_site_content($sql_select)
 	
 	if(mysql_affected_rows($connect) >= 0)
 	{
+		die(mysqli_error($connect));
 		return true;
 	}
 	else
