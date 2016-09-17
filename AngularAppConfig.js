@@ -80,3 +80,33 @@ karlApp.config(function($routeProvider)
 		redirectTo: '/'
 	  });
 });
+
+karlApp.run(['$rootScope', function($rootScope, $window) {
+	var firsttime= false;
+	$rootScope.aboutme_intro_divcontent = {content:'too late!'};
+	$rootScope.abouttime = {content:'too late!'};
+	$rootScope.stupidface = "you're not little";
+	$rootScope.PreviousPage = "you smell";
+        $rootScope.$on('$locationChangeStart', function() 
+		{			
+			if(firsttime == true)
+			{
+				$rootScope.PreviousPage = location.hash;
+				console.log("from run $rootscope  --", $rootScope.PreviousPage);
+			}
+			else
+				firsttime = true;
+			
+        });
+}]);
+karlApp.filter('unsafe', function($sce, $rootScope) {
+    return function(val, other) {
+		
+		//var output = 'fuck your <b>couch</b>';
+		console.log("unfiltered val---------", val);
+		var output = $rootScope.aboutme_intro_divcontent.content;
+		//console.log(" $rootScope.aboutme_intro_divcontent.content", output);
+
+		return $sce.trustAsHtml(val);
+    };
+});

@@ -61,28 +61,29 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
  
  karlApp.factory('siteContentService', function($http, $log, $q) {
   return {
-   getSiteContent: function(uname, pass) {
-     var deferred = $q.defer();
-	$http
-		({
-			method: 'GET',
-			url: 'site_content.php',                
-		})
-       .success(function(data) 
-	   { 
-			console.log(data);
-			console.log("we get data back in site_content.php", data.data);
-			deferred.resolve
+	getSiteContent: function(uname, pass) 
+    {
+		var deferred = $q.defer();
+			$http
+			({
+				method: 'GET',
+				url: 'site_content.php',                
+			})
+			.success(function(data) 
+			{ 
+				console.log(data);
+				console.log("we get data back in site_content.php", data.data);
+				deferred.resolve
 			({
 				site_content: data.data
 			});
-       }).error(function(msg, code) 
-	   {
-		  console.log("we had an error in siteContentService");
-          deferred.reject(msg);
-          $log.error(msg, code);
-       });
-     return deferred.promise;
-   }
+			}).error(function(msg, code) 
+			{
+				console.log("we had an error in siteContentService");
+				deferred.reject(msg);
+				$log.error(msg, code);
+			});
+		return deferred.promise;
+    }
   }
  });

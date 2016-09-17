@@ -1,11 +1,13 @@
  /******************** WEBPAGE CTRL ******************/
  
- karlApp.controller('webpageCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, facResumeContent,facAboutMeContent)
+ karlApp.controller('webpageCtrl', function ($window, $scope, $routeParams, $http, alertsManager, $timeout, $location, facResumeContent,facSiteContent, $rootScope, $sce)
 {			
 		$scope.formData = {};				
 		$scope.alerts = alertsManager.alerts;
 		$scope.AlertMessage = {active: false};
-			
+		$scope.firstload = false;	
+		$scope.global = $rootScope;
+		
 		$scope.toggle = function(delay)
 		{		
 			console.log("toggling...");
@@ -26,6 +28,10 @@
 			
 			//console.log($scope.AlertMessage);
 		};
+		$scope.isValid = function(value) 
+		{
+		return !value
+		}	
 								
         $scope.processForm = function () 
 		{		
@@ -74,60 +80,14 @@
 				}
 				$scope.toggle(true);
 			});
-        };
-		$scope.Load = function(elementref, file)
-		{
-			console.log("load event");
-			var txtfile = file + ".txt";
-			console.log("file name = " + txtfile + "\n");
-			$.ajax({
-				url : 'file.php',
-				type: 'post',
-				data : {
-					filename : txtfile,
-					action : 'load'
-				},
-				success : function(html) 
-				{
-					console.log("Loaded html.");
-					//console.log(html);
-					console.log("where is the stuff");
-					//$("#html_content").val(html);		
-					if(elementref)						
-						elementref.html(html);
-					facResumeContent.setSavedResumeContent(html);
-				}
-			});			
-		}
-		$scope.LoadAboutMe = function(elementref)
-		{
-			console.log("we are going in!");
-			$.ajax({
-            	type: 'GET',
-				url: 'site_content.php',
-				dataType: 'json',
-				success : function(data) 
-				{
-					console.log("Loaded about me intro");
-					console.log(data.data);
-					if(elementref)		
-					{
-						elementref.html(data.data[0].aboutme_intro);
-					}						
-					facAboutMeContent.setSavedAboutMeContent(data.data[0].aboutme_intro);
-				},
-				error : function(data)
-				{
-					console.log("something went wrong!", data.data)
-				}
-			});				
-		}		
+        };	
 		if($location.path() == '/resume')
-		{
-			if(facResumeContent.getSavedResumeContent() == null)
+		{	
+			//console.log(facResumeContent.getSavedResumeContent());
+			if(facResumeContent.getSavedResumeContent() === undefined)
 			{
 				console.log("loading resume content #resume_html_content");
-				$scope.Load($("#resume_html_content"), 'resume');
+				facResumeContent.loadResumeContent($("#resume_html_content"), 'resume');
 			}
 			else
 			{
@@ -135,26 +95,96 @@
 				$("#resume_html_content").html(facResumeContent.getSavedResumeContent());
 			}
 		}
-		else if(facResumeContent.getSavedResumeContent() == null)
+		else if(facResumeContent.getSavedResumeContent() === undefined)
 		{
 			console.log("location path == ", $location.path())
-			$scope.Load(false, 'resume');	
-		}
-		if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
+			var resume = facResumeContent.loadResumeContent($("#resume_html_content"), 'resume');
+			facResumeContent.setSavedResumeContent(resume);			
+		}		
+		var init = function () 
 		{
-			if(facAboutMeContent.getSavedAboutMeContent() == null)
+			if(facSiteContent.getSavedAboutMeContent() == null)
 			{
-				console.log("loading content #aboutme_intro");
-				$scope.LoadAboutMe($("#aboutme_intro"));
-			}
-			else
-			{
-				$("#aboutme_intro").html(facAboutMeContent.getSavedAboutMeContent());
+			   facSiteContent.getSiteContent() 
+			   .then(function(site_content_data) 
+			   {	   			  			   				  			
+					console.log("promise fulfilled loading getSiteContent");
+					console.log(site_content_data.site_content);
+						
+					var count = 1;		
+					angular.forEach(site_content_data.site_content[0], function(value, key) 
+					{
+						console.log("key, value =", key);
+						if(key.indexOf("aboutme") !== -1)
+						{
+								facSiteContent.setSavedAboutMeContent(value);
+						}	
+						else if(key.indexOf("greeting") !== -1)
+						{
+								facSiteContent.setSavedGreetingContent(value);
+						}	
+						else if(key.indexOf("sign") !== -1)					
+						{
+								facSiteContent.setSavedSignoffContent(value);
+						}	
+						else if(key.indexOf("footer") !== -1)
+						{
+								facSiteContent.setSavedFooterContent(value);														
+						}
+					});	
+					if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
+					{
+						$scope.applyaboutmesitedata();
+						$scope.applyindexsitedata();						
+					}
+					else
+					{
+						$scope.applyindexsitedata();
+					}
+				});
 			}			
 		}
-		
-});
+		$scope.applyaboutmesitedata = function()
+		{
+			console.log("applying about me content");
+			//console.log(facSiteContent.getSavedAboutMeContent());
+			//$("#aboutme_intro").html(facSiteContent.getSavedAboutMeContent());
+			$scope.global.aboutme_intro_divcontent.content = facSiteContent.getSavedAboutMeContent();			
+			//console.log("$scope.global.aboutme_intro_divcontent.content", $scope.global.aboutme_intro_divcontent.content)
+			//$scope.global.aboutme_intro_divcontent  = facSiteContent.getSavedAboutMeContent();
+		}
+		$scope.applyindexsitedata = function()
+		{
+			console.log("applying index content");
+			$("#greeting").html(facSiteContent.getSavedGreetingContent());
+			$("#myfooter").html(facSiteContent.getSavedFooterContent());
+			$("#sign_off").html(facSiteContent.getSavedSignoffContent());
+		}	
+		init();	
+		if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
+		{			
+			console.log(" current", $window.location.hash);			
+			/*if($scope.global.PreviousPage != null)
+			{
+				if ($scope.global.PreviousPage == '#/aboutme' || $scope.global.PreviousPage == '#/')
+				{
+					console.log("previous page was no bueno");
+					$scope.safeApply(function()
+					{	
+						$scope.applyaboutmesitedata();
+					});
+				}
+				
+			}
+			
+			else
+				*/
+				$scope.applyaboutmesitedata();
 
+		}	
+		
+
+});
 
 /******************** ADMIN CTRL ******************/
 

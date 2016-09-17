@@ -1,10 +1,10 @@
-<div class="aboutme">
-<h2>About Me</h2>
-<div class="aboutme_content">
-<p>
-I am a native of Oregon. I grew up in NE Portland and went to Grant High School. I completed my B.A. in Mathematics from the University of Oregon and a Masters in Engineering from Portland State University. I have an affinity for music as well as software. I've been developing software since 2010 and playing music professionally since 2001.<p>
-<p>
-Please contact me for help in software development, web and music services. 
+I grew up in NE Portland, OR and went to Grant High School. I completed my B.A. in Mathematics from the University of Oregon and a Masters in Engineering from Portland State University. I have an affinity for music as well as software. I've been developing software since 2010 and playing music professionally since 2001.
 </p>
-</div>
-</div>
+
+<p>
+I have worked with a variety of technologies but I got started in my professional career using C/C++. Not too long afterwards I began moving towards C#. I've used many aspects of the .NET framework from 2.0 to 4.5+ (imagine not using LINQ!). I have a passion about learning and have spent time with PHP, JS Frameworks (such as Knockout and Angular) and Java (see my github for details). I also work on mobile apps (usually Android). It is enjoyable to make something that can add more convenience to my life. 
+</p>
+</p>
+<p>
+I have played music in notable Portland area venues such as The Doug Fir, Mississippi Studios and The Crystal Ballroom. 
+</p>

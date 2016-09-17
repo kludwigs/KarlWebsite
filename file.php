@@ -22,7 +22,7 @@ class File {
 		
         $action = isset($_POST['action']) ? $_POST['action'] : false;
         $this->filename = isset($_POST['filename']) ? $_POST['filename'] : false;
-        if ((!$action) || (!$this->filename)) return;
+        if ((!$action) || (!$this->filename)) die("no action to be done");
         switch ($action) {
             case 'save' : 
                 $this->save(); break;
@@ -31,6 +31,7 @@ class File {
             case 'delete' : 
                 $this->delete(); break;
             default :
+				die("no ACTION!");
                 return;
                 break;
         }
