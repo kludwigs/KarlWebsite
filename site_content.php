@@ -25,7 +25,6 @@ if($HTTPS_required && $_SERVER['HTTPS'] != 'on')
 if($authentication_required == false)
 {	
 	$method = $_SERVER['REQUEST_METHOD'];
-
 	switch ($method) 
 	{
 		case 'GET':					

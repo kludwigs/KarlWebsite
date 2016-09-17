@@ -125,14 +125,22 @@ body {
 font-size:95%;
 }
 
+@media (min-width: 800px) {
+	.navbar .navbar-nav {
+	  display: inline-block;
+	  float: none;
+	  vertical-align: top;
+	}
 
-
-.nav {
-    margin: -15px;
-    display: table;
-   // width: 100%;
+	.navbar .navbar-collapse {
+	  text-align: center;
+	}
+	.nav {
+		margin: -15px;
+		display: table;
+	   // width: 100%;
+	}
 }
-
 
  .nav > li > a:hover,
  .nav > li > a:focus 
@@ -167,6 +175,10 @@ font-size:95%;
 	margin-right:12px;
 	float:left;
 }
+.profilepic
+{
+	float:left;
+}
 
 
 #pagelist > li > a:hover,
@@ -192,6 +204,7 @@ myheader old background-color:#666666;
 	font-size:95%;
 	margin-left:-10px;
 	margin-right:-10px;
+	margin-bottom:0px;
 }
 
 .carousel-inner > .item > img,

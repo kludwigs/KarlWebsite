@@ -103,7 +103,7 @@ karlApp.filter('unsafe', function($sce, $rootScope) {
     return function(val, other) {
 		
 		//var output = 'fuck your <b>couch</b>';
-		console.log("unfiltered val---------", val);
+		//console.log("unfiltered val---------", val);
 		var output = $rootScope.aboutme_intro_divcontent.content;
 		//console.log(" $rootScope.aboutme_intro_divcontent.content", output);
 
