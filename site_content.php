@@ -133,3 +133,4 @@ function update_site_content($sql_select)
 		return false;
 	}
 }
+?>
