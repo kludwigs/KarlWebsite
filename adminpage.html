@@ -7,7 +7,7 @@
 
  <div class="container-fluid">
     <div class="row">
-	        <div class="col-md-9 col-xs-9">
+	        <div class="col-md-12 col-xs-12">
 			<select ng-model="adminFilename" ng-options="x for x in filenames"></select><br>
 			<textarea class="form-control" id="html_content" style="height:400" width="100%"></textarea>
 			<button id="save" ng-click="adminSave(adminFilename)">Save</button>
@@ -28,7 +28,7 @@
       <select ng-model="site_content_select" 
         ng-options="content.key for content in site_content">
       </select>
-	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:200" width="100%"></textarea>
+	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300" width="100%"></textarea>
 	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button>
 	<h2>Entries</h2>
 	
@@ -80,7 +80,7 @@
 			<th>User</th>
 		</tr>	
 		<tr>	
-			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"></td>
+			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
 			<td><input type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
 			 <select ng-model="entry.category" ng-options="i.id as i.category_name for i in categories" ></select>
@@ -90,6 +90,7 @@
 	</table>	
 		<div class="span6" style="padding-bottom:4px";>	
 		<button type="submit">Insert New Entry</button>
+		<button type="reset" value="Reset">Clear Fields</button>
 	</div>	
 	</form>	
 
