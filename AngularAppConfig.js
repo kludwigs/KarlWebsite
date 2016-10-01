@@ -84,9 +84,9 @@ karlApp.config(function($routeProvider)
 karlApp.run(['$rootScope', function($rootScope, $window) {
 	var firsttime= false;
 	$rootScope.aboutme_intro_divcontent = {content:'too late!'};
-	$rootScope.abouttime = {content:'too late!'};
-	$rootScope.stupidface = "you're not little";
-	$rootScope.PreviousPage = "you smell";
+	$rootScope.sign_off = {content:'too late!'};
+
+	$rootScope.PreviousPage = "";
         $rootScope.$on('$locationChangeStart', function() 
 		{			
 			if(firsttime == true)
@@ -104,7 +104,7 @@ karlApp.filter('unsafe', function($sce, $rootScope) {
 		
 		//var output = 'fuck your <b>couch</b>';
 		//console.log("unfiltered val---------", val);
-		var output = $rootScope.aboutme_intro_divcontent.content;
+		//var output = $rootScope.aboutme_intro_divcontent.content;
 		//console.log(" $rootScope.aboutme_intro_divcontent.content", output);
 
 		return $sce.trustAsHtml(val);
