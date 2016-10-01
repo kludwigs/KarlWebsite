@@ -1,8 +1,0 @@
-[commands]
-server = 'localhost'
-database = 'karlludw_site_info'
-user = 'karlludw_myadmin'
-pass = 'EwzCgXx=uiZ5'
-budgetdatabase = 'karlludw_budget_app'
-sitecontentdatabase = 'karlludw_site_content'
-islocal = 1
