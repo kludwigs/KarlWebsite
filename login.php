@@ -1,5 +1,6 @@
 <?php
 
+require_once 'login_config.php';
 header('Content-Type: application/json');
 
 $HTTPS_required = false;
@@ -32,7 +33,7 @@ if($authentication_required == true)
 	
 	$username = $_POST['username'];
 	$pass = $_POST['password'];
-	$credential = validatecredentials($username, $pass);
+	$credential = validate_admin_credentials($username, $pass);
 	if($credential == false)
 	{
 		sendresponse($response, 4, false, $api_response_code);
@@ -54,19 +55,10 @@ function sendresponse($response, $code, $success, $api_response_code)
 	exit;
 }
 
-function validatecredentials($username, $password)
+function validate_admin_credentials($username, $password)
 {
-	$passhash = hash("sha256", "$password");
-	$config = parse_ini_file("settings/dataleader.txt");
-	$dbUser = $config['user'];
-	$dbPass = $config['pass'];
-	$dbDatabase = $config['database'];
-	$dbServer = $config['server'];
-	$connect= new mysqli($dbServer, $dbUser, $dbPass, $dbDatabase);
-	if ($connect->connect_error) 
-	{
-		die('Connect Error (' . $connect->connect_errno . ') '. $connect->connect_error);
-	}
+	global $connect;
+	$passhash = hash("sha256", "$password");	
 	$parm = "%$username%";
 	$sql_select = "SELECT * FROM admin_users WHERE username like '$parm'";
 
@@ -87,10 +79,11 @@ function validatecredentials($username, $password)
 		$row = mysqli_fetch_assoc($results);
 		$r_pass = $row['password']; 
 		$r_user = $row['username'];
-		//die("passwords $r_pass and $passhash! usernames received $r_user and submitted $username\n");
 		if(strcmp(trim($r_pass),trim($passhash)) == 0)
 			return true;
 		else
 			return false;
 	}
 }
+
+?>

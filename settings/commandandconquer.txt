@@ -1,3 +1,0 @@
-[commands]
-user = 'info@karlludwigsen.com'
-pass = '@Ov3rn1ght!'

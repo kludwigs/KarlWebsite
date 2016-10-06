@@ -83,9 +83,10 @@ I also write music (not the lyrics) to songs. Two of which have been made into m
 <hr>
 </span>
 </div>
-<div id="sign_off" class="aboutme_content">
-If you have questions feel free to contact me for help in software development, web and music services. Have a great day!
+<div ng-model="sign_offdiv">
+<span ng-bind-html='sign_off.content | unsafe'></span>
 </div>
+
 </div>
 </div> <!-- aboutme content -->
 </div> <!-- about me -->

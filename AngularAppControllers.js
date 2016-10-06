@@ -103,7 +103,7 @@
 		}		
 		var init = function () 
 		{
-			if(facSiteContent.getSavedAboutMeContent() == null)
+			if(facSiteContent.getSavedAboutMeContent() == undefined)
 			{
 			   facSiteContent.getSiteContent() 
 			   .then(function(site_content_data) 
@@ -150,6 +150,7 @@
 			//console.log(facSiteContent.getSavedAboutMeContent());
 			//$("#aboutme_intro").html(facSiteContent.getSavedAboutMeContent());
 			$scope.global.aboutme_intro_divcontent.content = facSiteContent.getSavedAboutMeContent();			
+			$scope.global.sign_off.content = facSiteContent.getSavedSignoffContent();
 			//console.log("$scope.global.aboutme_intro_divcontent.content", $scope.global.aboutme_intro_divcontent.content)
 			//$scope.global.aboutme_intro_divcontent  = facSiteContent.getSavedAboutMeContent();
 		}
@@ -157,8 +158,7 @@
 		{
 			console.log("applying index content");
 			$("#greeting").html(facSiteContent.getSavedGreetingContent());
-			$("#myfooter").html(facSiteContent.getSavedFooterContent());
-			$("#sign_off").html(facSiteContent.getSavedSignoffContent());
+			$("#myfooter").html(facSiteContent.getSavedFooterContent());			
 		}	
 		init();	
 		if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
