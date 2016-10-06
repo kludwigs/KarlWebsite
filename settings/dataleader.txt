@@ -5,4 +5,4 @@ user = 'karlludw_myadmin'
 pass = 'EwzCgXx=uiZ5'
 budgetdatabase = 'karlludw_budget_app'
 sitecontentdatabase = 'karlludw_site_content'
-islocal = 1
+islocal = 0
