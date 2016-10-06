@@ -1,9 +1,8 @@
-
 /*desktop*/
 @media (min-width: 800px) {
 	#myheader
 	{
-	background-image:url('images/Portland_skyline_ds_resize.jpg');	
+	background-image:url('images/Portland_skyline_resize.jpg');	
 	}
 	#headercontent
 	{
@@ -18,12 +17,12 @@
 	}	
 	#myfooter
 	{	
-		margin-bottom:5px;
+	margin-bottom:5px;
 	}
 }
 /*mobile*/
 @media (max-width: 800px) {
-		#myheader
+	#myheader
 	{
 	background-image:url('images/Portland_skyline.jpg');
 	}
@@ -35,10 +34,6 @@
 
 #myheader{	
 width:100%;
-//background-color:#666666;
-
-//background-image:url('images/plain-grey.jpg');
-//background-image:url('images/grey-banner.jpg');
 position: relative;
 background-repeat: no-repeat;
 background-size: 100% 100%;
