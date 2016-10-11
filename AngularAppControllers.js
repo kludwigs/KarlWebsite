@@ -117,25 +117,35 @@
 						console.log("key, value =", key);
 						if(key.indexOf("aboutme") !== -1)
 						{
-								facSiteContent.setSavedAboutMeContent(value);
+							facSiteContent.setSavedAboutMeContent(value);
 						}	
 						else if(key.indexOf("greeting") !== -1)
 						{
-								facSiteContent.setSavedGreetingContent(value);
+							facSiteContent.setSavedGreetingContent(value);
 						}	
 						else if(key.indexOf("sign") !== -1)					
 						{
-								facSiteContent.setSavedSignoffContent(value);
+							facSiteContent.setSavedSignoffContent(value);
 						}	
 						else if(key.indexOf("footer") !== -1)
 						{
-								facSiteContent.setSavedFooterContent(value);														
+							facSiteContent.setSavedFooterContent(value);														
+						}
+						else if(key.indexOf("media") !==-1)
+						{
+							console.log("WE SET THE MEDIA!");
+							facSiteContent.setSavedMediaIntroContent(value);
 						}
 					});	
 					if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
 					{
 						$scope.applyaboutmesitedata();
 						$scope.applyindexsitedata();						
+					}
+					if($location.path() =='/media')
+					{
+						$scope.applyindexsitedata();
+						$scope.applymediasitedata();
 					}
 					else
 					{
@@ -147,41 +157,33 @@
 		$scope.applyaboutmesitedata = function()
 		{
 			console.log("applying about me content");
-			//console.log(facSiteContent.getSavedAboutMeContent());
-			//$("#aboutme_intro").html(facSiteContent.getSavedAboutMeContent());
 			$scope.global.aboutme_intro_divcontent.content = facSiteContent.getSavedAboutMeContent();			
 			$scope.global.sign_off.content = facSiteContent.getSavedSignoffContent();
-			//console.log("$scope.global.aboutme_intro_divcontent.content", $scope.global.aboutme_intro_divcontent.content)
-			//$scope.global.aboutme_intro_divcontent  = facSiteContent.getSavedAboutMeContent();
 		}
 		$scope.applyindexsitedata = function()
 		{
 			console.log("applying index content");
 			$("#greeting").html(facSiteContent.getSavedGreetingContent());
-			$("#myfooter").html(facSiteContent.getSavedFooterContent());			
-		}	
+			$("#myfooter").html(facSiteContent.getSavedFooterContent());
+		}
+		$scope.applymediasitedata = function()
+		{
+			console.log("we setting the media div...");
+			console.log(facSiteContent.getSavedMediaIntroContent());
+			$("#media_intro_div").html(facSiteContent.getSavedMediaIntroContent());
+		}		
 		init();	
 		if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
 		{			
 			console.log(" current", $window.location.hash);			
-			/*if($scope.global.PreviousPage != null)
-			{
-				if ($scope.global.PreviousPage == '#/aboutme' || $scope.global.PreviousPage == '#/')
-				{
-					console.log("previous page was no bueno");
-					$scope.safeApply(function()
-					{	
-						$scope.applyaboutmesitedata();
-					});
-				}
-				
-			}
-			
-			else
-				*/
-				$scope.applyaboutmesitedata();
+			$scope.applyaboutmesitedata();
 
-		}	
+		}
+		if($location.path() =='/media')
+		{			
+			console.log(" current", $window.location.hash);			
+			$scope.applymediasitedata();
+		}			
 		
 
 });

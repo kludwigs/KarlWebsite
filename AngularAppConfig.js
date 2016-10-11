@@ -19,12 +19,7 @@ karlApp.config(function($routeProvider)
 	  {
 		templateUrl: 'resume.html',
 		controller: 'webpageCtrl'
-	  }).		  
-	  when('/mediagallery', 
-	  {
-		templateUrl: 'mediagallery.html',
-		controller: 'webpageCtrl'
-	  }).	
+	  }).		  	
 	   when('/contactme', 
 	  {
 		templateUrl: 'contactme.html',
@@ -34,7 +29,12 @@ karlApp.config(function($routeProvider)
 	  {
 		templateUrl: 'projects.html',
 		controller: 'webpageCtrl',
-	  }).	
+	  }).
+	   when('/media', 
+	  {
+		templateUrl: 'media.html',
+		controller: 'webpageCtrl',
+	  }).	  
 	   when('/testimonials', 
 	  {
 		templateUrl: 'testimonials.html',

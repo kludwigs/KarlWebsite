@@ -180,6 +180,7 @@ karlApp.factory('facSiteContent', function ($http, $log, $q) {
 	var	FooterContent = null;
 	var	SignoffContent = null;
 	var	GreetingContent = null;
+	var MediaContent = null;
     
     return{		
         getSavedAboutMeContent: function ()
@@ -213,7 +214,15 @@ karlApp.factory('facSiteContent', function ($http, $log, $q) {
 		setSavedGreetingContent: function (html)
 		{
 			GreetingContent = html;
-		},	
+		},
+		getSavedMediaIntroContent: function()
+		{
+			return MediaContent;
+		},
+		setSavedMediaIntroContent: function(html)
+		{
+			MediaContent = html;
+		},
 		getSiteContent: function(uname, pass) 
 		{
 			var deferred = $q.defer();
