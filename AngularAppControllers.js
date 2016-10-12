@@ -159,18 +159,23 @@
 			console.log("applying about me content");
 			$scope.global.aboutme_intro_divcontent.content = facSiteContent.getSavedAboutMeContent();			
 			$scope.global.sign_off.content = facSiteContent.getSavedSignoffContent();
+			var myclass= "aboutme_content";
+			$("#aboutme_intro_div").addClass(myclass );
+			$("#sign_off_div").addClass(myclass);						
 		}
 		$scope.applyindexsitedata = function()
 		{
 			console.log("applying index content");
-			$("#greeting").html(facSiteContent.getSavedGreetingContent());
+			$("#greeting").html(facSiteContent.getSavedGreetingContent());			
 			$("#myfooter").html(facSiteContent.getSavedFooterContent());
+			$("#greeting").addClass("greeting");
 		}
 		$scope.applymediasitedata = function()
 		{
 			console.log("we setting the media div...");
 			console.log(facSiteContent.getSavedMediaIntroContent());
 			$("#media_intro_div").html(facSiteContent.getSavedMediaIntroContent());
+			$("#media_intro_div").addClass("media_div");
 		}		
 		init();	
 		if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')

@@ -1,5 +1,5 @@
 /*desktop*/
-@media (min-width: 800px) {
+@media (min-width: 900px) {
 	#myheader
 	{
 	background-image:url('images/HawthorneBridge-Pano.jpg');	
@@ -19,14 +19,18 @@
 	{	
 	margin-bottom:5px;
 	}
-	#greeting
+	.greeting
 	{
 		padding-right:50px;
 		padding-left:10px;
+		font-size:105%;
+		margin-left:-10px;
+		margin-right:-10px;
+		margin-bottom:0px;			
 	}
 }
 /*mobile*/
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 	#myheader
 	{
 	background-image:url('images/Portland_skyline.jpg');
@@ -34,7 +38,11 @@
 	#headercontent
 	{
 		padding-top:50px;padding-bottom:50px;
-	}	
+	}
+	.greeting
+	{
+		font-size:120%;
+	}
 }
 
 #myheader{	
@@ -245,21 +253,11 @@ myheader old background-color:#666666;
      max-width: 100%;
      height: 500px !important;
 }
-.projects_content
+.aboutme_content,.media_div,.projects_content
 {
 	font-size: 120%;
 }
-.aboutme_content,.media_div
-{
-	font-size: 120%;
-}
-#greeting
-{
-	font-size:105%;
-	margin-left:-10px;
-	margin-right:-10px;
-	margin-bottom:0px;	
-}
+
 
 /*---------------------- Animations ------------------*/
 
