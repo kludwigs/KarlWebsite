@@ -161,14 +161,16 @@
 			$scope.global.sign_off.content = facSiteContent.getSavedSignoffContent();
 			var myclass= "aboutme_content";
 			$("#aboutme_intro_div").addClass(myclass );
-			$("#sign_off_div").addClass(myclass);						
+			$("#sign_off_div").addClass(myclass);			
 		}
 		$scope.applyindexsitedata = function()
 		{
 			console.log("applying index content");
 			$("#greeting").html(facSiteContent.getSavedGreetingContent());			
 			$("#myfooter").html(facSiteContent.getSavedFooterContent());
-			$("#greeting").addClass("greeting");
+			$("#greeting").addClass("greeting");	
+			$("#myfooter").addClass("footer");
+			
 		}
 		$scope.applymediasitedata = function()
 		{
