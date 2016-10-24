@@ -116,7 +116,7 @@ margin-right:0px;
 padding-top:0px;
 padding-left:0px;
 padding-right:0px;
-padding-bottom:60px; 
+padding-bottom:30px; 
 }
 .carousel img {
   top: 0;
@@ -294,14 +294,19 @@ myheader old background-color:#666666;
 		font-size:144%;
 	}	
 }
-.aboutme_content,.media_div,.projects_content, .contactme, .adminlogin, .adminpage 
+.aboutme_content,.media_div,.projects_content, .contactme, .adminlogin, .adminpage
 {
 	font-size:144%;
 }
 
-#resume_html_content,.footer 
+
+#resume_html_content,.footer  
 {
 	font-size:120%;
+}
+.form-control, .table
+{
+	font-size:108%;
 }
 
 #pagelist
