@@ -21,7 +21,7 @@
 	}
 	#profile_picture
 	{
-		position:relative;top:-12px;left:0px;
+		position:relative;top:-12px;left:-11px;
 	
 	}
 	.greeting
@@ -32,11 +32,11 @@
 		//margin-left:-10px;
 		margin-right:-10px;
 		margin-bottom:0px;	
-		position:relative;left:-4px;top:10px		
+		position:relative;left:-15px;top:10px		
 	}
-	.myicons
+	.mylinks
 	{
-		position:relative;left:10px;
+		position:relative;left:-17px;
 	}
 }
 @media(max-width:991px)
@@ -53,7 +53,7 @@
 	.greeting
 	{
 		font-size:120%;
-		position:relative;
+				position:relative;
 		left:-10px;
 	}		
 }
@@ -66,6 +66,11 @@
 	#headercontent
 	{
 		padding-top:50px;padding-bottom:50px;
+	}
+	.greeting
+	{
+		position:relative;
+		left:-10px;
 	}
 }
 
