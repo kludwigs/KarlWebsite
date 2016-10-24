@@ -19,15 +19,43 @@
 	{	
 	margin-bottom:5px;
 	}
+	#profile_picture
+	{
+		position:relative;top:-12px;left:-11px;
+	
+	}
 	.greeting
 	{
 		padding-right:50px;
-		padding-left:10px;
+		//padding-left:10px;
 		font-size:105%;
-		margin-left:-10px;
+		//margin-left:-10px;
 		margin-right:-10px;
-		margin-bottom:0px;			
+		margin-bottom:0px;	
+		position:relative;left:-15px;top:10px		
 	}
+	.mylinks
+	{
+		position:relative;left:-17px;
+	}
+}
+@media(max-width:991px)
+{
+	#profile_picture
+	{
+		float:left;
+		position:relative;left:-25px;
+	}
+	.myicons
+	{
+		position:relative;left:6px;
+	}
+	.greeting
+	{
+		font-size:120%;
+				position:relative;
+		left:-10px;
+	}		
 }
 /*mobile*/
 @media (max-width: 900px) {
@@ -41,7 +69,8 @@
 	}
 	.greeting
 	{
-		font-size:120%;
+		position:relative;
+		left:-10px;
 	}
 }
 
