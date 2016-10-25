@@ -298,12 +298,27 @@ myheader old background-color:#666666;
 {
 	font-size:144%;
 }
-
-
 #resume_html_content,.footer, .adminpage  
 {
 	font-size:120%;
 }
+/* Small Mobile Fonts*/
+@media(max-width:600px)
+{
+	.aboutme_content,.media_div, .greeting
+	{
+		font-size:170%;
+	}
+	.footer
+	{
+		font-size:144%;
+	}
+	#resume_html_content
+	{
+		font-size:120%;
+	}
+}
+
 .form-control, .table
 {
 	font-size:108%;
@@ -315,9 +330,6 @@ font-size:95%;
 }
 .no-boost {
     max-height: 99999px;
-}
-body * {
-  max-height: 1000000em;
 }
 
 /******************************************************/

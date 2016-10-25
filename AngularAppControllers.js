@@ -164,7 +164,7 @@
 			{
 				$("#aboutme_intro_div").addClass(myclass );
 				$("#sign_off_div").addClass(myclass);	
-			},25);
+			},0);
 			
 			
 		
@@ -179,7 +179,7 @@
 			{
 				$("#greeting").addClass("greeting");	
 				$("#myfooter").addClass("footer");
-			},25);
+			},0);
 
 		}
 		$scope.applymediasitedata = function()
@@ -190,7 +190,7 @@
 			setTimeout(function()
 			{
 			$("#media_intro_div").addClass("media_div");
-			},25);
+			},0);
 		}		
 		init();	
 		if($location.path() =='/aboutme' || $location.path() == '/' || $location.path() == '#/')
