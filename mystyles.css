@@ -294,11 +294,11 @@ myheader old background-color:#666666;
 		font-size:144%;
 	}	
 }
-.aboutme_content,.media_div,.projects_content, .contactme, .adminlogin
+.aboutme_content,.media_div,.projects_content, .contactme, .adminlogin, .footer
 {
 	font-size:144%;
 }
-#resume_html_content,.footer, .adminpage  
+#resume_html_content,.adminpage  
 {
 	font-size:120%;
 }
