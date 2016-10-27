@@ -309,13 +309,9 @@ myheader old background-color:#666666;
 	{
 		font-size:170%;
 	}
-	.footer
+	.footer, #resume_html_content
 	{
 		font-size:144%;
-	}
-	#resume_html_content
-	{
-		font-size:120%;
 	}
 }
 
