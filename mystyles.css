@@ -305,11 +305,11 @@ myheader old background-color:#666666;
 /* Small Mobile Fonts*/
 @media(max-width:600px)
 {
-	.aboutme_content,.media_div, .greeting
+	.aboutme_content,.media_div, .greeting,#resume_html_content
 	{
 		font-size:170%;
 	}
-	.footer, #resume_html_content
+	.footer 
 	{
 		font-size:144%;
 	}
