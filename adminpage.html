@@ -33,7 +33,7 @@
 	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300" width="100%"></textarea>
 	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button>
 	<h2>Entries</h2>
-	
+	<button id="JumpToBottomButton" ng-click="goToBottom()">Jump To Bottom </button>
 	<table class="table table-bordered" ng-show="entries.length">	
 		<tr>
 			<th>Price</th>
@@ -52,9 +52,26 @@
 	</table>
 	<button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
 	<br>
+	<h3>Stats</h3>
+
+	<table id="stats_table" class="table">
+		<tr>
+			<th>Total Spent</th>
+			<th>Avg Purchase</th>
+			<th>Avg Per Day </th>
+		</tr>
+		<tr>
+			<td><span id="currency-default">{{stats.total | currency}}</span><br></td>
+			<td><span id="currency-default">{{stats.avg_purchase| currency}}</span><br></td>
+			<td><span id="currency-default">{{stats.avg_per_day| currency}}</span><br></td>
+		</tr>
+	</table>
+		<button ng-click="calculateStats()">Re-Calculate</button>
 	<h3>Insert New Entry</h3>
 	
 	<!-- *******************************************************************-->
+
+	
 	<form ng-submit="insertNewEntry()">	
 	
 	<table class="table table-bordered hidden-md hidden-lg" style="table-layout:fixed;width:100%;">	

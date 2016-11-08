@@ -210,7 +210,7 @@
 
 /******************** ADMIN CTRL ******************/
 
-karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, accessFac, currentUserFac, categoriesService, userEntriesService, siteContentService)
+karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac, categoriesService, userEntriesService, siteContentService)
 {	
 		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
 		$scope.entries ={};
@@ -220,6 +220,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.hideme = false;
 		$scope.alerts = alertsManager.alerts;
 		$scope.AlertMessage = {active: false};
+		$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0"};
 			
 		$scope.toggle = function(delay)
 		{		
@@ -461,7 +462,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				console.log("getBudgetEntries promise",entriesData.entries);
 			   $scope.safeApply(function()
 				{			
-					$scope.entries = entriesData.entries;							
+					$scope.entries = entriesData.entries;	
 				}); 												   
 			});	
 		};
@@ -528,6 +529,47 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				}			
 			});				
 			
+		};
+		$scope.calculateStats = function()
+		{
+			console.log("CalculateStats");
+			$scope.CalculateAvgPurchase();
+		};
+		$scope.goToBottom = function()
+		{
+			$location.hash('stats_table');
+			$anchorScroll();
+		};
+		$scope.CalculateAvgPurchase = function()
+		{
+			var total  = 0;
+			var num_entries = $scope.entries.length;
+			var count =0 ;
+			var startDate;
+			console.log("/*Calculate Avg Purchase*/");
+			console.log("entries length == ", num_entries);
+			angular.forEach($scope.entries, function(value, key) 
+			{
+				var currentVal = Number(value.price);
+				if(count ==0)
+				{
+					startDate = value.date;
+				}
+				if(currentVal != NaN)
+				{
+				//console.log("key ---", key);
+				//console.log("value ---", value);
+					total = total + currentVal;		
+					count++;
+				}
+			});	
+			if(total != undefined)
+			{
+				console.log("count == ", count);
+				console.log("total == ", total);
+				$scope.stats.total = total;
+				$scope.stats.avg_purchase = total/num_entries;
+			}
 		};
 		// init
 		var init = function () 

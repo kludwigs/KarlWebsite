@@ -1,0 +1,1 @@
+Call GetUserStats(1, @end, @start, @sum, @days); SELECT @end, @start, @sum, @days;
