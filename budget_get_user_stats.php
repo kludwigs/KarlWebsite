@@ -52,7 +52,7 @@ if($authentication_required == true)
 		switch ($method) 
 		{
 			case 'GET':			
-				$stored_proc = "Call GetUserStats('$user_id', @end, @start, @sum, @days);";
+				$stored_proc = "CALL GetUserStats('$user_id', @end, @start, @sum, @days);SELECT @end, @start, @sum, @days";
 			
 				$user_stats = get_user_stats($stored_proc);
 			
@@ -88,9 +88,8 @@ function get_user_stats($stored_proc)
 {
 	global $connect;
 	$data = array();
-	$queries = "CALL GetUserStats(1, @end, @start, @sum, @days);SELECT @end, @start, @sum, @days" ;
 	$count = 0;
-	if(!$query = mysqli_multi_query($connect,$queries ))
+	if(!$query = mysqli_multi_query($connect,$stored_proc ))
 	{
 		die("Query didn't return");
 	}
