@@ -87,29 +87,36 @@ function sendresponse($response, $code, $success, $api_response_code)
 function get_user_stats($stored_proc) 
 {
 	global $connect;
-	//$results = mysqli_query($connect, $stored_proc);
-	//$results = mysqli_query($connect,"Call GetUserStats(1, @end, @start, @sum, @days)");
-	//mysqli_query($connect, 'CALL GetUserStats(1, @end, @start, @sum, @days)');
-
-	$result = mysqli_query($connect,"Call GetUserStats(1, @end, @start, @sum, @days)");
-	$result = mysqli_query($connect,"Select @end, @start, @sum, @days ");
-	if($result->num_rows > 0) 
+	$data = array();
+	$queries = "CALL GetUserStats(1, @end, @start, @sum, @days);SELECT @end, @start, @sum, @days" ;
+	$count = 0;
+	if(!$query = mysqli_multi_query($connect,$queries ))
 	{
-		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-		{
-			$data['end']     = $result['@end'];
-			$data['start']   = $result['@start'];
-			$data['sum']   = $result['@sum'];
-			$data['days']   = $result['@days'];
-		}
+		die("Query didn't return");
 	}
 	else
 	{
-		die("no data returned");
-		return false;
+		do 
+		{
+			$count++;
+			if($result=mysqli_store_result($connect))
+			{
+				while ($row = mysqli_fetch_row($result)) 
+				{
+						/*printf("%s\n", $row[0]);
+						printf("%s\n", $row[1]);
+						printf("%s\n", $row[2]);
+						printf("%s\n", $row[3]);
+						*/
+						$data['end'] = $row[0];
+						$data['start'] = $row[1];
+						$data['sum'] = $row[2];
+						$data['days'] = $row[3];
+				}
+			}
+		} while (mysqli_next_result($connect));
 	}
-
-	
+	$data['count'] = $count;
 	return $data;
 }
 ?>
