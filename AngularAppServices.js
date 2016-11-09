@@ -55,8 +55,40 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
           $log.error(msg, code);
        });
      return deferred.promise;
+   },
+	insertUserEntry: function(uname, pass, category_id, price, comments) {		
+	
+	console.log("uname and pass --", uname, pass);
+	console.log("category_id, price , comments ---", category_id, price, comments);
+	var deferred = $q.defer();
+	Indata = { "username": uname ,"password": pass, "price":price, "comments":comments, "category_id":category_id};
+	$http
+		({
+			method: 'POST',
+			data: $.param(Indata),
+			url: 'budget_user_entries.php',                
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+	   .success(function(data) 
+	   { 
+			console.log(data);
+			console.log("Successfully inserted record", data);
+			
+			deferred.resolve
+			({
+				insertion: data
+			});
+	   }).error(function(data) 
+	   {
+		  console.log("we had an error in insertUserEntry", data);		  
+			deferred.resolve
+			({
+				insertion: {"success":false}
+			});
+	   });
+ return deferred.promise;
    }
-  }
+  }  
  });
  
  karlApp.factory('siteContentService', function($http, $log, $q) {

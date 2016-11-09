@@ -408,8 +408,6 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				success : function(html) 
 				{
 					console.log("Loaded html.");
-					//console.log(html);
-					//$("#html_content").val(html);
 					elementref.html(html);
 				}
 			});			
@@ -418,37 +416,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.refreshBudgetEntries =function()
 		{
 			console.log("you called refreshBudgetEntries function - ");	
-			
-			var uname = currentUserFac.getCurrentUser();
-			var pass = currentUserFac.getCurrentUserPassword();
-			
-			console.log("uname:" + uname  + " - pass:" + pass);
-			
-			$.ajax({
-				url : 'budget_user_entries.php',
-				type: 'GET',
-				data: $.param({ "username": uname ,"password": pass}),
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
-				success : function(mydata) 
-				{
-					console.log("Entries coming back");
-					console.log(mydata);
-					console.log(mydata.data);
-					//console.log(mydata.data[0]);										
-					$scope.$apply(function()
-					{ // put $scope var that needs to be updated
-						$scope.entries = mydata.data;
-					});
-					
-				},
-				error: function(mydata) 
-				{ 
-					console.log("request failed");
-					console.log("data", mydata);				
-					console.log("data.success", mydata.success);
-					console.log("data.errors", mydata.errors);
-				}   
-			});	
+			$scope.getBudgetEntries();
 		};
 		
 		$scope.getBudgetEntries = function()
@@ -487,14 +455,35 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		};
 		$scope.insertNewEntry = function()
 		{
-			$scope.toggle();
+			//$scope.toggle();
+			
 			console.log("you called insertNewEntry function - ");	
-			alertsManager.doInfo("Sending entry to database...");
+			//alertsManager.doInfo("Sending entry to database...");
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-			console.log("entry.category -", $scope.entry.category.id);
-			console.log("entry.price - ",$scope.entry.price );
-			console.log("entry.comments - ",$scope.entry.comments );
+			
+			//$scope.categories = [{category_name: "none", id:"0"}];
+			//console.log("category.id -- category.category_name",$scope.entry.category.id, $scope.entry.category.category_name);
+			var tmp_category = $scope.entry.category;
+			var tmp_price = $scope.entry.price;
+			var tmp_comments = $scope.entry.comments;	
+			
+			
+			console.log("entry.category -", tmp_category);
+			console.log("entry.price - ",tmp_price );
+			console.log("entry.comments - ",tmp_comments);
+			
+		   userEntriesService.insertUserEntry(uname, pass, tmp_category, tmp_price , tmp_comments) 
+		   .then(function(new_entry_data) 
+		   {	   	
+				if(new_entry_data.insertion.success == true)
+				{
+					console.log("insert User Entry promise return ---", new_entry_data);
+				}else 
+					console.log("promise came back and it hit the fan");
+			});		
+				
+			/*
 			var tmp_category = $scope.entry.category;
 			var tmp_price = $scope.entry.price;
 			var tmp_comments = $scope.entry.comments;				
@@ -504,7 +493,8 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 			console.log("tmp_comments - ",tmp_comments);			
 			
 			console.log("uname:" + uname  + " - pass:" + pass);
-			
+			*/
+			/*
 			$.ajax({
 				url : 'budget_user_entries.php',
 				type: 'POST',
@@ -527,8 +517,9 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 					alertsManager.doEvil("Failed to insert record!");
 					$scope.toggle(true);
 				}			
-			});				
-			
+			});	
+		
+			*/
 		};
 		$scope.calculateStats = function()
 		{

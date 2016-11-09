@@ -26,6 +26,7 @@ if($authentication_required == true)
 {
 	$username ='';
 	$password = '';
+	$my_method = "did you see that";
 	$user_id =0;
 	
 	$method = $_SERVER['REQUEST_METHOD'];
@@ -38,6 +39,8 @@ if($authentication_required == true)
 		  case 'PUT':
 		  break;
 		  case 'POST':
+				//die('POST break statement');
+				$my_method = "you're not going to believe this";
 				$username		= $_POST['username'];
 				$password		= $_POST['password'];		
 				$category_id 	= $_POST['category_id'];
@@ -51,7 +54,7 @@ if($authentication_required == true)
 	
 	if (empty($username) || empty($password))
 	{
-		sendresponse($response, 3, false, $api_response_code);		
+		sendresponse($response, 3, false, $api_response_code);	
 	}			
 		
 	$user_id = validatecredentials($username, $password);
