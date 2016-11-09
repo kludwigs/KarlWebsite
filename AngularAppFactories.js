@@ -142,10 +142,6 @@ karlApp.factory('facResumeContent', function ($http) {
 			return;
 		console.log("load event");
 		var txtfile = file + ".txt";
-		this.setSavedResumeContent("fuck");
-		var poop =this.getSavedResumeContent();
-		this.file = file;
-		console.log(poop);
 		console.log("file name = " + txtfile + "\n");
 		$http
 		({
