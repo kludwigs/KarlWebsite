@@ -467,11 +467,10 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		{
 			$scope.toggle();
 			alertsManager.doInfo("Sending entry to database...");
-			console.log("you called insertNewEntry function - ");	
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
 
-			console.log("$scope.entry",$scope.entry);
+			console.log("$scope.entry to insert ---- ",$scope.entry);
 			var tmp_category = $scope.entry.category;
 			var tmp_price = $scope.entry.price;
 			var tmp_comments = $scope.entry.comments;	
