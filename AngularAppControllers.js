@@ -222,8 +222,6 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.AlertMessage = {active: false};
 		$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0"};
 		$scope.entry = {};
-		$scope.blisterPackTemplates=[{id:1,name:"a"},{id:2,name:"b"},{id:3,name:"c"}]
-        $scope.itemList=[];
 		$scope.changedValue=function(item){
 		$scope.itemList.push(item.name);
 		}	    
@@ -468,6 +466,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.insertNewEntry = function()
 		{
 			$scope.toggle();
+			alertsManager.doInfo("Sending entry to database...");
 			console.log("you called insertNewEntry function - ");	
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
