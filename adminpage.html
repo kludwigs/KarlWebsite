@@ -17,14 +17,7 @@
 			<button id="load" ng-click="adminLoad()">load</button>
 			ng-model="fileContents">
 			-->
-			</div>
-			
-			
-<select  ng-model="blisterPackTemplateSelected" ng-change="changedValue(blisterPackTemplateSelected)" 
-     ng-options="blisterPackTemplate as blisterPackTemplate.name for blisterPackTemplate in blisterPackTemplates">
-    <!--<option value="">Select Account</option>-->
-</select>
-{{itemList}}			
+			</div>		
 	</div>
 	<h2>Site Content</h2>
       <select ng-model="site_content_select" 
@@ -33,7 +26,9 @@
 	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300" width="100%"></textarea>
 	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button>
 	<h2>Entries</h2>
+	<!--
 	<button id="JumpToBottomButton" ng-click="goToBottom()">Jump To Bottom </button>
+	-->
 	<table class="table table-bordered" ng-show="entries.length">	
 		<tr>
 			<th>Price</th>
@@ -52,6 +47,7 @@
 	</table>
 	<button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
 	<br>
+	<!--
 	<h3>Stats</h3>
 
 	<table id="stats_table" class="table">
@@ -68,7 +64,7 @@
 	</table>
 		<button ng-click="calculateStats()">Re-Calculate</button>
 	<h3>Insert New Entry</h3>
-	
+	-->
 	<!-- *******************************************************************-->
 
 	
@@ -87,6 +83,7 @@
 			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
 			<td><input type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
+			 <select ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>
 			</td>
 		</tr>
 	</table>
@@ -101,6 +98,7 @@
 			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
 			<td><input type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
+			<select ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>
 			</td>
 			<td>{{ returnUser() }}</td>
 		</tr>
