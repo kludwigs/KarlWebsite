@@ -89,7 +89,7 @@ if($authentication_required == true)
 				{
 					sendresponse($response, 5, false, $api_response_code);
 				}else
-					$response['data'] = date('Y-m-d H:i');
+					$response['data'] = date('Y-m-d h:i a');
 				break;
 			case 'DELETE':
 					die("delete table where id=key"); break;

@@ -18,15 +18,15 @@
 			ng-model="fileContents">
 			-->
 			</div>
+			
+			
+<select  ng-model="blisterPackTemplateSelected" ng-change="changedValue(blisterPackTemplateSelected)" 
+     ng-options="blisterPackTemplate as blisterPackTemplate.name for blisterPackTemplate in blisterPackTemplates">
+    <!--<option value="">Select Account</option>-->
+</select>
+{{itemList}}			
 	</div>
 	<h2>Site Content</h2>
-<!--
-<ul ng-repeat="item in site_content">
-  <li ng-repeat="(key, val) in item">
-    {{key}}: {{val}}
-  </li>
-</ul>
--->
       <select ng-model="site_content_select" 
         ng-options="content.key for content in site_content">
       </select>
@@ -87,7 +87,6 @@
 			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
 			<td><input type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
-			 <select ng-model="entry.category" ng-options="i.id as i.category_name for i in categories" ></select>
 			</td>
 		</tr>
 	</table>
@@ -102,7 +101,6 @@
 			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
 			<td><input type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
-			 <select ng-model="entry.category" ng-options="i.id as i.category_name for i in categories" ></select>
 			</td>
 			<td>{{ returnUser() }}</td>
 		</tr>

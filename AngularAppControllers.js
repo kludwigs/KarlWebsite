@@ -30,12 +30,12 @@
 		};
 		$scope.isValid = function(value) 
 		{
-		return !value
+		return !value;
 		}	
-								
+				
+				
         $scope.processForm = function () 
 		{		
-			;
 			$scope.toggle();
 			
 			console.log($scope.formData.emailname);
@@ -221,7 +221,12 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.alerts = alertsManager.alerts;
 		$scope.AlertMessage = {active: false};
 		$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0"};
-			
+		$scope.entry = {};
+		$scope.blisterPackTemplates=[{id:1,name:"a"},{id:2,name:"b"},{id:3,name:"c"}]
+        $scope.itemList=[];
+		$scope.changedValue=function(item){
+		$scope.itemList.push(item.name);
+		}	    
 		$scope.toggle = function(delay)
 		{		
 			console.log("toggling...");
@@ -292,7 +297,11 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		   
 			});			
 		}		
-
+		$scope.myfunction = function()
+		{
+			alert("insertEntryCategorySelect");
+			console.log("insertEntryCategorySelect -- ");
+		}
 		var mywatch =$scope.$watch('adminFilename', function() 
 		{
 			console.log("watch from adminCtrl");
@@ -453,74 +462,44 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 			this.$apply(fn);
 		  }
 		};
+		$scope.$watch('entry', function() {
+			console.log("watch for category", $scope.entry);
+		});
 		$scope.insertNewEntry = function()
 		{
-			//$scope.toggle();
-			
+			$scope.toggle();
 			console.log("you called insertNewEntry function - ");	
-			//alertsManager.doInfo("Sending entry to database...");
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-			
-			//$scope.categories = [{category_name: "none", id:"0"}];
-			//console.log("category.id -- category.category_name",$scope.entry.category.id, $scope.entry.category.category_name);
+
+			console.log("$scope.entry",$scope.entry);
 			var tmp_category = $scope.entry.category;
 			var tmp_price = $scope.entry.price;
 			var tmp_comments = $scope.entry.comments;	
 			
-			
-			console.log("entry.category -", tmp_category);
-			console.log("entry.price - ",tmp_price );
-			console.log("entry.comments - ",tmp_comments);
-			
-		   userEntriesService.insertUserEntry(uname, pass, tmp_category, tmp_price , tmp_comments) 
+		   userEntriesService.insertUserEntry(uname, pass, tmp_category.id, tmp_price , tmp_comments) 
 		   .then(function(new_entry_data) 
 		   {	   	
 				if(new_entry_data.insertion.success == true)
 				{
 					console.log("insert User Entry promise return ---", new_entry_data);
-				}else 
-					console.log("promise came back and it hit the fan");
-			});		
-				
-			/*
-			var tmp_category = $scope.entry.category;
-			var tmp_price = $scope.entry.price;
-			var tmp_comments = $scope.entry.comments;				
-			
-			console.log("tmp_category -", tmp_category);
-			console.log("tmp_price - ",tmp_price);
-			console.log("tmp_comments - ",tmp_comments);			
-			
-			console.log("uname:" + uname  + " - pass:" + pass);
-			*/
-			/*
-			$.ajax({
-				url : 'budget_user_entries.php',
-				type: 'POST',
-				data: $.param({ "username": uname ,"password": pass, "price":tmp_price, "comments":tmp_comments, "category_id":tmp_category }),
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
-				success : function(mydata) 
-				{
-					console.log("Successfully insert record");
-					console.log(mydata);	
 					alertsManager.doGood("Successfully inserted record!");		
 					$scope.toggle(true);
-					
-				},
-				error: function(mydata) 
-				{ 					
-					console.log("request failed");
-					console.log("data", mydata);				
-					console.log("data.success", mydata.success);
-					console.log("data.errors", mydata.errors);
+					$scope.addRecordToEntryList(uname, tmp_price, tmp_comments, tmp_category.category_name, new_entry_data.insertion.data);
+				}else 
+				{
+					console.log("promise came back and it hit the fan");
 					alertsManager.doEvil("Failed to insert record!");
 					$scope.toggle(true);
-				}			
-			});	
-		
-			*/
+				}
+			});		
 		};
+		$scope.addRecordToEntryList = function(uname, record_price, record_comments, record_category_name, record_date)
+		{
+			var new_record = { "username": uname, "price":record_price, "comments":record_comments, "category_name":record_category_name, "date_time": record_date};
+			$scope.entries.push(new_record);
+		}
+		
 		$scope.calculateStats = function()
 		{
 			console.log("CalculateStats");
