@@ -65,9 +65,9 @@ if($authentication_required == true)
 	else
 	{			
 		switch ($method) 
-		{
+		{ //DATE_FORMAT(entries.date_time, '%Y-%M-%d %h:%i %p)
 			case 'GET':			
-				$sql_select = "SELECT entries.*, users.username, categories.category_name FROM entries, users, categories WHERE entries.user_id = $user_id AND users.id = entries.user_id AND categories.id = entries.category_id ORDER BY entries.date_time";
+				$sql_select = "SELECT entries.user_id, entries.price, DATE_FORMAT(entries.date_time,'%Y-%m-%d %h:%i %p') as date_time , entries.comments, entries.category_id, users.username, categories.category_name FROM entries, users, categories WHERE entries.user_id = $user_id AND users.id = entries.user_id AND categories.id = entries.category_id ORDER BY entries.date_time";
 			
 				$entries = get_entries_from_user_id($user_id, $sql_select);
 			
@@ -88,7 +88,8 @@ if($authentication_required == true)
 				if($result == false)
 				{
 					sendresponse($response, 5, false, $api_response_code);
-				}
+				}else
+					$response['data'] = date('Y-m-d H:i');
 				break;
 			case 'DELETE':
 					die("delete table where id=key"); break;

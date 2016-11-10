@@ -57,9 +57,6 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
      return deferred.promise;
    },
 	insertUserEntry: function(uname, pass, category_id, price, comments) {		
-	
-	console.log("uname and pass --", uname, pass);
-	console.log("category_id, price , comments ---", category_id, price, comments);
 	var deferred = $q.defer();
 	Indata = { "username": uname ,"password": pass, "price":price, "comments":comments, "category_id":category_id};
 	$http
