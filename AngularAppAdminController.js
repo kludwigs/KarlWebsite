@@ -12,9 +12,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.AlertMessage = {active: false};
 		$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0"};
 		$scope.entry = {};
-		$scope.changedValue=function(item){
-		$scope.itemList.push(item.name);
-		}	    
+    
 		$scope.toggle = function(delay)
 		{		
 			console.log("toggling...");
@@ -291,43 +289,28 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.calculateStats = function()
 		{
 			console.log("CalculateStats");
-			$scope.CalculateAvgPurchase();
+			var uname = currentUserFac.getCurrentUser();
+			var pass = currentUserFac.getCurrentUserPassword();
+			
+		   userEntriesService.getUserStats(uname, pass) 
+		   .then(function(data) 
+		   {	   	
+				if(data.stats.success == true)
+				{
+					console.log("insert User Entry promise return ---", data);
+				}else 
+				{
+					console.log("promise came back and it hit the fan");
+				}
+			});	
+			
 		};
+		
+		
 		$scope.goToBottom = function()
 		{
 			$location.hash('stats_table');
 			$anchorScroll();
-		};
-		$scope.CalculateAvgPurchase = function()
-		{
-			var total  = 0;
-			var num_entries = $scope.entries.length;
-			var count =0 ;
-			var startDate;
-			console.log("/*Calculate Avg Purchase*/");
-			console.log("entries length == ", num_entries);
-			angular.forEach($scope.entries, function(value, key) 
-			{
-				var currentVal = Number(value.price);
-				if(count ==0)
-				{
-					startDate = value.date;
-				}
-				if(currentVal != NaN)
-				{
-				//console.log("key ---", key);
-				//console.log("value ---", value);
-					total = total + currentVal;		
-					count++;
-				}
-			});	
-			if(total != undefined)
-			{
-				console.log("count == ", count);
-				console.log("total == ", total);
-				$scope.stats.total = total;
-				$scope.stats.avg_purchase = total/num_entries;
-			}
 		};
 		// init
 		var init = function () 

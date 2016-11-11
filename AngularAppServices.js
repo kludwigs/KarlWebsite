@@ -83,9 +83,38 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
 				insertion: {"success":false}
 			});
 	   });
- return deferred.promise;
-   }
-  }  
+		return deferred.promise;
+   },
+   	getUserStats: function(uname, pass) {	
+	
+	var deferred = $q.defer();
+	$http
+		({
+			method: 'GET',
+			params:({ "username": uname ,"password": pass}), 
+			url: 'budget_get_user_stats.php',                
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+	   .success(function(data) 
+	   { 
+			console.log(data);
+			console.log("successfully got user stats", data);
+			
+			deferred.resolve
+			({
+				stats: data
+			});
+	   }).error(function(data) 
+	   {
+		  console.log("error in user stats request", data);		  
+			deferred.resolve
+			({
+				stats: {"success":false}
+			});
+	   });
+		return deferred.promise;	
+	}  
+  }
  });
  
  karlApp.factory('siteContentService', function($http, $log, $q) {
