@@ -51,13 +51,13 @@
 
 	<table id="stats_table" class="table">
 		<tr>
+			<th>Start Date</th>
 			<th>Total Spent</th>
-			<th>Avg Purchase</th>
 			<th>Avg Per Day </th>
 		</tr>
 		<tr>
-			<td><span id="currency-default">{{stats.total | currency}}</span><br></td>
-			<td><span id="currency-default">{{stats.avg_purchase| currency}}</span><br></td>
+		    <td><span>{{stats.date}}</span><br></td>
+			<td><span id="currency-default">{{stats.total | currency}}</span><br></td>	
 			<td><span id="currency-default">{{stats.avg_per_day| currency}}</span><br></td>
 		</tr>
 	</table>
@@ -107,7 +107,6 @@
 		<button type="reset" value="Reset">Clear Fields</button>
 	</div>	
 	</form>	
-
 	<!-- *******************************************************************-->
 	
 <div ng-show="AlertMessage.active" class="fadein fadeout">

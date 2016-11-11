@@ -51,8 +51,9 @@ if($authentication_required == true)
 	{			
 		switch ($method) 
 		{
-			case 'GET':			
-				$stored_proc = "CALL GetUserStats('$user_id', @end, @start, @sum, @days);SELECT @end, @start, @sum, @days";
+			case 'GET':	
+				// set up stored procedure queries, date_format start date e.g. Aug, 25 - 2016
+				$stored_proc = "CALL GetUserStats('$user_id', @end, @start, @sum, @days);SELECT @end, DATE_FORMAT(@start,'%b, %d - %Y'), @sum, @days";
 			
 				$user_stats = get_user_stats($stored_proc);
 			

@@ -10,7 +10,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.hideme = false;
 		$scope.alerts = alertsManager.alerts;
 		$scope.AlertMessage = {active: false};
-		$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0"};
+		$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0", date:"-------"};
 		$scope.entry = {};
     
 		$scope.toggle = function(delay)
@@ -297,16 +297,19 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		   {	   	
 				if(data.stats.success == true)
 				{
-					console.log("insert User Entry promise return ---", data);
+					console.log("calculate Stats promise return ---", data);
+					// user pointer to the data
+					var x = data.stats.data;
+					console.log("x var", x);
+					$scope.stats.avg_per_day = x.sum / x.days;
+					$scope.stats.total = x.sum;
+					$scope.stats.date = x.start;
 				}else 
 				{
-					console.log("promise came back and it hit the fan");
+					console.log("calculate Stats promise came back and it hit the fan");
 				}
 			});	
-			
 		};
-		
-		
 		$scope.goToBottom = function()
 		{
 			$location.hash('stats_table');
@@ -323,6 +326,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				$scope.getCategoriesFromService();
 				$scope.getBudgetEntries();
 				$scope.getSiteContentFromService();
+				$scope.calculateStats();
 				$scope.hideme = true;
 			}
 			else
