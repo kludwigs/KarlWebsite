@@ -6,7 +6,6 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.entries ={};
 		$scope.site_content=[{}];
 		$scope.categories = [{category_name: "none", id:"0"}];
-		$scope.sampleDate = {value: new Date(2016, 11,8, 01, 30)};
 		$scope.hideme = false;
 		$scope.alerts = alertsManager.alerts;
 		$scope.AlertMessage = {active: false};
@@ -30,15 +29,14 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 					$scope.AlertMessage.active = !$scope.AlertMessage.active;
 				}, 5000);				
 			}
-			
-			//console.log($scope.AlertMessage);
+
 		}
 		
         $scope.processLogin = function () 
 		{
 			currentUserFac.setCurrentUser($scope.loginForm.username);
 			currentUserFac.setCurrentUserPassword($scope.loginForm.password);			
-			accessFac.checkPermission(currentUserFac.getCurrentUser(),currentUserFac.getCurrentUserPassword());       //call the method in acccessFac to check user permission  .
+			accessFac.checkPermission(currentUserFac.getCurrentUser(),currentUserFac.getCurrentUserPassword());   
 		};	
 		$scope.getCategoriesFromService = function() 
 		{
@@ -72,12 +70,11 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 						angular.forEach(site_content_data.site_content[0], function(value, key) 
 						{
 							// do something for all key: value pairs 
-//							console.log("value =", value);
+							//console.log("value =", value);
 							console.log("key =", key);
 							$scope.site_content.push({key:key, "value":value});
 						});		
 						
-						//$site_content = site_content_data.site_content[0];
 						console.log("for Each done site_content json object is populated", $scope.site_content);
 					}); 										
 		   
