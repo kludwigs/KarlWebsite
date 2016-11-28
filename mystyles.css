@@ -1,13 +1,36 @@
+
+#mynavbar
+{
+font-weight:bold; 
+color:grey;	
+}
+
+#profile_picture
+{
+    display: block;
+    margin: 0 auto;
+	margin-top:10px;
+}
+#header-text
+{
+	text-align:center;
+}
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
 /*desktop*/
 @media (min-width: 900px) {
+	
 	#myheader
 	{
-	background-image:url('images/HawthorneBridge-Pano.jpg');	
-	}
-	#headercontent
-	{
-		padding-top:65px;padding-bottom:65px;
-		
+	/*background-image:url('images/HawthorneBridge-Pano.jpg');	*/
 	}
 	#mymaincontainer
 	{
@@ -21,7 +44,7 @@
 	}
 	#profile_picture
 	{
-		position:relative;top:-12px;left:-11px;
+		//position:relative;top:-12px;left:-11px;
 	
 	}
 	.greeting
@@ -56,8 +79,8 @@
 {
 	#profile_picture
 	{
-		float:left;
-		position:relative;left:-25px;
+	//	float:left;
+	//	position:relative;left:-25px;
 	}
 	.myicons
 	{
@@ -79,11 +102,7 @@
 {
 	#myheader
 	{
-	background-image:url('images/Portland_skyline.jpg');
-	}
-	#headercontent
-	{
-		padding-top:50px;padding-bottom:50px;
+	//background-image:url('images/Portland_skyline.jpg');
 	}
 	.myicons
 	{
@@ -202,12 +221,14 @@ body {
 	min-height:90%;
 }
 @media (min-width: 800px) {
+	
+	/*
 	.navbar .navbar-nav {
 	  display: inline-block;
 	  float: none;
 	  vertical-align: top;
 	}
-
+*/
 	.navbar .navbar-collapse {
 	  text-align: center;
 	}
