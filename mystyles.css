@@ -4,7 +4,7 @@
 font-weight:bold; 
 //color:grey;	
 background-color:white;
-padding-bottom:13px;
+padding-bottom:15px;
 }
 
 #profile_picture
@@ -17,11 +17,23 @@ padding-bottom:13px;
 {
 	text-align:center;
 }
-	.container>.navbar-collapse, .container>.navbar-header
+
+@media (min-width: 800px)
+{
+	#mynavbar
 	{
-		margin-right:-15px !important;
-		margin-left:-15px !important;
+		padding-top:16px;
 	}
+}
+
+@media (max-width: 800px)
+{
+	#mynavbar
+	{
+		padding-bottom:0px;
+	}
+}
+
 
 /*desktop*/
 @media (min-width: 900px) {
@@ -237,10 +249,19 @@ body {
 	}
 
 }
-	.navbar-toggle
-	{
-		background-color:white !important;
-	}
+.navbar-toggle
+{
+	background-color:white !important;
+}
+.container>.navbar-collapse, .container>.navbar-header
+{
+	margin-right:-15px;
+	margin-left:-15px;
+	
+}
+.navbar {
+  border: 0;
+}
 
 /* navbar item centering */
 .navbar .navbar-nav {
