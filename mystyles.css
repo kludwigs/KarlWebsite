@@ -2,7 +2,9 @@
 #mynavbar
 {
 font-weight:bold; 
-color:grey;	
+//color:grey;	
+background-color:white;
+padding-bottom:13px;
 }
 
 #profile_picture
@@ -15,19 +17,15 @@ color:grey;
 {
 	text-align:center;
 }
-.navbar .navbar-nav {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-}
-
-.navbar .navbar-collapse {
-  text-align: center;
-}
+	.container>.navbar-collapse, .container>.navbar-header
+	{
+		margin-right:-15px !important;
+		margin-left:-15px !important;
+	}
 
 /*desktop*/
 @media (min-width: 900px) {
-	
+		
 	#myheader
 	{
 	/*background-image:url('images/HawthorneBridge-Pano.jpg');	*/
@@ -186,7 +184,7 @@ color:#33b5e5;
 }
 #adminselect:hover
 {
-color:white;	
+//color:white;	
 }
 .carousel .item {
     overflow:hidden;
@@ -237,13 +235,29 @@ body {
 		display: table;
 	   // width: 100%;
 	}
+
+}
+	.navbar-toggle
+	{
+		background-color:white !important;
+	}
+
+/* navbar item centering */
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
 }
 
  .nav > li > a:hover,
  .nav > li > a:focus 
 {	
-	text-decoration: none;
-    background-color: white; /*/ Change rollover cell color here*/
+	//text-decoration: none;
+    //background-color: white; /*/ Change rollover cell color here*/
 	font-weight: bold;		
 }
 
