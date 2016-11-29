@@ -1,23 +1,52 @@
-.banner-class
+.banner-container
+{
+	background-color:white;
+	padding-bottom:18px;
+}
+.navbar-brand
+{
+	white-space: nowrap;	
+	color:#f4f4f4;
+}
+.navbar
 {
 	background-color:#666666;
 }
+.hr-class
+{
+	//position:relative;top:15px;
+}
+
+@media (min-width: 1200px)
+{
+	#profile_picture
+	{
+		position:relative;left:27px;
+	}
+}
+@media (max-width:1200px) and (min-width:990px) 
+{
+	#profile_picture
+	{
+		position:relative;left:11px;
+	}
+}
+
+
+
 #profile_picture
 {
-    display: block;
-    margin: 0 auto;
-	//position:relative;top: -100px;left:-45px;
-	//margin-bottom:-50px;
+	float:left;
 	margin-top:10px;;
 }
 #header-text
 {
-	text-align:center;
-	color:white;
+	text-align:left;
+	color:black;
 }
 #header-text h2, #header-text h1
 {
-	display:inline;
+	display:block;
 }
 
 .myicon
@@ -218,7 +247,7 @@ body {
 }
 #containercontent
 {
-	min-height:90%;
+	min-height:66%;
 }
 @media (min-width: 800px) {
 	
