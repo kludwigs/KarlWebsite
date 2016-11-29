@@ -1,3 +1,25 @@
+.banner-class
+{
+	background-color:#666666;
+}
+#profile_picture
+{
+    display: block;
+    margin: 0 auto;
+	//position:relative;top: -100px;left:-45px;
+	//margin-bottom:-50px;
+	margin-top:10px;;
+}
+#header-text
+{
+	text-align:center;
+	color:white;
+}
+#header-text h2, #header-text h1
+{
+	display:inline;
+}
+
 .myicon
 {
   -webkit-transition:all 0.3s ease-out;
@@ -21,16 +43,7 @@ background-color:white;
 padding-bottom:15px;
 }
 
-#profile_picture
-{
-    display: block;
-    margin: 0 auto;
-	margin-top:10px;
-}
-#header-text
-{
-	text-align:center;
-}
+
 /* padding adjustments for 800px pivot point in navbar */
 @media (min-width: 800px)
 {
