@@ -68,7 +68,7 @@ hr
 	}
 }
 
-@media (max-width:990px) and (min-width:776px) 
+@media (max-width:990px) and (min-width:710px) 
 {
 	#profile_picture
 	{
@@ -80,17 +80,35 @@ hr
 		position:relative;left:30px;top:20px;;
 	}	
 }
-@media (max-width:776px)
+@media (max-width:710px)
 {
 	#header-text h2, #header-text h1
 	{
-	clear:both;
+	//clear:both;
+	position:relative;left:20px;top:20px;;
 	}
 	#profile_picture
 	{
 		margin-bottom:20px;
+		margin-left:20px;
+	}	
+}
+@media (max-width:660px)
+{
+	#header-text h2, #header-text h1
+	{
+	//clear:both;
+	position:relative;left:20px;top:20px;;
 	}
-	
+	#profile_picture
+	{
+		margin-bottom:20px;
+		margin-left:-20px;
+	}	
+}
+#header-text h2::before
+{
+	content:"- ";
 }
 .navbar-brand
 {
@@ -212,7 +230,9 @@ padding-bottom:15px;
 	}
 	.greeting {
 		display:block;
+		clear:both;
 		text-align:left;
+		padding-top:10px;
         margin-bottom:20px;
     }
 	.myicon
