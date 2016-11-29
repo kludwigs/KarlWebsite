@@ -115,6 +115,13 @@ hr
 	white-space: nowrap;	
 	color:#f4f4f4;
 }
+.navbar-header a:link,
+.navbar-header a:visited,
+.navbar-header a:hover,
+.navbar-header a:active
+{
+	color:#f4f4f4; 
+}
 .navbar
 {
 	background-color:#666666;
