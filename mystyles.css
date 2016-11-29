@@ -205,6 +205,7 @@ body {
 	//background-size: 100% auto;
 	//background-attachment: fixed;
 	width:100%;
+	//font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-family:Cabin;
     src: url("cabin/Cabin.otf") format("opentype");
 	height:100%;	
@@ -213,6 +214,7 @@ body {
 {
 	margin-top:20px;
 	text-align:center;
+	font-weight: 600;
 }
 #containercontent
 {
