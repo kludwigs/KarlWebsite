@@ -57,7 +57,7 @@ hr
 	#header-text h2, #header-text h1
 	{
 		display:block;
-		position:relative;left:60px;
+		position:relative;left:60px;top:20px;
 	}
 }
 @media (max-width:1200px) and (min-width:990px) 
@@ -69,7 +69,7 @@ hr
 	}
 	#header-text
 	{
-		position:relative;left:60px;;
+		position:relative;left:60px;top:20px;
 	}
 }
 
@@ -82,7 +82,7 @@ hr
 	}
 	#header-text
 	{
-		position:relative;left:30px;;
+		position:relative;left:30px;top:20px;;
 	}	
 }
 @media (max-width:776px)
@@ -198,13 +198,7 @@ padding-bottom:15px;
 	.contactme, #media_intro_div, #aboutme_intro_div
 	{
 		padding-top:20px;
-	}
-	#media_intro_div
-	{
-		
-	}
-	#aboutme_intro_div
-	
+	}	
 	
 }
 /* desktop end */
@@ -230,6 +224,10 @@ padding-bottom:15px;
 	{
 		float:left;
 		margin-right:6px;
+	}
+	#mymaincontainer
+	{
+		padding-top:20px;
 	}
 }
 /* end mobile */
