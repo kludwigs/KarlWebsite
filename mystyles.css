@@ -54,6 +54,11 @@ hr
 		display:block;
 		position:relative;left:60px;top:20px;
 	}
+	.social-icon-column
+	{
+		position:relative;
+		left:-31px;
+	}	
 }
 @media (max-width:1200px) and (min-width:990px) 
 {
@@ -65,6 +70,11 @@ hr
 	#header-text
 	{
 		position:relative;left:60px;top:20px;
+	}
+		.social-icon-column
+	{
+		position:relative;
+		left:-35px;
 	}
 }
 
@@ -168,12 +178,15 @@ padding-bottom:15px;
 	}
 }
 
+
+
+
 /*desktop*/
 @media (min-width: 990px) {
 
 	#myheader
 	{
-	/*background-image:url('images/HawthorneBridge-Pano.jpg');	*/
+	//background-image:url('images/vintage-lace-wallpaper.jpg');	
 	}
 	#mymaincontainer
 	{
@@ -184,13 +197,6 @@ padding-bottom:15px;
 	#myfooter
 	{	
 	margin-bottom:5px;
-	}
-	.greeting
-	{
-		padding-right:50px;
-		margin-right:10px;	
-		position:relative;top:10px;left:-15px;	
-		
 	}
 	.content
 	{
@@ -219,6 +225,13 @@ padding-bottom:15px;
 	{
 		padding-top:20px;
 	}	
+	#greeting
+	{
+		position:relative;
+		left:-30px;
+		top:-9px;
+		padding:0;
+	}
 	
 }
 /* desktop end */
@@ -226,6 +239,11 @@ padding-bottom:15px;
 /* small and mobile */
 @media(max-width:990px)
 {	
+	.social-icon-column
+	{
+		padding:0;
+		position:relative;top:11px;
+	}
 	.content
 	{
 		position:relative;left:0px;
@@ -250,6 +268,13 @@ padding-bottom:15px;
 	#mymaincontainer
 	{
 		padding-top:20px;
+	}
+}
+@media(max-width:767px)
+{
+	.social-icon-column
+	{
+		position:relative;top:0px;
 	}
 }
 /* end mobile */
@@ -319,6 +344,7 @@ color:#33b5e5;
 body { 
     padding-top: 50px; 
 	background-color:#666666;
+	//background-image:url('images/vintage-lace-wallpaper.jpg');	
 	//background-image:url('images/abstract-light-grey.jpg');
 	//background-repeat: no-repeat;
 	//background-size: 100% auto;
@@ -432,20 +458,8 @@ myheader old background-color:#666666;
      height: 500px !important;
 }
 /********************* Site Font Sizes *********************************/
-@media (min-width: 900px) 
-{
-	.greeting
-	{
-		font-size:126%;
-	}
-}
-@media(max-width:991px){
-	.greeting
-	{
-		font-size:144%;
-	}	
-}
-.aboutme_content,.media_div,.projects_content
+
+.aboutme_content,.media_div,.projects_content, .greeting
 {
 	font-size:144%;
 }
@@ -478,7 +492,13 @@ font-size:95%;
 .no-boost {
     max-height: 99999px;
 }
-
+@media (min-width:767px)
+{
+.greeting
+{
+	//font-style:italic;
+}
+}
 /******************************************************/
 
 /*---------------------- Animations ------------------*/
