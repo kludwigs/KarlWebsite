@@ -5,4 +5,5 @@ user = 'karlludw_myadmin'
 pass = 'EwzCgXx=uiZ5'
 budgetdatabase = 'karlludw_budget_app'
 sitecontentdatabase = 'karlludw_site_content'
+musicgigdatabase = 'karlludw_music_gigs'
 islocal = 1

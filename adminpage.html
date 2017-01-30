@@ -25,6 +25,46 @@
       </select>
 	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300" width="100%"></textarea>
 	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button>
+	  
+	<h2>Music Gigs</h2>
+	<button id="JumpToBottomButton" ng-click="goToBottom()">Jump To Bottom </button>
+	<table class="table table-bordered" ng-show="musicGigs.length">	
+		<tr>
+			<th>Price</th>
+			<th>Comments</th>
+			<th>Category</th>
+			<th>User</th>
+			<th>DateTime</th>	
+		</tr>	
+		<tr ng-repeat="x in musicGigs">
+			<td style="text-align:right;padding-right:25px">${{x.price | number:2}}</td>
+			<td>{{x.comments }}</td>
+			<td>{{x.category_name }}</td>
+			<td>{{x.username}}</td>
+			<td>{{x.date_time | date:'medium'}}</td>	
+		</tr>
+	</table>
+	<button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
+	<br>
+	<h3>Stats</h3>
+
+	<table id="stats_table" class="table bordered">
+		<tr>
+			<th>Start Date</th>
+			<th>Total Spent</th>
+			<th>Avg Per Day </th>
+		</tr>
+		<tr>
+		    <td><span>{{stats.date}}</span><br></td>
+			<td><span id="currency-default">{{stats.total | currency}}</span><br></td>	
+			<td><span id="currency-default">{{stats.avg_per_day| currency}}</span><br></td>
+		</tr>
+	</table>
+		<button ng-click="calculateStats()">Re-Calculate</button>  
+	  
+	  
+	  
+	  
 	<h2>Entries</h2>
 	<!--
 	<button id="JumpToBottomButton" ng-click="goToBottom()">Jump To Bottom </button>

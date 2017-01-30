@@ -226,6 +226,22 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				}); 												   
 			});	
 		};
+		$scope.getMusicEntries = function()
+		{
+			var uname = currentUserFac.getCurrentUser();
+			var pass = currentUserFac.getCurrentUserPassword();
+			
+		    musicEntryService.getEntries(uname,pass) 
+			.then(function(musicgigData) 
+		    {	 
+			   $scope.safeApply(function()
+				{			
+					$scope.entries = musicgigData.entries;	
+				}); 												   
+			});	
+		};		
+		
+		
 		$scope.returnUser = function()
 		{
 			return currentUserFac.getCurrentUser();
