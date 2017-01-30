@@ -120,7 +120,7 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
  
  karlApp.factory('musicEntriesService', function($http, $log, $q) {
   return {
-   getUserEntries: function(uname, pass) {
+   getEntries: function(uname, pass) {
      var deferred = $q.defer();
 	$http
 		({

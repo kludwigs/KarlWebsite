@@ -1,6 +1,6 @@
 /******************** ADMIN CTRL ******************/
 
-karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac, categoriesService, userEntriesService, siteContentService)
+karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac, categoriesService, userEntriesService, siteContentService, musicEntriesService)
 {	
 		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
 		$scope.entries ={};
@@ -231,7 +231,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
 			
-		    musicEntryService.getEntries(uname,pass) 
+		    musicEntriesService.getEntries(uname,pass) 
 			.then(function(musicgigData) 
 		    {	 
 			   $scope.safeApply(function()

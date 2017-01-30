@@ -1,5 +1,5 @@
 <?php
-require_once 'budgetdatabase_config.php';
+require_once 'musicgigdatabase_config.php';
 include 'validate_credentials.php';
 header('Content-Type: application/json');
 
@@ -39,7 +39,7 @@ if($authentication_required == true)
 		  case 'PUT':
 		  break;
 		  case 'POST':
-				//die('POST break statement');
+				die('POST break statement');
 				$my_method = 	"you're not going to believe this";
 				$username		= $_POST['username'];
 				$password		= $_POST['password'];		
