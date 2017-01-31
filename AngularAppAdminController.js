@@ -4,7 +4,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 {	
 		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
 		$scope.entries ={};
-		$scope.site_content=[{}];
+		$scope.site_content=[];
 		$scope.categories = [{category_name: "none", id:"0"}];
 		$scope.hideme = false;
 		$scope.alerts = alertsManager.alerts;
@@ -72,9 +72,10 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 							// do something for all key: value pairs 
 							//console.log("value =", value);
 							console.log("key =", key);
+							if(key)
 							$scope.site_content.push({key:key, "value":value});
 						});		
-						
+						$scope.site_content_select = $scope.site_content[0];
 						console.log("for Each done site_content json object is populated", $scope.site_content);
 					}); 										
 		   
@@ -236,7 +237,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		    {	 
 			   $scope.safeApply(function()
 				{			
-					$scope.entries = musicgigData.entries;	
+					$scope.entries = musicgigData.gig_entries;	
 				}); 												   
 			});	
 		};		

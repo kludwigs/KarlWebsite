@@ -45,25 +45,7 @@
 		</tr>
 	</table>
 	<button ng-click="getMusicEntries()">Get Music Gigs!</button>
-	<br>
-	<h3>Stats</h3>
-
-	<table id="stats_table" class="table bordered">
-		<tr>
-			<th>Start Date</th>
-			<th>Total Spent</th>
-			<th>Avg Per Day </th>
-		</tr>
-		<tr>
-		    <td><span>{{stats.date}}</span><br></td>
-			<td><span id="currency-default">{{stats.total | currency}}</span><br></td>	
-			<td><span id="currency-default">{{stats.avg_per_day| currency}}</span><br></td>
-		</tr>
-	</table>
-		<button ng-click="calculateStats()">Re-Calculate</button>  
-	  
-	  
-	  
+	<br>	  	  	 
 	  
 	<h2>Entries</h2>
 	<!--

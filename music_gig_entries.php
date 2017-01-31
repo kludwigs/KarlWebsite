@@ -24,15 +24,18 @@ if($HTTPS_required && $_SERVER['HTTPS'] != 'on')
 
 if($authentication_required == true)
 {
+	
 	$username ='';
 	$password = '';
 	$my_method = "did you see that";
 	$user_id =0;
 	
 	$method = $_SERVER['REQUEST_METHOD'];
+	
 	switch ($method) 
 	{
 		  case 'GET':
+				
 				$username = $_GET['username'];
 				$password = $_GET['password'];
 				break;

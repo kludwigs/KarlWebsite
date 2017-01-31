@@ -117,10 +117,9 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
   }
  });
  
- 
  karlApp.factory('musicEntriesService', function($http, $log, $q) {
-  return {
-   getEntries: function(uname, pass) {
+	return {
+	getEntries: function(uname, pass) {
      var deferred = $q.defer();
 	$http
 		({
@@ -132,10 +131,10 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
        .success(function(data) 
 	   { 
 			console.log(data);
-			console.log("we got data back in music_gig_entries", data.data);
+			console.log("we get data back in userEntriesService", data.data);
 			deferred.resolve
 			({
-				entries: data.data
+				gig_entries: data.data
 			});
        }).error(function(msg, code) 
 	   {
@@ -144,36 +143,7 @@ karlApp.factory('categoriesService', function($http, $log, $q) {
           $log.error(msg, code);
        });
      return deferred.promise;
-   },
-	insertUserEntry: function(uname, pass, payout, comments, venue, time, user_id, attachment, paid ) {		
-	var deferred = $q.defer();
-	Indata = { "username": uname ,"password": pass, "payout":payout, "comments":comments, "venue":venue, };
-	$http
-		({
-			method: 'POST',
-			data: $.param(Indata),
-			url: 'music_gig_entries.php',                
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
-		})
-	   .success(function(data) 
-	   { 
-			console.log(data);
-			console.log("Successfully inserted record", data);
-			
-			deferred.resolve
-			({
-				insertion: data
-			});
-	   }).error(function(data) 
-	   {
-		  console.log("we had an error in music_gig_entries", data);		  
-			deferred.resolve
-			({
-				insertion: {"success":false}
-			});
-	   });
-		return deferred.promise;
-   },  
+   }
   }
  });
  

@@ -28,8 +28,7 @@ if($authentication_required == false)
 	switch ($method) 
 	{
 		case 'GET':					
-			$sql_select = "SELECT * FROM site_content";
-			//site_content.greeting
+			$sql_select = "SELECT * FROM site_content";			
 			$site_content = false;
 			$site_content = get_site_data($sql_select);
 			
@@ -91,7 +90,6 @@ function get_site_data($sql_select)
 	global $connect;
 	mysql_query("set character_set_server='utf8'");
 	$results = mysqli_query($connect, $sql_select);
-	
 	if(!$results)
 	{
 		//print("$dbPass, $dbUser, $dbDatabase, $dbServer, --- parm is $user_id\n");		
