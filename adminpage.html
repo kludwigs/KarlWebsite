@@ -23,34 +23,62 @@
       <select ng-model="site_content_select" 
         ng-options="content.key for content in site_content">
       </select>
-	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300" width="100%"></textarea>
-	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button>
+	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300" width="100%"></textarea>	  
+	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button><br>
 	  
-	<h2>Music Gigs</h2>
-	<button id="JumpToBottomButton" ng-click="goToBottom()">Jump To Bottom </button>
+	<button id="JumpToBottomButton" style="margin-top:17px;" ng-click="goToBottom()">Jump To Bottom </button> 
+	<br>  
+	<h2>Music Gigs</h2>	
+	
 	<table class="table table-bordered" ng-show="musicGigs.length">	
 		<tr>
-			<th>Price</th>
+			<th>Payout</th>			
 			<th>Comments</th>
-			<th>Category</th>
+			<th>Type</th>
+			<th>Paid</th>
+			<th>Method</th>
 			<th>User</th>
 			<th>DateTime</th>	
 		</tr>	
 		<tr ng-repeat="x in musicGigs">
-			<td style="text-align:right;padding-right:25px">${{x.price | number:2}}</td>
+			<td style="text-align:right;padding-right:25px">${{x.payout | number:2}}</td>
 			<td>{{x.comments }}</td>
-			<td>{{x.category_name }}</td>
+			<td>{{x.type }}</td>
+			<td ng-if="x.paid == 0">No</td>
+			<td ng-if="x.paid != 0">Yes</td>
+			<td>{{x.method }}</td>
 			<td>{{x.username}}</td>
-			<td>{{x.date_time | date:'medium'}}</td>	
+			<td>{{x.time | date:'mediumDate'}}</td>	
 		</tr>
-	</table>
-	<button ng-click="getMusicEntries()">Get Music Gigs!</button>
-	<br>	  	  	 
-	  
+	</table>		  	  	 
+	<button ng-click="getMusicEntries()">Refresh Music Gigs</button> 
+	<h3>Log Gig</h3>
+	<form ng-submit="insertNewGig()">	
+	
+		<table class="table table-bordered" style="table-layout:fixed;width:100%;">		
+			<tr>
+				<th>Payout</th>
+				<th>Comments</th>
+				<th>Type</th>
+				<th>Method</th>
+			</tr>	
+			<tr>	
+				<td><input type="number" name="price" ng-model="gig.payout"  step="0.01" min="0" max="9999.99"></td>
+				<td><input type="text" name="comments" ng-model="gig.comments"></td>
+				<td>   
+				 <select ng-model="gig.type" ng-options="i as i.type for i in venues" ></select>
+				</td>
+				<td>   
+				 <select ng-model="gig.method" ng-options="i as i.method for i in methods" ></select>
+				</td>			
+			</tr>
+		</table>
+		<div class="span6" style="padding-bottom:4px";>	
+			<button type="submit">Insert New Gig</button>
+			<button type="reset" value="Reset">Clear Fields</button>
+		</div>	
+	</form>
 	<h2>Entries</h2>
-	<!--
-	<button id="JumpToBottomButton" ng-click="goToBottom()">Jump To Bottom </button>
-	-->
 	<table class="table table-bordered" ng-show="entries.length">	
 		<tr>
 			<th>Price</th>
@@ -124,7 +152,7 @@
 			<td>{{ returnUser() }}</td>
 		</tr>
 	</table>	
-		<div class="span6" style="padding-bottom:4px";>	
+	<div class="span6" style="padding-bottom:4px";>	
 		<button type="submit">Insert New Entry</button>
 		<button type="reset" value="Reset">Clear Fields</button>
 	</div>	

@@ -2,6 +2,11 @@
  
  karlApp.controller('webpageCtrl', function ($window, $scope, $routeParams, $http, alertsManager, $timeout, $location, facResumeContent,facSiteContent, $rootScope, $sce)
 {			
+		var sideInfo = $(".side-info");
+		sideInfo[0].className = "col-md-3 col-xs-12 side-info";
+		var myele = $(".view-container");
+		myele[0].className = "col-md-9 col-xs-12 view-container";
+		myele[0].style.marginTop = '0px';
 		$scope.formData = {};				
 		$scope.alerts = alertsManager.alerts;
 		$scope.AlertMessage = {active: false};

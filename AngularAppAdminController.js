@@ -1,9 +1,11 @@
 /******************** ADMIN CTRL ******************/
 
 karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac, categoriesService, userEntriesService, siteContentService, musicEntriesService)
-{	
+{			
 		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
+		$scope.adminFilename = $scope.filenames[0];
 		$scope.entries ={};
+		$scope.musicGigs = {};
 		$scope.site_content=[];
 		$scope.categories = [{category_name: "none", id:"0"}];
 		$scope.hideme = false;
@@ -237,7 +239,10 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		    {	 
 			   $scope.safeApply(function()
 				{			
-					$scope.entries = musicgigData.gig_entries;	
+					$scope.musicGigs = musicgigData.gig_entries;
+					angular.forEach($scope.musicGigs,function(line){
+						line.time = new Date(line.time);						
+					});
 				}); 												   
 			});	
 		};		
@@ -340,8 +345,14 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				$scope.getCategoriesFromService();
 				$scope.getBudgetEntries();
 				$scope.getSiteContentFromService();
+				$scope.getMusicEntries();
 				$scope.calculateStats();
 				$scope.hideme = true;
+				var myele = $(".view-container");
+				myele[0].className = "col-md-12 col-xs-12 view-container";
+				myele[0].style.marginTop='16px';
+				var sideInfo = $(".side-info");
+				sideInfo[0].className = "col-md-12 col-xs-12 side-info";				
 			}
 			else
 				$scope.hideme = false;

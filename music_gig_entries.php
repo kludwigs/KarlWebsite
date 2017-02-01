@@ -73,7 +73,7 @@ if($authentication_required == true)
 		switch ($method) 
 		{ //DATE_FORMAT(entries.date_time, '%Y-%M-%d %h:%i %p)
 			case 'GET':			
-				$sql_select = "SELECT entries.user_id, entries.payout, DATE_FORMAT(entries.time,'%Y-%m-%d %h:%i %p') as time , entries.comments, entries.venue_id, users.username, entries.payout, entries.paid entries.attachment_id, venues.type FROM entries, users, venues WHERE entries.user_id = $user_id AND users.id = entries.user_id AND venues.id = entries.venue_id ORDER BY entries.time";
+				$sql_select = "SELECT entries.user_id, entries.payout, DATE_FORMAT(entries.time,'%Y-%m-%d %h:%i %p') as time , entries.comments, entries.venue_id, users.username, entries.payout, entries.paid, payment_methods.method, entries.attachment_id, venues.type FROM entries, users, venues, payment_methods WHERE entries.user_id = $user_id AND users.id = entries.user_id AND venues.id = entries.venue_id AND entries.payment_method_id = payment_methods.id ORDER BY entries.time";
 			
 				$entries = get_entries_from_user_id($user_id, $sql_select);
 			
@@ -122,8 +122,7 @@ function sendresponse($response, $code, $success, $api_response_code)
 function get_entries_from_user_id($user_id, $sql_select) 
 {
 	global $connect;
-	$results = mysqli_query($connect, $sql_select);
-	
+	$results = mysqli_query($connect, $sql_select);	
 	if(!$results)
 	{
 		//print("$dbPass, $dbUser, $dbDatabase, $dbServer, --- parm is $user_id\n");		
