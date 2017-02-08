@@ -53,14 +53,14 @@
 	</table>		  	  	 
 	<button ng-click="getMusicEntries()">Refresh Music Gigs</button> 
 	<h3>Log Gig</h3>
-	<form ng-submit="insertNewGig()">	
+	<form ng-submit="logGig()">	
 	
 		<table class="table table-bordered" style="table-layout:fixed;width:100%;">		
 			<tr>
 				<th>Payout</th>
 				<th>Comments</th>
 				<th>Type</th>
-				<th>Method</th>
+				<th>Date</th>
 			</tr>	
 			<tr>	
 				<td><input type="number" name="price" ng-model="gig.payout"  step="0.01" min="0" max="9999.99"></td>
@@ -68,9 +68,15 @@
 				<td>   
 				 <select ng-model="gig.type" ng-options="i as i.type for i in venues" ></select>
 				</td>
-				<td>   
-				 <select ng-model="gig.method" ng-options="i as i.method for i in methods" ></select>
-				</td>			
+				<td>
+					<div class="input-group date" data-provide="datepicker">
+						<input ng-model="gigdate" type="text" class="form-control">
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-th"></span>
+						</div>
+					</div>
+				</td>
+				<td><input type="text" name="comments" ng-model="gig.date"></td>				
 			</tr>
 		</table>
 		<div class="span6" style="padding-bottom:4px";>	

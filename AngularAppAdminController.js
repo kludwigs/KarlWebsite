@@ -1,6 +1,6 @@
 /******************** ADMIN CTRL ******************/
 
-karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac, categoriesService, userEntriesService, siteContentService, musicEntriesService)
+karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac, userEntriesService,serviceMethodsFactory)
 {			
 		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
 		$scope.adminFilename = $scope.filenames[0];
@@ -44,43 +44,29 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		{
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-			
-		   categoriesService.getCategories(uname,pass) 
-		   .then(function(categoryData) 
-		   {	   			  			   				  
-				   $scope.safeApply(function()
-					{			
-						angular.forEach(categoryData.categories, function(item) 
-						{
-							$scope.categories.push({category_name:item.category_name,id: item.id});
-						});											
-					}); 										
-		   
+			url = 'budget_categories.php';
+			params = {"password":pass, "username":uname};
+		    serviceMethodsFactory.apiGet(url, params, null, function(result){  			  			   				  		
+				angular.forEach(result.data, function(item) 
+				{
+					$scope.categories.push({category_name:item.category_name,id: item.id});
+				});																						   
 			});			
 		}
 		$scope.getSiteContentFromService = function() 
 		{			
-		   siteContentService.getSiteContent() 
-		   .then(function(site_content_data) 
-		   {	   			  			   				  
-				   $scope.safeApply(function()
-					{			
-						console.log("safe apply! in getSiteContent")
-						console.log(site_content_data.site_content);
-							
-							var count = 1;		
-						angular.forEach(site_content_data.site_content[0], function(value, key) 
-						{
-							// do something for all key: value pairs 
-							//console.log("value =", value);
-							console.log("key =", key);
-							if(key)
-							$scope.site_content.push({key:key, "value":value});
-						});		
-						$scope.site_content_select = $scope.site_content[0];
-						console.log("for Each done site_content json object is populated", $scope.site_content);
-					}); 										
-		   
+		   url = 'site_content.php';
+		   serviceMethodsFactory.apiGet(url, null, null, function(result)
+		   {	  			   				  
+				var count = 1;		
+				angular.forEach(result.data[0], function(value, key) 
+				{
+					console.log("key =", key);
+					if(key)
+					$scope.site_content.push({key:key, "value":value});
+				});		
+				$scope.site_content_select = $scope.site_content[0];
+				console.log("for Each done site_content json object is populated", $scope.site_content);
 			});			
 		}		
 		$scope.myfunction = function()
@@ -218,33 +204,24 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		{
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-			
-		    userEntriesService.getUserEntries(uname,pass) 
-			.then(function(entriesData) 
-		    {	 
-				console.log("getBudgetEntries promise",entriesData.entries);
-			   $scope.safeApply(function()
-				{			
-					$scope.entries = entriesData.entries;	
-				}); 												   
-			});	
+			var args = {"username":uname, "password":pass};
+			url = 'budget_user_entries.php';
+			serviceMethodsFactory.apiGet(url, args, null, function(result){				
+							$scope.entries = result.data;						
+			});					
 		};
 		$scope.getMusicEntries = function()
-		{
+		{			
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-			
-		    musicEntriesService.getEntries(uname,pass) 
-			.then(function(musicgigData) 
-		    {	 
-			   $scope.safeApply(function()
-				{			
-					$scope.musicGigs = musicgigData.gig_entries;
-					angular.forEach($scope.musicGigs,function(line){
+			var args = {"username":uname, "password":pass};
+			url = 'music_gig_entries.php';
+			serviceMethodsFactory.apiGet(url, args, null, function(result){				
+						$scope.musicGigs = result.data;
+						angular.forEach($scope.musicGigs,function(line){
 						line.time = new Date(line.time);						
-					});
-				}); 												   
-			});	
+					});				
+			});
 		};		
 		
 		
@@ -276,29 +253,23 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 			alertsManager.doInfo("Sending entry to database...");
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-
-			console.log("$scope.entry to insert ---- ",$scope.entry);
 			var tmp_category = $scope.entry.category;
 			var tmp_price = $scope.entry.price;
 			var tmp_comments = $scope.entry.comments;	
 			
-		   userEntriesService.insertUserEntry(uname, pass, tmp_category.id, tmp_price , tmp_comments) 
-		   .then(function(new_entry_data) 
-		   {	   	
-				if(new_entry_data.insertion.success == true)
-				{
-					console.log("insert User Entry promise return ---", new_entry_data);
+			params = { "username": uname ,"password": pass, "price":tmp_price, "comments":tmp_comments, "category_id":tmp_category.id};
+			url = 'budget_user_entries.php';
+			serviceMethodsFactory.apiPost(url, params, null, function(result){	   	
+					console.log("insert User Entry promise return ---", result);
 					alertsManager.doGood("Successfully inserted record!");		
 					$scope.toggle(true);
-					$scope.addRecordToEntryList(uname, tmp_price, tmp_comments, tmp_category.category_name, new_entry_data.insertion.data);
-				}else 
-				{
-					console.log("promise came back and it hit the fan");
-					alertsManager.doEvil("Failed to insert record!");
-					$scope.toggle(true);
-				}
+					$scope.addRecordToEntryList(uname, tmp_price, tmp_comments, tmp_category.category_name, result.data);
 			});		
 		};
+		$scope.logGig = function()
+		{
+			
+		}
 		$scope.addRecordToEntryList = function(uname, record_price, record_comments, record_category_name, record_date)
 		{
 			var new_record = { "username": uname, "price":record_price, "comments":record_comments, "category_name":record_category_name, "date_time": record_date};
@@ -307,26 +278,16 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		
 		$scope.calculateStats = function()
 		{
-			console.log("CalculateStats");
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-			
-		   userEntriesService.getUserStats(uname, pass) 
-		   .then(function(data) 
-		   {	   	
-				if(data.stats.success == true)
-				{
-					console.log("calculate Stats promise return ---", data);
-					// user pointer to the data
-					var x = data.stats.data;
+			url = 'budget_get_user_stats.php';
+			params = {"password":pass, "username":uname};
+		    serviceMethodsFactory.apiGet(url, params, null, function(result){
+					var x = result.data;
 					console.log("x var", x);
 					$scope.stats.avg_per_day = x.sum / x.days;
 					$scope.stats.total = x.sum;
 					$scope.stats.date = x.start;
-				}else 
-				{
-					console.log("calculate Stats promise came back and it hit the fan");
-				}
 			});	
 		};
 		$scope.goToBottom = function()
