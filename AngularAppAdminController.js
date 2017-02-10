@@ -1,6 +1,6 @@
 /******************** ADMIN CTRL ******************/
 
-karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac, userEntriesService,serviceMethodsFactory)
+karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsManager, $timeout, $location, $anchorScroll,accessFac, currentUserFac,serviceMethodsFactory)
 {			
 		$scope.filenames = ["resume.txt"];//, "aboutme.html"];
 		$scope.adminFilename = $scope.filenames[0];
@@ -8,11 +8,14 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		$scope.musicGigs = {};
 		$scope.site_content=[];
 		$scope.categories = [{category_name: "none", id:"0"}];
+		$scope.venues = [{type: "none", id:"0"}];
 		$scope.hideme = false;
 		$scope.alerts = alertsManager.alerts;
 		$scope.AlertMessage = {active: false};
 		$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0", date:"-------"};
 		$scope.entry = {};
+		$scope.num_records = 100;
+		$scope.gig = [];
     
 		$scope.toggle = function(delay)
 		{		
@@ -52,6 +55,20 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 					$scope.categories.push({category_name:item.category_name,id: item.id});
 				});																						   
 			});			
+		}
+		$scope.getVenueTypes = function(){
+			var uname = currentUserFac.getCurrentUser();
+			var pass = currentUserFac.getCurrentUserPassword();
+			url = 'music_venues.php';
+			params = {"password":pass, "username":uname};
+		    serviceMethodsFactory.apiGet(url, params, null, function(result){  			  			   				  		
+				angular.forEach(result.data, function(x) 
+				{
+					$scope.venues.push({type:x.type,id: x.id});
+				});		
+				x = $scope.venues[0];
+				$scope.gig.type = x.type;
+			});	
 		}
 		$scope.getSiteContentFromService = function() 
 		{			
@@ -148,50 +165,18 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 			});
 		};
 		$scope.adminSave = function(file)
-		{
-			console.log("save event");	
-		
-			
-			//var file = $scope.adminFilename;
-			console.log(file);
-			alert("Saving " + file + "!")
-			$.ajax(
-			{
-				url : 'file.php',
-				type: 'post',
-				data : {
-					filename : file,
-					action : 'save',
-					content : encodeURIComponent($('#html_content').val())
-				},
-				success : function(msg) 
-				{
-					console.log(msg);
-				}				
-			});
-			$scope.toggle();
-			alertsManager.doGood("Writing to file...");	
-			$scope.toggle(true);
-			;
+		{		
+			alert("Saving " + file + "!");
+			params = {filename: file, action:'save', content:encodeURIComponent($('#html_content').val())};
+			serviceMethodsFactory.apiPost( 'file.php', params, null, function(result) {
+			});			
 		};
 		$scope.AdminLoad = function(elementref, file)
 		{
-			console.log("load event");
-			var myfile = file; /* + ".txt" */
-			console.log("file name = " + myfile + "\n");
-			$.ajax({
-				url : 'file.php',
-				type: 'post',
-				data : {
-					filename : myfile,
-					action : 'load'
-				},
-				success : function(html) 
-				{
-					console.log("Loaded html.");
-					elementref.html(html);
-				}
-			});			
+			params = {filename: file, action:'load'};
+			serviceMethodsFactory.apiPost( 'file.php', params, null, function(result) {
+					elementref.html(result);
+			});		
 		};
 		
 		$scope.refreshBudgetEntries =function()
@@ -204,10 +189,15 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		{
 			var uname = currentUserFac.getCurrentUser();
 			var pass = currentUserFac.getCurrentUserPassword();
-			var args = {"username":uname, "password":pass};
+			$scope.num_records = 50;
+			records = $scope.num_records;
+			var args = {"username":uname, "password":pass,records:records};
 			url = 'budget_user_entries.php';
-			serviceMethodsFactory.apiGet(url, args, null, function(result){				
-							$scope.entries = result.data;						
+			serviceMethodsFactory.apiGet(url, args, null, function(result){	
+							$scope.entries = [];
+							for(i=result.data.length-1;i>=0;i--){
+								$scope.entries.push(result.data[i]);						
+							}
 			});					
 		};
 		$scope.getMusicEntries = function()
@@ -268,7 +258,20 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		};
 		$scope.logGig = function()
 		{
-			
+			$scope.toggle();
+			alertsManager.doInfo("Sending entry to database...");
+			var uname = currentUserFac.getCurrentUser();
+			var pass = currentUserFac.getCurrentUserPassword();
+			url = 'music_gig_entries.php';
+			payout = $scope.gig.payout;
+			comments = $scope.gig.comments;
+			type = $scope.gig.type;
+			time = $scope.gig.date;
+			params = {"username": uname ,"password": pass, payout:payout , payment_method_id: 0, comments: comments, venue_id:type.id, time:time, paid: false};
+			serviceMethodsFactory.apiPost(url, params, null, function(result){
+				alertsManager.doGood("Successfully inserted record!");	
+				$scope.toggle(true);
+			});				
 		}
 		$scope.addRecordToEntryList = function(uname, record_price, record_comments, record_category_name, record_date)
 		{
@@ -309,6 +312,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				$scope.getMusicEntries();
 				$scope.calculateStats();
 				$scope.hideme = true;
+				$scope.getVenueTypes();
 				var myele = $(".view-container");
 				myele[0].className = "col-md-12 col-xs-12 view-container";
 				myele[0].style.marginTop='16px';

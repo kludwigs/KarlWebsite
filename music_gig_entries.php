@@ -22,37 +22,35 @@ if($HTTPS_required && $_SERVER['HTTPS'] != 'on')
 	sendresponse($response, 2, false, $api_response_code);	
 }
 
+
+
 if($authentication_required == true)
 {
-	
 	$username ='';
 	$password = '';
-	$my_method = "did you see that";
 	$user_id =0;
 	
 	$method = $_SERVER['REQUEST_METHOD'];
 	
 	switch ($method) 
 	{
-		  case 'GET':
-				
+		  case 'GET':				
 				$username = $_GET['username'];
 				$password = $_GET['password'];
 				break;
 		  case 'PUT':
 		  break;
 		  case 'POST':
-				die('POST break statement');
-				$my_method = 	"you're not going to believe this";
 				$username		= $_POST['username'];
 				$password		= $_POST['password'];		
 				$payout 		= $_POST['payout'];
-				$payment_type 	= $_POST['payment_type'];
+				$payment_method	= $_POST['payment_method'];
 				$comments		= $_POST['comments'];
 				$venue_id		= $_POST['venue_id'];
-				$user_id		= $_POST['user_id'];
+				$time			= $_POST['time'];
+				$paid 			= $_POST['paid'];
 				$attachment_id	= $_POST['attachment_id'];
-				$date = 		date('Y-m-d H:i:s');				
+				$date = 		new DateTime($time);				
 				break;
 		  case 'DELETE':				
 				break;
@@ -87,9 +85,19 @@ if($authentication_required == true)
 				break;
 			case 'PUT':				
 					die("update table"); break;
-			case 'POST':				
-
-				$sql_command = "INSERT INTO entries (id, payout, payment_type, comments, venue_id, time, paid, user_id, attachment_id) values (NULL, '$payout','$payment_type','$comments','$venue_id', now(), '$user_id', '$attachment_id')";
+			case 'POST':	
+				$dateString = $date->format('Y-m-d');
+				$sql_command = "INSERT INTO entries (id, payout, payment_method_id, comments, venue_id, time, paid, user_id, attachment_id) values (
+				 NULL, 
+				'$payout',
+				'$payment_method',
+				'$comments',
+				'$venue_id', 
+				'$dateString', 
+				'$paid', 
+				'$user_id', 
+				'$attachment_id')";
+				
 				$result = insert_new_entry_for_user($sql_command);
 				if($result == false)
 				{
@@ -99,6 +107,7 @@ if($authentication_required == true)
 				break;
 			case 'DELETE':
 					die("delete table where id=key"); break;
+					
 		}	
 	}
 }

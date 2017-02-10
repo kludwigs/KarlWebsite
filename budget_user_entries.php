@@ -35,6 +35,7 @@ if($authentication_required == true)
 		  case 'GET':
 				$username = $_GET['username'];
 				$password = $_GET['password'];
+				$records = $_GET['records'];
 				break;
 		  case 'PUT':
 		  break;
@@ -67,7 +68,7 @@ if($authentication_required == true)
 		switch ($method) 
 		{ //DATE_FORMAT(entries.date_time, '%Y-%M-%d %h:%i %p)
 			case 'GET':			
-				$sql_select = "SELECT entries.user_id, entries.price, DATE_FORMAT(entries.date_time,'%Y-%m-%d %h:%i %p') as date_time , entries.comments, entries.category_id, users.username, categories.category_name FROM entries, users, categories WHERE entries.user_id = $user_id AND users.id = entries.user_id AND categories.id = entries.category_id ORDER BY entries.date_time";
+				$sql_select = "SELECT entries.user_id, entries.price, DATE_FORMAT(entries.date_time,'%Y-%m-%d %h:%i %p') as date_time , entries.comments, entries.category_id, users.username, categories.category_name FROM entries, users, categories WHERE entries.user_id = $user_id AND users.id = entries.user_id AND categories.id = entries.category_id ORDER BY entries.entry_id DESC LIMIT $records";
 			
 				$entries = get_entries_from_user_id($user_id, $sql_select);
 			

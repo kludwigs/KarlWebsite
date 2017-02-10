@@ -66,17 +66,17 @@
 				<td><input type="number" name="price" ng-model="gig.payout"  step="0.01" min="0" max="9999.99"></td>
 				<td><input type="text" name="comments" ng-model="gig.comments"></td>
 				<td>   
-				 <select ng-model="gig.type" ng-options="i as i.type for i in venues" ></select>
+				 <select ng-model="gig.type" ng-options="x as x.type for x in venues" ></select>	
+				<!--<select ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>				 -->
 				</td>
 				<td>
 					<div class="input-group date" data-provide="datepicker">
-						<input ng-model="gigdate" type="text" class="form-control">
+						<input ng-model="gig.date" type="text" class="form-control">
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-th"></span>
 						</div>
 					</div>
-				</td>
-				<td><input type="text" name="comments" ng-model="gig.date"></td>				
+				</td>			
 			</tr>
 		</table>
 		<div class="span6" style="padding-bottom:4px";>	
@@ -84,7 +84,7 @@
 			<button type="reset" value="Reset">Clear Fields</button>
 		</div>	
 	</form>
-	<h2>Entries</h2>
+	<h2>Entries (Showing TOP {{num_records}})</h2>
 	<table class="table table-bordered" ng-show="entries.length">	
 		<tr>
 			<th>Price</th>
@@ -180,3 +180,9 @@
 </div>
 
 </div>
+<script>
+$('.input-group.date').datepicker({
+    autoclose: true,
+    todayHighlight: true
+});
+</script>

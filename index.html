@@ -9,7 +9,8 @@
 <meta name="viewport" content="initial-scale=.64, maximum-scale=1.0, width=device-width, user-scalable=1.0" />
 
 <link rel='stylesheet' type='text/css' href='bootstrap-3.3.6-dist/css/bootstrap.min.css' /></link>	
-<link rel='stylesheet' type='text/css' href='bootstrap-3.3.6-dist/css/bootstrap.min.css' /></link>	
+<link rel='stylesheet' type='text/css' href='bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css' /></link>	
+
 <link rel='stylesheet' type='text/css' href='mystyles.css?id=123'></link>
 
 <link rel="shortcut icon" href='images/profile.jpg'>
@@ -85,14 +86,13 @@
 </div>
 
 <div class="container" id="mymaincontainer">
-
 	<div class="row-fluid">
 		<div id="containercontent">	
 			<div class="col-md-3 col-xs-12 side-info">	
 				
 				<!--
 				<img id="profile_picture" src="images/prof_a_crop.jpg" width="133" height="200">
-				
+				fdasdfasdfasdf
 				-->
 				<div class="col-md-12 col-sm-3 col-xs-12 social-icon-column">				
 					<div class="myicon">
@@ -137,8 +137,20 @@
 </div> 
 <script src="jquery-1.11.3.js"></script>
 <script src='bootstrap-3.3.6-dist/js/bootstrap.min.js'></script>
+<script src='bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js'></script>
 
 <script>
+
+$('.input-group.date').datepicker({
+    autoclose: true,
+    todayHighlight: true
+});
+/*
+$('.datepicker').datepicker({
+    autoclose: true,
+	todayHighlight: true
+});
+*/
 // Activate Carousel
 $("#mediagallery").carousel();
 
