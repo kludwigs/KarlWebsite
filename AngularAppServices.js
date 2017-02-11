@@ -49,27 +49,23 @@
 			});
 		},	
 		apiPut:function(url, params, error_method, success_method){
-			$http
-			({
+			$.ajax(
+			{
 				url : url,
 				type: 'PUT',
-				data: params,
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded'}// set the headers so angular passing info as form data (not request
-			})			
-			.success(function(data) 
-			{
-				if(success_method)
+				data:params,			
+				success : function(data) 
 				{
-					success_method(data);
+					if(success_method)
+						success_method(data);
+					
+				},
+				error : function(msg) 
+				{
+					if(error_method)
+						error_method(data);
 				}
-			})	
-			.error(function(data)
-			{
-				if(error_method)
-				{
-					error_method(data);
-				}		
-			});			
+			});
 		},
 		apiGetPromise: function(identifier, url, args) {		 	
 			var deferred = $q.defer();

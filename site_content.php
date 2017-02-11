@@ -39,6 +39,7 @@ if($authentication_required == false)
 			else
 			{
 				$response['data'] = $site_content;
+				$response['method'] = 'GET';
 			}
 			break;
 			
@@ -46,6 +47,7 @@ if($authentication_required == false)
 			parse_str(file_get_contents('php://input'), $_PUT);
 			$key = $_PUT['key'];
 			$new_value = $_PUT['new_value'];
+			
 			$new_value = addslashes($new_value);
 			if (empty($key) || empty($new_value))
 			{
@@ -58,7 +60,8 @@ if($authentication_required == false)
 			{		
 				sendresponse($response, 0, false, $api_response_code);					
 			}
-			$response['data'] = $success;
+			$response['data'] = $new_value;
+			$response['method'] = 'PUT';
 			
 				break;				
 		case 'POST':

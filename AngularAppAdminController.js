@@ -118,12 +118,13 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 	});	
 	$scope.saveResume = function()
 	{
+		alert("Saving Resume...");
 		url = 'site_content.php';
 		params = { key : $scope.resume.key, new_value : $scope.resume.resume_text_field};	
 		
 		serviceMethodsFactory.apiPut(url, params, null, 
 		function(result){
-				
+				$scope.resume.resume_text_field = result.data;
 		});				
 	}
 	$scope.saveContentChanges = function(objectkey, objectvalue)
@@ -137,7 +138,7 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				{						
 					if (value.key == objectkey) 
 					{
-						$scope.site_content[key]["value"] = objectvalue;						
+						$scope.site_content[key]["value"] = result.data;						
 					}						
 				});	
 		});						
