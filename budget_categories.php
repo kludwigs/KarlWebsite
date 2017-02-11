@@ -56,7 +56,7 @@ if($authentication_required == true)
 	  switch ($method) 
 		{
 			case 'GET':					
-				$sql_select = "SELECT categories.* FROM categories";
+				$sql_select = "SELECT categories.* FROM categories ORDER BY id ASC";
 			
 				$entries = get_categories($sql_select);
 				

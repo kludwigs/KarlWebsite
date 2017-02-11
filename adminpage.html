@@ -1,32 +1,25 @@
 <div class="adminpage">
 
-<h1> File Editor </h1>
-<!--
-<input type="text" id="filename" ng-options="x for x in names" ng-model="adminFilename"><br>
- <div class="container-fluid" ng-controller="adminCtrl">
--->
-
+<div id="signedAs" style="margin-bottom:15px;width:250px;" class="form-control" readonly>
+<p>Signed in as: <b>{{username}}</b></p>
+</div>
 
  <div class="container-fluid">
     <div class="row">
 	        <div class="col-md-12 col-xs-12">
-			<select ng-model="adminFilename" ng-options="x for x in filenames"></select><br>
-			<textarea class="form-control" id="html_content" style="height:400" width="100%"></textarea>
-			<button id="save" ng-click="adminSave(adminFilename)">Save</button>
-			<!--
-			<button id="load" ng-click="adminLoad()">load</button>
-			ng-model="fileContents">
-			-->
+			<h2>Resume</h2>
+			<textarea class="form-control" ng-model="resume.resume_text_field" id="resume_content" style="height:400" width="100%"></textarea>
+			<button id="save" ng-click="saveResume()" class="btn btn-default" style="margin-top:10px">Save</button>
 			</div>		
 	</div>
 	<h2>Site Content</h2>
-      <select ng-model="site_content_select" 
+      <select class="form-control" style="width:200px" ng-model="site_content_select" 
         ng-options="content.key for content in site_content">
       </select>
-	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300" width="100%"></textarea>	  
-	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)">Save</button><br>
+	  <textarea class="form-control" ng-model="site_content_edit_text_field" style="height:300;margin-top:10px;" width="100%"></textarea>	  
+	  <button id="save" ng-click="saveContentChanges(site_content_select.key, site_content_edit_text_field)"  class="btn btn-default" style=";margin-top:10px;">Save</button><br>
 	  
-	<button id="JumpToBottomButton" style="margin-top:17px;" ng-click="goToBottom()">Jump To Bottom </button> 
+	<button id="JumpToBottomButton" style="margin-top:17px;" class="btn btn-default" ng-click="goToBottom()">Jump To Bottom </button> 
 	<br>  
 	<h2>Music Gigs</h2>	
 	
@@ -37,7 +30,6 @@
 			<th>Type</th>
 			<th>Paid</th>
 			<th>Method</th>
-			<th>User</th>
 			<th>DateTime</th>	
 		</tr>	
 		<tr ng-repeat="x in musicGigs">
@@ -47,31 +39,30 @@
 			<td ng-if="x.paid == 0">No</td>
 			<td ng-if="x.paid != 0">Yes</td>
 			<td>{{x.method }}</td>
-			<td>{{x.username}}</td>
 			<td>{{x.time | date:'mediumDate'}}</td>	
 		</tr>
 	</table>		  	  	 
-	<button ng-click="getMusicEntries()">Refresh Music Gigs</button> 
+	<button ng-click="getMusicEntries()" class="btn btn-default" >Refresh Music Gigs</button> 
 	<h3>Log Gig</h3>
 	<form ng-submit="logGig()">	
 	
 		<table class="table table-bordered" style="table-layout:fixed;width:100%;">		
 			<tr>
-				<th>Payout</th>
-				<th>Comments</th>
-				<th>Type</th>
-				<th>Date</th>
+				<th class="col-md-3 col-xs-2">Payout</th>
+				<th class="col-md-3 col-xs-3">Comments</th>
+				<th class="col-md-3 col-xs-3">Type</th>
+				<th class="col-md-3 col-xs-4">Date</th>
 			</tr>	
 			<tr>	
-				<td><input type="number" name="price" ng-model="gig.payout"  step="0.01" min="0" max="9999.99"></td>
-				<td><input type="text" name="comments" ng-model="gig.comments"></td>
+				<td><input type="number" class="form-control input-lg" name="price" ng-model="gig.payout"  step="0.01" min="0" max="9999.99"></td>
+				<td><input type="text" class="form-control input-lg" name="comments" ng-model="gig.comments"></td>
 				<td>   
-				 <select ng-model="gig.type" ng-options="x as x.type for x in venues" ></select>	
+				 <select class="form-control input-lg" ng-model="gig.type" ng-options="x as x.type for x in venues" style="padding:7px" ></select>	
 				<!--<select ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>				 -->
 				</td>
 				<td>
-					<div class="input-group date" data-provide="datepicker">
-						<input ng-model="gig.date" type="text" class="form-control">
+					<div class="input-group date input-lg" data-provide="datepicker" style="position:relative;padding:0px">
+						<input ng-model="gig.date" type="text" class="form-control input-lg" style="color:#333;padding:6px;">
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-th"></span>
 						</div>
@@ -80,8 +71,8 @@
 			</tr>
 		</table>
 		<div class="span6" style="padding-bottom:4px";>	
-			<button type="submit">Insert New Gig</button>
-			<button type="reset" value="Reset">Clear Fields</button>
+			<button type="submit" class="btn btn-default" >Insert New Gig</button>
+			<button type="reset" value="Reset" class="btn btn-default" >Clear Fields</button>
 		</div>	
 	</form>
 	<h2>Entries (Showing TOP {{num_records}})</h2>
@@ -90,18 +81,16 @@
 			<th>Price</th>
 			<th>Comments</th>
 			<th>Category</th>
-			<th>User</th>
 			<th>DateTime</th>	
 		</tr>	
 		<tr ng-repeat="x in entries">
 			<td style="text-align:right;padding-right:25px">${{x.price | number:2}}</td>
 			<td>{{x.comments }}</td>
 			<td>{{x.category_name }}</td>
-			<td>{{x.username}}</td>
 			<td>{{x.date_time | date:'medium'}}</td>	
 		</tr>
 	</table>
-	<button ng-click="refreshBudgetEntries()">Refresh User Entries</button>
+	<button ng-click="refreshBudgetEntries()" class="btn btn-default" >Refresh User Entries</button>
 	<br>
 	<h3>Stats</h3>
 
@@ -117,7 +106,7 @@
 			<td><span id="currency-default">{{stats.avg_per_day| currency}}</span><br></td>
 		</tr>
 	</table>
-		<button ng-click="calculateStats()">Re-Calculate</button>
+		<button ng-click="calculateStats()" class="btn btn-default" >Re-Calculate</button>
 	
 	<!-- *******************************************************************-->
 
@@ -135,10 +124,10 @@
 		</tr>	
 		<tr>	
 		<!--ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"-->
-			<td><input type="number" name="price" ng-model="entry.price"  step="0.01" min="0" max="9999.99"></td>
-			<td><input type="text" name="comments" ng-model="entry.comments"></td>
+			<td><input class="form-control input-lg" type="number" name="price" ng-model="entry.price"  step="0.01" min="0" max="9999.99"></td>
+			<td><input class="form-control input-lg" type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
-			 <select ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>
+			 <select class="form-control input-lg" ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>
 			</td>
 		</tr>
 	</table>
@@ -150,17 +139,17 @@
 			<th>User</th>
 		</tr>	
 		<tr>	
-			<td><input type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
-			<td><input type="text" name="comments" ng-model="entry.comments"></td>
+			<td><input class="form-control input-lg" type="number" name="price" ng-model="entry.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" max="9999.99"></td>
+			<td><input class="form-control input-lg" type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
-			<select ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>
+			<select  class="form-control input-lg" ng-model="entry.category" ng-options="i as i.category_name for i in categories" style="padding-left:2px" ></select>
 			</td>
 			<td>{{ returnUser() }}</td>
 		</tr>
 	</table>	
 	<div class="span6" style="padding-bottom:4px";>	
-		<button type="submit">Insert New Entry</button>
-		<button type="reset" value="Reset">Clear Fields</button>
+		<button type="submit" class="btn btn-default" >Insert New Entry</button>
+		<button type="reset" value="Reset" class="btn btn-default" >Clear Fields</button>
 	</div>	
 	</form>	
 	<!-- *******************************************************************-->

@@ -3,8 +3,6 @@ karlApp.factory('alertsManager', function($timeout) {
         alerts: {},
         addAlert: function(message, type) {
 		
-			console.log("add-alert :message", message);
-			console.log("add-alert :type", type);
             this.alerts[type] = this.alerts[type] || [];
             this.alerts[type].push(message);
         },
@@ -18,19 +16,16 @@ karlApp.factory('alertsManager', function($timeout) {
 		doGood: function(message)
 		{
 			this.clearAlerts();
-			console.log(message);
 			this.addAlert(message, "alert-success");
 		},
 		doEvil: function(message)
 		{
 			this.clearAlerts();
-			console.log(message);
 			this.addAlert(message, "alert-danger");
 		},
 		doInfo: function(message)
 		{
 			this.clearAlerts();
-			console.log(message);
 			this.addAlert(message, "alert-info");
 		},
 		reset: function(delay) 
@@ -115,59 +110,13 @@ karlApp.factory('currentUserFac', function () {
             return data.current_user_password;
         },		
         setCurrentUser: function (user) {
-            data.current_user = user;
+            data.current_user = user.toLowerCase();
         },
 		setCurrentUserPassword: function (pass)
 		{
 			data.current_user_password = pass;
 		}
     };
-});
-
-karlApp.factory('facResumeContent', function ($http) {
-	var obj = {}
-	this.resume;
-	this.file;
-	obj.getSavedResumeContent = function () 
-	{
-		return this.resume;
-	}		
-	obj.setSavedResumeContent = function (html)
-	{
-		this.resume = html;
-	}
-	obj.loadResumeContent = function(elementref, file)
-	{
-		if(file === undefined || elementref === undefined)
-			return;
-		console.log("load event");
-		var txtfile = file + ".txt";
-		console.log("file name = " + txtfile + "\n");
-		$http
-		({
-			url : 'file.php',
-			method: 'post',
-			//type:'POST',
-			data: $.param({ 'filename': txtfile ,'action': 'load'}),
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded'},// set the headers so angular passing info as form data (not request payload)				
-		})			
-		.success(function(html) 
-		{
-			console.log("Loaded html.");
-			//console.log(html);
-
-			if(elementref)
-			{
-				elementref.html(html);
-			}					
-			obj.setSavedResumeContent(html);
-		})	
-		.error(function()
-		{
-			console.log("failed to get ", this.file);
-		});	//semicolon wraps success and error	
-	}
-	return obj;		
 });
  
 karlApp.factory('facSiteContent', function ($http, $log, $q) {
@@ -177,6 +126,7 @@ karlApp.factory('facSiteContent', function ($http, $log, $q) {
 	var	SignoffContent = null;
 	var	GreetingContent = null;
 	var MediaContent = null;
+	var ResumeContent = null;
     
     return{		
         getSavedAboutMeContent: function ()
@@ -219,6 +169,14 @@ karlApp.factory('facSiteContent', function ($http, $log, $q) {
 		{
 			MediaContent = html;
 		},
+		getSavedResumeContent: function()
+		{
+			return ResumeContent;
+		},
+		setSavedResumeContent: function(html)
+		{
+			ResumeContent = html;
+		},		
 		getSiteContent: function(uname, pass) 
 		{
 			var deferred = $q.defer();
@@ -229,15 +187,12 @@ karlApp.factory('facSiteContent', function ($http, $log, $q) {
 			})
 			.success(function(data) 
 			{ 
-				console.log(data);
-				console.log("we get data back in site_content.php", data.data);
 				deferred.resolve
 			({
 				site_content: data.data
 			});
 			}).error(function(msg, code) 
 			{
-				console.log("we had an error in siteContentService");
 				deferred.reject(msg);
 				$log.error(msg, code);
 			});

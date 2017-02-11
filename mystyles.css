@@ -132,10 +132,7 @@ hr
 {
 	color:#f4f4f4; 
 }
-.navbar
-{
-	background-color:#666666;
-}
+
 
 .myicon
 {
@@ -193,14 +190,15 @@ padding-bottom:15px;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 		margin-bottom:20px;
-	}	
+	}
+		
 	#myfooter
 	{	
 	margin-bottom:5px;
 	}
 	.content
 	{
-		position:relative;left:-15px;
+		//position:relative;left:-15px;
 	}
 	.greeting
 	{
@@ -280,6 +278,10 @@ padding-bottom:15px;
 	{
 		position:relative;top:0px;
 	}
+.navbar
+{
+	background-color:#666666;
+}	
 }
 /* end mobile */
 .carousel img {
@@ -347,8 +349,8 @@ color:#33b5e5;
 }
 body { 
     padding-top: 50px; 
-	background-color:#666666;
-	//background-image:url('images/vintage-lace-wallpaper.jpg');	
+	background-color:#999;
+	//background-image:url('http://static.tumblr.com/87b538f205b4b8bcc853ffacfe2f9186/b0t9nmp/Swtnb8p9n/tumblr_static_5vfcn01zc6ck40os4gksgo8kg.jpg');	
 	//background-image:url('images/abstract-light-grey.jpg');
 	//background-repeat: no-repeat;
 	//background-size: 100% auto;
@@ -498,10 +500,20 @@ font-size:95%;
 }
 @media (min-width:767px)
 {
-.greeting
-{
+	.greeting
+	{
 	//font-style:italic;
-}
+	}
+	#mynavbar
+	{
+		background-color:#eee;
+	}
+	.nav > li > a:active,
+	.nav > li > a:hover,
+	.nav > li > a:focus 
+	{		
+    background-color: white; /*/ Change rollover cell color here*/	
+	}	
 }
 /******************************************************/
 
