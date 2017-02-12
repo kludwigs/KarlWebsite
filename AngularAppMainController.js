@@ -102,14 +102,14 @@
 					$scope.applyaboutmesitedata();
 					$scope.applyindexsitedata();						
 				}
-				if($location.path() =='/media')
+				if($location.path().includes('media'))
 				{
-					$scope.applyindexsitedata();
 					$scope.applymediasitedata();
 				}
 				if($location.path().includes('resume'))
 				{
 					$scope.applyresumecontent();
+					$scope.applyindexsitedata();
 				}
 				else
 				{
