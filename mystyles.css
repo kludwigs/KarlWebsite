@@ -4,7 +4,7 @@ hr
 }
 .banner-container
 {
-	background-color:white;
+	background-color:#615137;
 	//background-color:#f2f2f2;
 	margin-top:1px;
 	border-top-color:#d9d9d9;
@@ -17,8 +17,8 @@ hr
 
 .banner-column
 {
-	//background-color:#666666;
-	background-color:white;
+	//background-color:;
+	background-color:#615137;
 	//background-color:#f2f2f2;	
 	//opacity:.90;
 	padding-bottom:18px;
@@ -350,7 +350,8 @@ color:#33b5e5;
 body { 
     padding-top: 50px; 
 	background-color:#999;
-	//background-image:url('http://static.tumblr.com/87b538f205b4b8bcc853ffacfe2f9186/b0t9nmp/Swtnb8p9n/tumblr_static_5vfcn01zc6ck40os4gksgo8kg.jpg');	
+	//background-image:url(
+	'http://static.tumblr.com/87b538f205b4b8bcc853ffacfe2f9186/b0t9nmp/Swtnb8p9n/tumblr_static_5vfcn01zc6ck40os4gksgo8kg.jpg');	
 	//background-image:url('images/abstract-light-grey.jpg');
 	//background-repeat: no-repeat;
 	//background-size: 100% auto;
@@ -358,7 +359,10 @@ body {
 	width:100%;
 	//font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-family:Cabin;
-    src: url("cabin/Cabin.otf") format("opentype");
+    //src: url("cabin/Cabin.otf") format("opentype");
+	//font-family: 'Montserrat', sans-serif;
+	//font-family: 'Sahitya', serif;	
+	font-family: 'Fira Sans Extra Condensed', sans-serif;
 	height:100%;	
 }
 #myfooter
