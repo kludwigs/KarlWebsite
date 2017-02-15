@@ -2,10 +2,18 @@ hr
 {
 	border-color:#d9d9d9;
 }
+.button-font-size{
+	font-size:110%;
+}
+
+.header-row{
+	background-color:#f5f5f5;
+}
+.banner-container img {
+  border-radius: 10px;
+}
 .banner-container
 {
-	background-color:#615137;
-	//background-color:#f2f2f2;
 	margin-top:1px;
 	border-top-color:#d9d9d9;
 	border-top-style:solid;
@@ -17,9 +25,6 @@ hr
 
 .banner-column
 {
-	//background-color:;
-	background-color:#615137;
-	//background-color:#f2f2f2;	
 	//opacity:.90;
 	padding-bottom:18px;
 }
@@ -278,10 +283,17 @@ padding-bottom:15px;
 	{
 		position:relative;top:0px;
 	}
-.navbar
-{
-	background-color:#666666;
-}	
+	.navbar
+	{
+		background-color:#666666;
+	}	
+	.banner-container,.banner-column
+	{
+		background-color:white;
+	}
+	.header-row{
+		background-color: #ccc;
+	}
 }
 /* end mobile */
 .carousel img {
@@ -510,15 +522,28 @@ font-size:95%;
 	}
 	#mynavbar
 	{
-		background-color:#eee;
+		background-color:#ddd;
 	}
 	.nav > li > a:active,
 	.nav > li > a:hover,
 	.nav > li > a:focus 
 	{		
-    background-color: white; /*/ Change rollover cell color here*/	
+    background-color: #white; /*/ Change rollover cell color here*/	
 	}	
-}
+	#header-name{
+		//color:white;
+	}
+	.banner-container,.banner-column
+	{
+		//background-color:#2e5e75;
+		background-color:#f5f5f5;
+	}
+	.banner-container{
+		border-bottom-color:white;
+	}
+	#mymaincontainer{
+	background-color:white;	
+	}
 /******************************************************/
 
 /*---------------------- Animations ------------------*/
