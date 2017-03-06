@@ -45,12 +45,19 @@ karlApp.factory('alertsManager', function($timeout) {
     };
 });	
 
-karlApp.factory('accessFac',function($http, $location){
+karlApp.factory('accessFac',function($http, $location, currentUserFac){
     var obj = {}
     this.access = false;
     obj.HasAccess = function()
 	{    
-		console.log("access = " + this.access + "\n");
+		cu = localStorage.getItem("currentuser");
+		pw = localStorage.getItem("currentpass");
+		if(pw && cu || (pw != "" && cu != ""))
+			if(localStorage.getItem(cu+pw) == '1')
+			{
+				obj.setPermission(true);
+				return true;
+			}
 		return this.access;
     }
     obj.checkPermission = function(uname, pass)
@@ -67,21 +74,16 @@ karlApp.factory('accessFac',function($http, $location){
 			.success(function (data) 
 			{
 
-				console.log("data", data);				
-				console.log("data.success", data.success);
-				console.log("data.errors", data.errors);
-
 				if (!data.success) 
 				{
 					// if not successful, bind errors to error variables
-					console.log("you had a bad time!");	
-					console.log(data.message);	
 					obj.setPermission(false);
 				} 
 				else 
 				{
 					// if successful, bind success message to message and direct to admin page
-					console.log("you win!");
+					st = uname + pass;
+					localStorage.setItem(st, "1");
 					obj.setPermission(true);
 					$location.path('/adminpage');
 				}				
@@ -91,6 +93,13 @@ karlApp.factory('accessFac',function($http, $location){
 	{
 		console.log("setting permission to " + perm);
 		this.access = perm;
+	}
+	obj.logOut = function()
+	{
+		cu = localStorage.setItem("currentuser", "");
+		pw = localStorage.setItem("currentpass", "");
+		obj.setPermission(false);		
+		$location.path('/adminlogin');
 	}
     return obj;
 });
@@ -104,17 +113,19 @@ karlApp.factory('currentUserFac', function () {
 
     return {
         getCurrentUser: function () {
-            return data.current_user;
+			return localStorage.getItem("currentuser");
         },
         getCurrentUserPassword: function () {
-            return data.current_user_password;
+            return localStorage.getItem("currentpass");
         },		
         setCurrentUser: function (user) {
             data.current_user = user.toLowerCase();
+			localStorage.setItem("currentuser", data.current_user);
         },
 		setCurrentUserPassword: function (pass)
 		{
 			data.current_user_password = pass;
+			localStorage.setItem("currentpass", data.current_user_password );
 		}
     };
 });

@@ -1,10 +1,22 @@
 <div class="adminpage">
 
-<div id="signedAs" style="margin-bottom:15px;width:250px;" class="form-control" readonly>
-<p>Signed in as: <b>{{username}}</b></p>
-</div>
 
  <div class="container-fluid">
+ 
+	<div class="row">
+	<div class="col-xs-6">
+		<div id="signedAs" style="margin-bottom:15px;width:250px;padding-bottom:30px" class="form-control" readonly>
+		<p>Signed in as: <b>{{username}}</b></p>
+		</div>
+	</div>
+	<div class="col-xs-6">
+	<div id="buttonwrapper" style="text-align:right">
+	<button id="save" ng-click="logOut()" class="btn btn-default  button-font-size">Log out</button>
+	</div>
+	</div>
+	</div>
+ 
+ 
     <div class="row">
 	        <div class="col-md-12 col-xs-12">
 			<h2>Resume</h2>

@@ -41,6 +41,10 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 		accessFac.checkPermission(currentUserFac.getCurrentUser(),currentUserFac.getCurrentUserPassword()); 
 		$scope.username = currentUserFac.getCurrentUser();			
 	};	
+	$scope.logOut = function ()
+	{
+		accessFac.logOut();
+	}
 	$scope.getCategoriesFromService = function() 
 	{
 		var uname = currentUserFac.getCurrentUser();
