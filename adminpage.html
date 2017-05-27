@@ -66,7 +66,7 @@
 				<th class="col-md-3 col-xs-4">Date</th>
 			</tr>	
 			<tr>	
-				<td><input type="number" class="form-control input-lg" name="price" ng-model="gig.payout"  step="0.01" min="0" max="9999.99"></td>
+				<td><input type="number" class="form-control input-lg" name="price" ng-model="gig.payout"  step="0.01" min="-9999.99" max="9999.99"></td>
 				<td><input type="text" class="form-control input-lg" name="comments" ng-model="gig.comments"></td>
 				<td>   
 				 <select class="form-control input-lg" ng-model="gig.type" ng-options="x as x.type for x in venues" style="padding:7px" ></select>	
@@ -120,7 +120,19 @@
 	</table>
 		<button ng-click="calculateStats()" class="btn btn-default  button-font-size" >Re-Calculate</button>
 	
-	<!-- *******************************************************************-->
+	<h2>Stats For Select Month Calculator</h2>
+	
+	<select ng-model="monthSelect" ng-options="x.name for x in months"></select>
+	<select ng-model="yearSelect" ng-options="x for x in years"></select>
+	<button ng-click="calculateStatsForMonth()" class="btn btn-default  button-font-size" >Go!</button>
+	<div>Monthly Earnings</div><br>
+	<input style="width:50%" type="number" class="form-control input-lg" ng-model="calc.earnings"  step="0.01" min="-9999.99" max="9999.99"></td>
+	<div>Additional Expenses</div><br>
+	<input style="width:50%" type="number" class="form-control input-lg" ng-model="calc.expenses"  step="0.01" min="-9999.99" max="9999.99"></td>
+	<div>Money Spent</div><br>
+	<span id="currency-default">{{calc.spent | currency}}</span><br>
+	<div>Plus/Minus</div><br>
+	<span id="currency-default">{{calc.plusminus | currency}}</span><br>
 
 	<h3>Insert New Entry</h3>
 	<form ng-submit="insertNewEntry()">	
@@ -136,7 +148,7 @@
 		</tr>	
 		<tr>	
 		<!--ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"-->
-			<td><input class="form-control input-lg" type="number" name="price" ng-model="entry.price"  step="0.01" min="0" max="9999.99"></td>
+			<td><input class="form-control input-lg" type="number" name="price" ng-model="entry.price"  step="0.01" min="-9999.99" max="9999.99"></td>
 			<td><input class="form-control input-lg" type="text" name="comments" ng-model="entry.comments"></td>
 			<td>   
 			 <select class="form-control input-lg" ng-model="entry.category" ng-options="i as i.category_name for i in categories" ></select>

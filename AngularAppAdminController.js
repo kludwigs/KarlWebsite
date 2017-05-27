@@ -12,6 +12,29 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 	$scope.alerts = alertsManager.alerts;
 	$scope.AlertMessage = {active: false};
 	$scope.stats ={avg_per_day: "0", avg_purchase:"0", total:"0", date:"-------"};
+	$scope.months = [
+	{ name: "January", id:1 },
+	{ name: "February", id:2 },
+	{ name: "March", id:3 },
+	{ name: "April", id:4 },
+	{ name: "May", id:5 },
+	{ name: "June", id:6 },
+	{ name: "July", id:7 },
+	{ name: "August", id:8 },
+	{ name: "September", id:9 },
+	{ name: "October", id:10 },
+	{ name: "November", id:11 },
+	{ name: "December", id:12 }
+	];
+	
+    var year = new Date().getFullYear();
+    var range = [];
+    range.push(year);
+    for (var i = 1; i < 3; i++) {
+        range.push(year - i);
+    }
+    $scope.years = range;
+	
 	$scope.entry = {};
 	$scope.num_records = 100;
 	$scope.username = "";
@@ -311,6 +334,18 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				$scope.stats.total = x.sum;
 				$scope.stats.date = x.start;
 		});	
+	};
+	$scope.calculateStatsForMonth = function()
+	{
+		var uname = currentUserFac.getCurrentUser();
+		var pass = currentUserFac.getCurrentUserPassword();
+		url = 'budget_get_user_stats_for_month.php';
+		params = {"password":pass, "username":uname, "month":$scope.monthSelect.id, "year":$scope.yearSelect};
+				serviceMethodsFactory.apiGet(url, params, null, function(result){					
+				var x = result.data["0"]["SUM(price)"];
+				$scope.calc.spent = x;
+				$scope.calc.plusminus = $scope.calc.earnings - $scope.calc.expenses - x;
+		});
 	};
 	$scope.goToBottom = function()
 	{
