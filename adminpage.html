@@ -129,11 +129,22 @@
 	<input style="width:50%" type="number" class="form-control input-lg" ng-model="calc.earnings"  step="0.01" min="-9999.99" max="9999.99"></td>
 	<div>Additional Expenses</div><br>
 	<input style="width:50%" type="number" class="form-control input-lg" ng-model="calc.expenses"  step="0.01" min="-9999.99" max="9999.99"></td>
-	<div>Money Spent</div><br>
-	<span id="currency-default">{{calc.spent | currency}}</span><br>
-	<div>Plus/Minus</div><br>
-	<span id="currency-default">{{calc.plusminus | currency}}</span><br>
-
+	
+		<table id="stats_table" class="table bordered">
+		<tr class="header-row">
+			<th>Money Spent</th>
+			<th>Plus/Minus</th>
+			<th>Avg Per Day </th>
+		</tr>
+		<tr>
+		    <td><span id="currency-default">{{calc.spent | currency}}</span><br></td>			
+			<td><span id="currency-default">{{calc.plusminus | currency}}</span><br></td>
+			<td><span id="currency-default">{{calc.avg_per_day| currency}}</span><br></td>							
+		</tr>
+	</table>
+	
+	
+	
 	<h3>Insert New Entry</h3>
 	<form ng-submit="insertNewEntry()">	
 	

@@ -345,8 +345,22 @@ karlApp.controller('adminCtrl', function ($scope, $routeParams, $http, alertsMan
 				var x = result.data["0"]["SUM(price)"];
 				$scope.calc.spent = x;
 				$scope.calc.plusminus = $scope.calc.earnings - $scope.calc.expenses - x;
+				y = numberDaysInSelectMonth($scope.monthSelect.name, $scope.yearSelect);
+				$scope.calc.avg_per_day = $scope.calc.spent/y;
 		});
 	};
+	var numberDaysInSelectMonth = function(month, year)
+	{
+		var myDate=month + " " + year; 
+		firstOfMonth = "1 "+ myDate;
+
+		var d = new Date(firstOfMonth);
+		var checkDate = new Date(firstOfMonth);
+		var endDate = new Date(checkDate.getFullYear(), checkDate.getMonth() + 1, 0);
+		var numDays = endDate.getDate();
+		return numDays;
+	};
+	
 	$scope.goToBottom = function()
 	{
 		$location.hash('stats_table');
